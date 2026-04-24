@@ -2,29 +2,14 @@
 
 import { useState, useEffect } from 'react';
 
-// Target: next 02:00 AM PST
+// Target: June 1st, 2026 02:00 AM PST
 function getNextDropTime(): Date {
-  const now = new Date();
-  // Convert to PST (UTC-8)
-  const pstOffset = -8 * 60;
-  const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
-  const pstNow = new Date(utcMs + pstOffset * 60000);
-
-  const target = new Date(pstNow);
-  target.setHours(2, 0, 0, 0);
-
-  // If 02:00 AM PST has already passed today, advance to tomorrow
-  if (pstNow >= target) {
-    target.setDate(target.getDate() + 1);
-  }
-
-  // Convert PST target back to UTC for comparison
-  const targetUTC = new Date(target.getTime() - pstOffset * 60000);
-  return targetUTC;
+  // June is month 5 (0-indexed). 02:00 PST = 10:00 UTC
+  return new Date(Date.UTC(2026, 5, 1, 10, 0, 0));
 }
 
 export function DropTimer() {
-  const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
@@ -35,16 +20,17 @@ export function DropTimer() {
 
       if (diff <= 0) {
         setIsLive(true);
-        setTimeLeft({ h: 0, m: 0, s: 0 });
+        setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
         return;
       }
 
       setIsLive(false);
       const totalSeconds = Math.floor(diff / 1000);
-      const h = Math.floor(totalSeconds / 3600);
+      const d = Math.floor(totalSeconds / 86400);
+      const h = Math.floor((totalSeconds % 86400) / 3600);
       const m = Math.floor((totalSeconds % 3600) / 60);
       const s = totalSeconds % 60;
-      setTimeLeft({ h, m, s });
+      setTimeLeft({ d, h, m, s });
     };
 
     tick();
@@ -70,28 +56,35 @@ export function DropTimer() {
   return (
     <div className="flex flex-col items-center gap-4">
       <span className="text-xs font-mono text-muted-foreground tracking-widest">
-        NEXT DROP: 02:00 PST
+        NEXT DROP: JUNE 1, 2026 — 02:00 PST
       </span>
-      <div className="flex items-center gap-2 text-4xl sm:text-6xl font-mono tabular-nums">
+      <div className="flex items-center gap-2 text-3xl sm:text-5xl font-mono tabular-nums">
         <div className="flex flex-col items-center">
-          <span className="text-white border border-border px-4 py-3 bg-black min-w-[4rem] text-center">
+          <span className="text-white border border-border px-3 py-2 sm:px-4 sm:py-3 bg-black min-w-[3.5rem] sm:min-w-[4rem] text-center">
+            {pad(timeLeft.d)}
+          </span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground mt-1">DAY</span>
+        </div>
+        <span className="text-[#FF0000] pb-5 sm:pb-6 font-bold">:</span>
+        <div className="flex flex-col items-center">
+          <span className="text-white border border-border px-3 py-2 sm:px-4 sm:py-3 bg-black min-w-[3.5rem] sm:min-w-[4rem] text-center">
             {pad(timeLeft.h)}
           </span>
-          <span className="text-xs text-muted-foreground mt-1">HRS</span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground mt-1">HRS</span>
         </div>
-        <span className="text-[#FF0000] pb-6 font-bold">:</span>
+        <span className="text-[#FF0000] pb-5 sm:pb-6 font-bold">:</span>
         <div className="flex flex-col items-center">
-          <span className="text-white border border-border px-4 py-3 bg-black min-w-[4rem] text-center">
+          <span className="text-white border border-border px-3 py-2 sm:px-4 sm:py-3 bg-black min-w-[3.5rem] sm:min-w-[4rem] text-center">
             {pad(timeLeft.m)}
           </span>
-          <span className="text-xs text-muted-foreground mt-1">MIN</span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground mt-1">MIN</span>
         </div>
-        <span className="text-[#FF0000] pb-6 font-bold">:</span>
+        <span className="text-[#FF0000] pb-5 sm:pb-6 font-bold">:</span>
         <div className="flex flex-col items-center">
-          <span className="text-white border border-border px-4 py-3 bg-black min-w-[4rem] text-center">
+          <span className="text-white border border-border px-3 py-2 sm:px-4 sm:py-3 bg-black min-w-[3.5rem] sm:min-w-[4rem] text-center">
             {pad(timeLeft.s)}
           </span>
-          <span className="text-xs text-muted-foreground mt-1">SEC</span>
+          <span className="text-[10px] sm:text-xs text-muted-foreground mt-1">SEC</span>
         </div>
       </div>
     </div>

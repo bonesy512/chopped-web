@@ -11,11 +11,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store';
 export const metadata: Metadata = {
   title: 'CHOPPED. — High-Performance Ageless Streetwear',
   description:
-    'Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Limited drops at 02:00 AM PST. Austin, TX.',
+    'Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Next drop June 1st, 2026 02:00 AM PST. Austin, TX.',
   alternates: { canonical: BASE_URL },
   openGraph: {
     title: 'CHOPPED. — Function For The Friction.',
-    description: 'High-Performance Ageless Streetwear. Nocturnal drops 02:00 AM PST.',
+    description: 'High-Performance Ageless Streetwear. Next drop June 1st, 2026 02:00 AM PST.',
     url: BASE_URL,
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. — Function For The Friction.' }],
   },
@@ -126,7 +126,7 @@ export default function Home() {
                 ▮ ACCESS RESTRICTED
               </div>
               <div className="text-xs font-mono text-muted-foreground mt-1">
-                DROP: 02:00 AM PST NIGHTLY
+                DROP: JUNE 1, 2026 // 02:00 AM PST
               </div>
             </div>
           </div>
@@ -259,11 +259,10 @@ export default function Home() {
                 </div>
                 <div className="mt-auto">
                   <span
-                    className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${
-                      member.status === 'STILL UP'
+                    className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
                         ? 'border-green-500/50 text-green-500'
                         : 'border-[#FF0000]/50 text-[#FF0000]'
-                    }`}
+                      }`}
                   >
                     {member.status}
                   </span>

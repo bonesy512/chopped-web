@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import type { Metadata, Viewport } from "next"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
@@ -109,6 +110,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="grain-overlay" />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
