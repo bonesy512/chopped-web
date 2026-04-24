@@ -41,12 +41,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const meta = CATEGORY_META[category];
   if (!meta) return {};
+  
+  const canonical = `/shop/${category}`;
+  
   return {
     title: meta.title,
     description: meta.description,
-    alternates: { canonical: `/shop/${category}` },
+    alternates: { canonical },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: canonical,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `CHOPPED. ${meta.label}` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.title,
+      description: meta.description,
+      images: ['/og-image.png'],
+    },
   };
 }
+
+import { ItemListSchema, BreadcrumbSchema } from '@/components/seo/schema';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 export default async function ShopCategoryPage({ params }: Props) {
   const { category } = await params;
@@ -57,8 +77,22 @@ export default async function ShopCategoryPage({ params }: Props) {
   const meta = CATEGORY_META[category];
   const filtered = getProductsByCategory(category);
 
+  const itemListData = filtered.map((p, i) => ({
+    name: p.name,
+    url: `${BASE_URL}/shop/${p.categorySlug}/${p.slug}`,
+    position: i + 1,
+  }));
+
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
+      <ItemListSchema name={`CHOPPED. ${meta.label} CATALOG`} items={itemListData} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'CHOPPED.', url: BASE_URL },
+          { name: 'Museum', url: `${BASE_URL}/shop/all` },
+          { name: meta.label, url: `${BASE_URL}/shop/${category}` },
+        ]}
+      />
       <Header />
 
       <main className="flex-1 pt-14">

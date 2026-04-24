@@ -26,7 +26,7 @@ export const products: Product[] = [
     slug: 'ortho-aggressor-mid',
     category: 'Footwear',
     categorySlug: 'footwear',
-    price: 245.00,
+    price: 149.99,
     description: 'All-black Italian suede mid-top with hidden ORTH3-AGGR medical-grade support. Heavy-gauge suede chassis. Hidden orthotic sole. Built for the 02:00 AM shift.',
     shortDesc: 'All-black Italian suede mid-top. Hidden ORTH3-AGGR support.',
     features: [
@@ -51,7 +51,7 @@ export const products: Product[] = [
     slug: 'chopped-heavyweight-hoodie',
     category: 'Outerwear',
     categorySlug: 'outerwear',
-    price: 165.00,
+    price: 79.99,
     description: '500GSM French Terry armor with internal lumbar support. Wear the armor. Respect the friction.',
     shortDesc: '500GSM French Terry armor. Internal Lumbar-Lock™ liner.',
     features: [
@@ -75,7 +75,7 @@ export const products: Product[] = [
     slug: 'unc-utility-vest',
     category: 'Outerwear',
     categorySlug: 'outerwear',
-    price: 185.00,
+    price: 99.99,
     description: '12oz Duck Canvas tactical vest stripped of cosplay aesthetics. Logical utility. No excess. Just capacity.',
     shortDesc: '12oz Duck Canvas. Stripped of cosplay aesthetics.',
     features: [
@@ -99,7 +99,7 @@ export const products: Product[] = [
     slug: 'anti-graphic-tee',
     category: 'Essentials',
     categorySlug: 'essentials',
-    price: 79.99,
+    price: 65.00,
     description: '300GSM "Anti Chopped Chopped Social Club" parody tee. Wear it without explanation.',
     shortDesc: '300GSM Dry-Hand Cotton. Anti-uniform for the veteran.',
     features: [
@@ -123,7 +123,7 @@ export const products: Product[] = [
     slug: 'distressed-logo-hat',
     category: 'Essentials',
     categorySlug: 'essentials',
-    price: 39.99,
+    price: 45.00,
     description: 'Hand-abraded 6-panel dad hat in Midnight Charcoal. Low profile. High authority.',
     shortDesc: 'Hand-abraded 6-panel. Midnight Charcoal.',
     features: [

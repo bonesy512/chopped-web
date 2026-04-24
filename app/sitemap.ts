@@ -41,23 +41,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.5,
     },
+    {
+      url: `${BASE_URL}/drop-log`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/legal/terms-of-friction`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/legal/privacy-redacted`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
   ]
 
-  const productPages: MetadataRoute.Sitemap = products
-    .filter((p) => p.status !== 'REDACTED')
-    .map((product) => ({
-      url: `${BASE_URL}/shop/${product.categorySlug}/${product.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }))
-
-  // Include all products in sitemap (even REDACTED) — Googlebot can still discover the URL structure
+  // Filter out REDACTED products for the main sitemap list if needed, 
+  // but keep the allProductPages logic below for comprehensive coverage.
   const allProductPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${BASE_URL}/shop/${product.categorySlug}/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: product.status === 'REDACTED' ? 0.6 : 0.8,
+    priority: product.status === 'REDACTED' ? 0.4 : 0.8,
   }))
 
   return [...staticPages, ...allProductPages]

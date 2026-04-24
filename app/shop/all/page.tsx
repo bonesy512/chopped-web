@@ -4,10 +4,25 @@ import { ProductCard } from '@/components/ui/product-card';
 import { products } from '@/lib/products';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ItemListSchema, BreadcrumbSchema } from '@/components/seo/schema';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 export const metadata: Metadata = {
   title: 'Museum — VOL.01: The Support System — CHOPPED.',
-  description: 'Scan the full VOL.01 archive. 5 items. Drop: 02:00 AM PST.',
+  description: 'Scan the full VOL.01 archive. Industrial-grade hardware and ageless streetwear. Drop: 02:00 AM PST.',
+  openGraph: {
+    title: 'THE MUSEUM — VOL.01 — CHOPPED.',
+    description: 'The complete VOL.01 hardware archive. Engineered for the midnight shift.',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. MUSEUM' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'THE MUSEUM — CHOPPED.',
+    description: 'The full hardware archive for the friction.',
+    images: ['/og-image.png'],
+  },
 };
 
 const CATEGORIES = [
@@ -18,8 +33,21 @@ const CATEGORIES = [
 ];
 
 export default function ShopAllPage() {
+  const itemListData = products.map((p, i) => ({
+    name: p.name,
+    url: `${BASE_URL}/shop/${p.categorySlug}/${p.slug}`,
+    position: i + 1,
+  }));
+
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
+      <ItemListSchema name="CHOPPED. VOL.01 CATALOG" items={itemListData} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'CHOPPED.', url: BASE_URL },
+          { name: 'Museum', url: `${BASE_URL}/shop/all` },
+        ]}
+      />
       <Header />
 
       <main className="flex-1 pt-14">

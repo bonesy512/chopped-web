@@ -21,11 +21,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'CHOPPED. — High-Performance Ageless Streetwear',
-    template: '%s — CHOPPED.',
+    default: 'CHOPPED. | High-Performance Industrial Streetwear - Austin',
+    template: '%s | CHOPPED.',
   },
   description:
-    'Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Limited drops at 02:00 AM PST. Austin, TX.',
+    'Function for the friction. Engineered in Austin, TX for the midnight shift. Shop industrial-grade hoodies, techwear vests, and orthotic suede footwear. SECURE GEAR ★',
   keywords: [
     'ageless streetwear',
     'high-performance workwear',
@@ -95,6 +95,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { OrganizationSchema, WebSiteSchema } from "@/components/seo/schema"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -108,6 +110,8 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
+          <OrganizationSchema />
+          <WebSiteSchema />
           <div className="grain-overlay" />
           {children}
           <Analytics />

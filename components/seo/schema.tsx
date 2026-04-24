@@ -85,9 +85,10 @@ interface ProductSchemaProps {
   slug: string
   categorySlug: string
   status: 'ACTIVE' | 'REDACTED'
+  image?: string
 }
 
-export function ProductSchema({ name, description, sku, price, slug, categorySlug, status }: ProductSchemaProps) {
+export function ProductSchema({ name, description, sku, price, slug, categorySlug, status, image }: ProductSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -103,13 +104,13 @@ export function ProductSchema({ name, description, sku, price, slug, categorySlu
       '@id': `${BASE_URL}/#organization`,
     },
     url: `${BASE_URL}/shop/${categorySlug}/${slug}`,
-    image: `${BASE_URL}/og-image.png`,
+    image: image ? (image.startsWith('http') ? image : `${BASE_URL}${image}`) : `${BASE_URL}/og-image.png`,
     ...(status === 'ACTIVE' && {
       offers: {
         '@type': 'Offer',
         price: price.toFixed(2),
         priceCurrency: 'USD',
-        availability: 'https://schema.org/PreOrder',
+        availability: 'https://schema.org/InStock',
         url: `${BASE_URL}/shop/${categorySlug}/${slug}`,
         seller: {
           '@id': `${BASE_URL}/#organization`,

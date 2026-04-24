@@ -4,7 +4,19 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Manifesto — CHOPPED.',
-  description: 'Function for the Friction. The philosophical core of CHOPPED. Industrial Wear.',
+  description: 'Function for the Friction. The philosophical core of CHOPPED. Industrial Wear for the veteran.',
+  openGraph: {
+    title: 'THE CHOPPED. MANIFESTO',
+    description: 'We don\'t move during business hours. Engineered for the 02:00 AM shift.',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. MANIFESTO' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CHOPPED. MANIFESTO',
+    description: 'Function for the friction. No cosplay.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function ManifestoPage() {

@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ProductCard } from '@/components/ui/product-card';
 import { DropTimer } from '@/components/ui/drop-timer';
 import { products } from '@/lib/products';
-import { OrganizationSchema, WebSiteSchema, ItemListSchema } from '@/components/seo/schema';
+import { ItemListSchema } from '@/components/seo/schema';
 import type { Metadata } from 'next';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
@@ -30,8 +30,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
-      <OrganizationSchema />
-      <WebSiteSchema />
       <ItemListSchema name="CHOPPED. VOL.01 Collection" items={productListItems} />
       <Header />
 

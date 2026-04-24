@@ -26,7 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, category } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: 'Not Found — CHOPPED.' };
+  
   const canonical = `${BASE_URL}/shop/${category}/${slug}`;
+  const ogImage = product.image || '/og-image.png';
+  
   return {
     title: `${product.name} — CHOPPED.`,
     description: product.description,
@@ -36,13 +39,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: product.description,
       url: canonical,
       type: 'website',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: product.name }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${product.name} — CHOPPED.`,
       description: product.shortDesc,
-      images: ['/og-image.png'],
+      images: [ogImage],
     },
   };
 }
@@ -66,6 +69,7 @@ export default async function ProductDetailPage({ params }: Props) {
         slug={product.slug}
         categorySlug={product.categorySlug}
         status={product.status}
+        image={product.image}
       />
       <BreadcrumbSchema
         items={[

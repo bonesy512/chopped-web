@@ -4,7 +4,19 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Friction — CHOPPED.',
-  description: 'Legal terms and conditions for CHOPPED.',
+  description: 'Legal terms and conditions for CHOPPED. By accessing this system, you acknowledge and accept all friction.',
+  openGraph: {
+    title: 'TERMS OF FRICTION — CHOPPED.',
+    description: 'We build armor, not fashion. The nocturnal standard applies.',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. TERMS' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TERMS OF FRICTION — CHOPPED.',
+    description: 'We build armor, not fashion.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function TermsOfFrictionPage() {

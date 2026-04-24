@@ -4,7 +4,19 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy [REDACTED] — CHOPPED.',
-  description: 'Privacy policy for CHOPPED.',
+  description: 'Your transmission data is strictly confidential. Information sharing is disabled by default. Become invisible.',
+  openGraph: {
+    title: 'PRIVACY [REDACTED] — CHOPPED.',
+    description: 'We respect your right to operate in the shadows. Transactions are encrypted.',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. PRIVACY' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PRIVACY [REDACTED] — CHOPPED.',
+    description: 'Information sharing is disabled by default.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function PrivacyRedactedPage() {

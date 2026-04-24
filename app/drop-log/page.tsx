@@ -4,7 +4,19 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Drop Log — CHOPPED.',
-  description: 'Historical log of CHOPPED. drops.',
+  description: 'Historical log of CHOPPED. drops. Track the evolution of industrial-grade hardware.',
+  openGraph: {
+    title: 'THE CHOPPED. DROP LOG',
+    description: 'Archive of previous and upcoming hardware deployments.',
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. DROP LOG' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CHOPPED. DROP LOG',
+    description: 'The deployment history for the friction.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function DropLogPage() {
