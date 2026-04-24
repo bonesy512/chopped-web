@@ -10,8 +10,11 @@ const NAV_LINKS = [
   { label: 'TRANSMIT', href: '/transmit' },
 ];
 
+import { useUncVoice } from '@/hooks/use-unc-voice';
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { speak, isPlaying } = useUncVoice();
 
   return (
     <header className="fixed top-0 left-0 w-full border-b border-border bg-[#080808]/95 backdrop-blur-sm z-40 h-14 flex items-center px-4 md:px-6 justify-between font-mono text-xs">
@@ -36,6 +39,14 @@ export function Header() {
 
       {/* Right: CTA + scan */}
       <div className="flex items-center gap-3">
+        <button
+          onClick={() => speak("The first move is what sets everything in motion.")}
+          disabled={isPlaying}
+          className={`hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`}
+          title="LISTEN TO THE UNC"
+        >
+          {isPlaying ? '• SIGNAL •' : 'SIGNAL'}
+        </button>
         <Link
           href="/scan"
           className="hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0"

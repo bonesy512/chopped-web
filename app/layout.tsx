@@ -1,5 +1,4 @@
 import { Inter, Roboto_Mono, Courier_Prime } from "next/font/google"
-
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
