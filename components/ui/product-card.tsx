@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { type Product } from '@/lib/products';
 
 const CATEGORY_GLYPHS: Record<string, string> = {
@@ -15,29 +16,31 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/shop/${product.categorySlug}/${product.slug}`}
       className="group border border-border flex flex-col bg-black hover:border-white transition-colors duration-0 relative overflow-hidden"
     >
-      {/* Product image area — terminal placeholder with identity glyph */}
+      {/* Product image area — terminal placeholder with identity glyph or actual image */}
       <div className="aspect-[4/5] bg-[#080808] flex flex-col items-center justify-center border-b border-border relative overflow-hidden select-none">
         {/* Noise texture overlay */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-10 z-10 pointer-events-none"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
         />
 
-        {/* Redacted overlay */}
-        {product.status === 'REDACTED' && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-            <span className="bg-black text-[#FF0000] text-xs font-mono px-3 py-1 border border-[#FF0000] tracking-widest">
-              [REDACTED]
-            </span>
-          </div>
+        {/* Product Image */}
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 z-0"
+            sizes="(max-width: 768px) 50vw, 33vw"
+          />
+        ) : (
+          /* Product visual glyph fallback */
+          <span className="text-8xl text-white/10 group-hover:text-white/20 transition-opacity font-sans font-bold z-0">
+            {glyph}
+          </span>
         )}
-
-        {/* Product visual glyph */}
-        <span className="text-8xl text-white/10 group-hover:text-white/20 transition-opacity font-sans font-bold z-0">
-          {glyph}
-        </span>
 
         {/* SKU watermark */}
         <span className="absolute bottom-3 left-3 text-xs font-mono text-muted-foreground/50 tracking-wider">

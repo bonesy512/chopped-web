@@ -13,6 +13,7 @@ export type Product = {
   features: string[];
   specs: { label: string; value: string }[];
   status: 'REDACTED' | 'ACTIVE';
+  image?: string;
 };
 
 export const products: Product[] = [
@@ -59,6 +60,7 @@ export const products: Product[] = [
       { label: 'FIT', value: 'Structured Boxy' },
     ],
     status: 'ACTIVE',
+    image: '/images/products/chopped-heavyweight-hoodie/hero.jpg',
   },
   {
     id: 'chpd-out-003',

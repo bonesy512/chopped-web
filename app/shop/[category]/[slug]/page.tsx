@@ -1,3 +1,5 @@
+// Add next/image to imports
+import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AcquireButton } from '@/components/ui/acquire-button';
@@ -92,27 +94,39 @@ export default async function ProductDetailPage({ params }: Props) {
             <div className="aspect-square bg-[#080808] border-b md:border-b-0 md:border-r border-border flex items-center justify-center relative overflow-hidden">
               {/* Noise overlay */}
               <div
-                className="absolute inset-0 opacity-10"
+                className="absolute inset-0 opacity-10 z-10 pointer-events-none"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
                 }}
               />
 
               {product.status === 'REDACTED' && (
-                <div className="absolute top-4 left-4 bg-black text-[#FF0000] text-xs font-mono px-3 py-1 border border-[#FF0000] tracking-widest z-10">
+                <div className="absolute top-4 left-4 bg-black text-[#FF0000] text-xs font-mono px-3 py-1 border border-[#FF0000] tracking-widest z-20">
                   [REDACTED]
                 </div>
               )}
 
-              {/* Visual glyph */}
-              <div className="relative z-0 text-center select-none">
-                <span className="text-[180px] leading-none text-white/5 font-bold font-sans block">
-                  ◈
-                </span>
-                <span className="text-xs font-mono text-muted-foreground/40 tracking-wider">
-                  {product.sku}
-                </span>
-              </div>
+              {/* Product Image */}
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover opacity-90 z-0"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              ) : (
+                /* Visual glyph fallback */
+                <div className="relative z-0 text-center select-none">
+                  <span className="text-[180px] leading-none text-white/5 font-bold font-sans block">
+                    ◈
+                  </span>
+                  <span className="text-xs font-mono text-muted-foreground/40 tracking-wider">
+                    {product.sku}
+                  </span>
+                </div>
+              )}
 
               {/* HUD corner */}
               <div className="absolute bottom-4 right-4 text-[10px] font-mono text-muted-foreground/40">
