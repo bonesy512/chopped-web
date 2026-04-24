@@ -19,13 +19,17 @@ export async function POST(request: NextRequest) {
         {
           price_data: {
             currency: 'usd',
-            product_data: {
-              name: product.name,
-              description: product.shortDesc,
-              metadata: {
-                sku: product.sku,
-              },
-            },
+            ...(product.stripeProductId
+              ? { product: product.stripeProductId }
+              : {
+                  product_data: {
+                    name: product.name,
+                    description: product.shortDesc,
+                    metadata: {
+                      sku: product.sku,
+                    },
+                  },
+                }),
             unit_amount: Math.round(product.price * 100),
           },
           quantity,

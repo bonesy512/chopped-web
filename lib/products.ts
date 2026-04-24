@@ -14,6 +14,7 @@ export type Product = {
   specs: { label: string; value: string }[];
   status: 'REDACTED' | 'ACTIVE';
   image?: string;
+  stripeProductId?: string;
 };
 
 export const products: Product[] = [
@@ -39,6 +40,7 @@ export const products: Product[] = [
     ],
     status: 'ACTIVE',
     image: '/images/products/ortho-aggressor-mid/hero.jpg',
+    stripeProductId: 'prod_UOO58N0UmdWVZk',
   },
   {
     id: 'chpd-out-002',
