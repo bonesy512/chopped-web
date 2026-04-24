@@ -38,6 +38,7 @@ export const products: Product[] = [
       { label: 'LOGO', value: 'Stencil C on Lateral Heel' },
     ],
     status: 'ACTIVE',
+    image: '/images/products/ortho-aggressor-mid/hero.jpg',
   },
   {
     id: 'chpd-out-002',
@@ -83,6 +84,7 @@ export const products: Product[] = [
       { label: 'PATCH', value: 'Black-on-Black Tonal Velcro' },
     ],
     status: 'ACTIVE',
+    image: '/images/products/unc-utility-vest/hero.jpg',
   },
   {
     id: 'chpd-tsh-004',
@@ -105,6 +107,7 @@ export const products: Product[] = [
       { label: 'BACK', value: 'Wavy Distorted Typography' },
     ],
     status: 'ACTIVE',
+    image: '/images/products/anti-graphic-tee/hero.jpg',
   },
   {
     id: 'chpd-acc-005',
@@ -127,6 +130,7 @@ export const products: Product[] = [
       { label: 'DISTRESS', value: 'Hand-abraded brim edges' },
     ],
     status: 'ACTIVE',
+    image: '/images/products/distressed-logo-hat/hero.jpg',
   },
 ];
 

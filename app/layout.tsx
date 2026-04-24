@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swa
 const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 const courierPrime = Courier_Prime({ weight: ["400", "700"], subsets: ['latin'], variable: '--font-courier', display: 'swap' })
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 export const viewport: Viewport = {
   themeColor: '#080808',
