@@ -9,46 +9,28 @@ export const metadata: Metadata = {
 
 const BOARD_MEMBERS = [
   {
-    handle: 'THE_MECHANIC',
-    role: 'Auto Fabricator',
-    tenure: '28 years in friction',
-    bio: 'Runs a full custom shop off Lamar. Built the first CHOPPED. chassis prototype from scratch.',
+    handle: '@dances_with_disaster',
+    role: 'Chopped CEO',
+    tenure: '14 years in Design',
+    bio: 'Lead visionary. Orchestrating the intersection of industrial utility and high-design friction.',
     status: 'STILL UP',
+    link: 'https://instagram.com/dances_with_disaster',
   },
   {
-    handle: 'THE_ENGINEER',
-    role: 'Structural Fabricator',
-    tenure: '22 years in friction',
-    bio: 'Aerospace background. Designed the internal lumbar support architecture for VOL.01.',
+    handle: '@eatingsnackswithstrippers_2.0',
+    role: 'Chopped Producer',
+    tenure: '15 years in Production',
+    bio: 'Production powerhouse. Turning industrial concepts into physical gear with relentless precision.',
     status: 'STILL UP',
+    link: 'https://instagram.com/eatingsnackswithstrippers_2.0',
   },
   {
-    handle: 'THE_SKATER',
-    role: 'Veteran Rider / Shop Owner',
-    tenure: '30 years in friction',
-    bio: 'Still lands kickflips at 48. Tests the orthotic integration on concrete every morning.',
+    handle: '@abstract_andy_',
+    role: 'Chopped Old Head Unc',
+    tenure: '20 years in Marketing and Product Design',
+    bio: 'The veteran operator. Decades of market friction distilled into the CHOPPED. ethos.',
     status: 'STILL UP',
-  },
-  {
-    handle: 'THE_PRODUCER',
-    role: 'Studio Head / Operator',
-    tenure: '25 years in friction',
-    bio: 'Built three studios and two brands before 45. Wears the vest to every session.',
-    status: 'STILL UP',
-  },
-  {
-    handle: '[REDACTED]',
-    role: '[REDACTED]',
-    tenure: '[REDACTED] years',
-    bio: 'Access restricted. Clearance level: [REDACTED].',
-    status: 'CLASSIFIED',
-  },
-  {
-    handle: '[REDACTED]',
-    role: '[REDACTED]',
-    tenure: '[REDACTED] years',
-    bio: 'Access restricted. Identity withheld by protocol.',
-    status: 'CLASSIFIED',
+    link: 'https://instagram.com/abstract_andy_',
   },
 ];
 
@@ -68,7 +50,7 @@ export default function AdvisoryBoardPage() {
           </h1>
           <p className="text-sm font-mono text-muted-foreground mt-6 max-w-xl leading-relaxed">
             We don&apos;t have influencers. We have an Advisory Board.
-            Mechanics, engineers, skaters, and creators who have spent 20+ years in the friction.
+            Veterans, operators, and creators who have spent 15+ years in the friction.
             They don&apos;t model our clothes; they test the chassis.
           </p>
         </div>
@@ -93,7 +75,19 @@ export default function AdvisoryBoardPage() {
                 {/* Info */}
                 <div className="flex-1">
                   <h3 className="font-bold text-white font-mono text-base">
-                    {member.handle}
+                    {member.link ? (
+                      <a
+                        href={member.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-muted-foreground transition-colors inline-flex items-center gap-2"
+                      >
+                        {member.handle}
+                        <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                      </a>
+                    ) : (
+                      member.handle
+                    )}
                   </h3>
                   <p className="text-xs font-mono text-muted-foreground mt-1">{member.role}</p>
                   <p className="text-[10px] font-mono text-muted-foreground/50 mt-0.5">{member.tenure}</p>
@@ -105,11 +99,10 @@ export default function AdvisoryBoardPage() {
                 {/* Status badge */}
                 <div>
                   <span
-                    className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${
-                      member.status === 'STILL UP'
+                    className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
                         ? 'border-green-500/50 text-green-500'
                         : 'border-[#FF0000]/50 text-[#FF0000]'
-                    }`}
+                      }`}
                   >
                     {member.status}
                   </span>
@@ -128,7 +121,7 @@ export default function AdvisoryBoardPage() {
             STILL UP?
           </h2>
           <p className="text-sm font-mono text-muted-foreground max-w-md mx-auto mb-8">
-            20+ years in the friction. A trade, a craft, or a grind that never stopped.
+            15+ years in the friction. A trade, a craft, or a grind that never stopped.
             Apply for access.
           </p>
           <a
