@@ -62,12 +62,12 @@ export function Footer() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === 'loading' || status === 'success'}
-            className="bg-transparent border border-border border-r-0 px-4 py-3 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white w-full md:w-64 transition-colors disabled:opacity-50"
+            className="bg-transparent border border-border border-r-0 px-4 py-4 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white w-full md:w-64 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={status === 'loading' || status === 'success' || !email}
-            className="border border-white bg-black text-white px-4 py-3 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed w-28 text-center"
+            className="border border-white bg-black text-white px-4 py-4 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed w-32 text-center"
           >
             {status === 'loading' ? 'WAIT...' : status === 'success' ? 'LOCKED IN' : 'CLOCK IN'}
           </button>

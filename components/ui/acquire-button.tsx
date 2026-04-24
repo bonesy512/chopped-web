@@ -98,7 +98,7 @@ export function AcquireButton({ product }: { product: Product }) {
                   setSelectedSize(size);
                   setError(null);
                 }}
-                className={`font-mono text-xs border py-2 px-4 transition-colors uppercase ${
+                className={`font-mono text-xs border py-3 px-5 transition-colors uppercase min-w-[3rem] h-[2.75rem] flex items-center justify-center ${
                   selectedSize === size
                     ? 'border-white bg-white text-black font-bold'
                     : 'border-border bg-black text-muted-foreground hover:border-white hover:text-white'

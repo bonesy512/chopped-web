@@ -53,12 +53,14 @@ export function Header() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white w-8 h-8 flex flex-col justify-center gap-1.5"
+          className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5"
           aria-label="Toggle menu"
         >
-          <span className={`block h-px w-full bg-white transition-all ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
-          <span className={`block h-px bg-white transition-all ${menuOpen ? 'opacity-0 w-0' : 'w-full'}`} />
-          <span className={`block h-px w-full bg-white transition-all ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
+          <div className="w-8 flex flex-col gap-1.5">
+            <span className={`block h-px w-full bg-white transition-all ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
+            <span className={`block h-px bg-white transition-all ${menuOpen ? 'opacity-0 w-0' : 'w-full'}`} />
+            <span className={`block h-px w-full bg-white transition-all ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
+          </div>
         </button>
       </div>
 

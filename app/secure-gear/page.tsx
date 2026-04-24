@@ -49,7 +49,7 @@ export default function SecureGearPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {products.map((product) => (
-                <div key={product.id} className="border border-border bg-black p-8 group">
+                <div key={product.id} className="border border-border bg-black p-4 sm:p-8 group">
                   <div className="flex flex-col md:flex-row gap-8">
                     <div className="w-full md:w-1/2 aspect-[4/5] bg-[#111] relative overflow-hidden border border-border">
                       {product.image && (
@@ -141,12 +141,12 @@ export default function SecureGearPage() {
                     setError(null);
                   }}
                   placeholder="> ENTER ACCESS CODE"
-                  className="flex-1 bg-transparent text-white text-xs font-mono px-4 py-3 placeholder:text-muted-foreground focus:outline-none uppercase"
+                  className="flex-1 bg-transparent text-white text-sm font-mono px-4 py-4 placeholder:text-muted-foreground focus:outline-none uppercase"
                 />
                 <button 
                   type="submit"
                   disabled={loading || !accessCode}
-                  className="border-l border-border bg-black text-white text-xs font-mono px-4 hover:bg-white hover:text-black transition-colors duration-0 disabled:opacity-50"
+                  className="border-l border-border bg-black text-white text-xs font-mono px-6 py-4 hover:bg-white hover:text-black transition-colors duration-0 disabled:opacity-50"
                 >
                   {loading ? 'CHECKING...' : 'DEPLOY ACCESS'}
                 </button>

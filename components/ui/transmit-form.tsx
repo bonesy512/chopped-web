@@ -96,7 +96,7 @@ export function TransmitForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="border border-white bg-black text-white text-xs font-mono tracking-widest py-3 px-8 hover:bg-white hover:text-black transition-colors duration-0 disabled:opacity-50"
+          className="border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-8 hover:bg-white hover:text-black transition-colors duration-0 disabled:opacity-50"
         >
           {status === 'loading' ? 'TRANSMITTING...' : 'TRANSMIT →'}
         </button>

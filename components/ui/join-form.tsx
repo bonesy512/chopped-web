@@ -13,11 +13,11 @@ export function JoinForm() {
         <input
           type="text"
           placeholder="> ENTER CALLSIGN"
-          className="flex-1 bg-transparent border border-border border-r-0 px-4 py-3 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white transition-colors"
+          className="flex-1 bg-transparent border border-border border-r-0 px-4 py-4 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white transition-colors"
         />
         <button
           type="submit"
-          className="border border-white bg-black text-white px-6 py-3 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0"
+          className="border border-white bg-black text-white px-6 py-4 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0"
         >
           TRANSMIT →
         </button>
