@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import Image from 'next/image';
-
 const NAV_LINKS = [
   { label: 'MUSEUM', href: '/shop/all' },
   { label: 'MANIFESTO', href: '/manifesto' },
@@ -18,15 +16,8 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 w-full border-b border-border bg-[#080808]/95 backdrop-blur-sm z-40 h-14 flex items-center px-4 md:px-6 justify-between font-mono text-xs">
       {/* Left: Logo */}
-      <Link href="/" className="flex items-center hover:opacity-80 transition-opacity duration-150">
-        <Image
-          src="/images/brand/logo.png"
-          alt="CHOPPED. Logo"
-          width={120}
-          height={24}
-          className="object-contain"
-          priority
-        />
+      <Link href="/" className="font-bold tracking-[0.3em] text-white text-sm hover:text-[#FF0000] transition-colors duration-0">
+        CHOPPED.
       </Link>
 
       {/* Center: Nav (desktop) */}

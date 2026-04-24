@@ -1,11 +1,47 @@
 'use client';
 
+import { useState } from 'react';
+
 export function TransmitForm() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: wire to backend / email service
-    alert('TRANSMISSION RECEIVED. STAND BY.');
+    setStatus('loading');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      callsign: formData.get('callsign'),
+      channel: formData.get('channel'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/transmit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error('Transmission failed');
+      setStatus('success');
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
   };
+
+  if (status === 'success') {
+    return (
+      <div className="border border-[#FF0000] p-12 text-center bg-[#FF0000]/10">
+        <h3 className="text-[#FF0000] font-bold text-xl tracking-[0.2em] mb-4">TRANSMISSION SUCCESSFUL</h3>
+        <p className="text-muted-foreground font-mono text-sm tracking-widest">
+          YOUR MESSAGE HAS BEEN RECEIVED BY THE SYSTEM. WE WILL RESPOND SHORTLY.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form className="space-y-0 border border-border" onSubmit={handleSubmit}>
@@ -27,7 +63,8 @@ export function TransmitForm() {
             type={field.type}
             placeholder={field.placeholder}
             required={field.required}
-            className="flex-1 bg-transparent text-white text-xs font-mono px-4 py-4 placeholder:text-muted-foreground focus:outline-none focus:bg-white/5 transition-colors"
+            disabled={status === 'loading'}
+            className="flex-1 bg-transparent text-white text-xs font-mono px-4 py-4 placeholder:text-muted-foreground focus:outline-none focus:bg-white/5 transition-colors disabled:opacity-50"
           />
         </div>
       ))}
@@ -45,21 +82,27 @@ export function TransmitForm() {
           name="message"
           rows={6}
           placeholder="> TRANSMIT YOUR MESSAGE. MAX 300 WORDS."
-          className="flex-1 bg-transparent text-white text-xs font-mono px-4 py-4 placeholder:text-muted-foreground focus:outline-none focus:bg-white/5 transition-colors resize-none"
+          required
+          disabled={status === 'loading'}
+          className="flex-1 bg-transparent text-white text-xs font-mono px-4 py-4 placeholder:text-muted-foreground focus:outline-none focus:bg-white/5 transition-colors resize-none disabled:opacity-50"
         />
       </div>
 
       {/* Submit */}
-      <div className="p-4 flex justify-end">
+      <div className="p-4 flex justify-between items-center bg-black">
+        <div className="text-[#FF0000] text-xs font-mono tracking-widest">
+          {status === 'error' && 'ERROR DETECTED. PLEASE RETRY.'}
+        </div>
         <button
           type="submit"
-          className="border border-white bg-black text-white text-xs font-mono tracking-widest py-3 px-8 hover:bg-white hover:text-black transition-colors duration-0"
+          disabled={status === 'loading'}
+          className="border border-white bg-black text-white text-xs font-mono tracking-widest py-3 px-8 hover:bg-white hover:text-black transition-colors duration-0 disabled:opacity-50"
         >
-          TRANSMIT →
+          {status === 'loading' ? 'TRANSMITTING...' : 'TRANSMIT →'}
         </button>
       </div>
 
-      <p className="text-xs font-mono text-muted-foreground p-4 border-t border-border">
+      <p className="text-xs font-mono text-muted-foreground p-4 border-t border-border bg-[#080808]">
         SYSTEM FRICTION DETECTED? RE-TRANSMIT. Response time: [REDACTED].
       </p>
     </form>
