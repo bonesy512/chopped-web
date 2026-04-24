@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Advisory Board — CHOPPED.',
@@ -15,14 +16,16 @@ const BOARD_MEMBERS = [
     bio: 'Lead visionary. Orchestrating the intersection of industrial utility and high-design friction.',
     status: 'STILL UP',
     link: 'https://instagram.com/dances_with_disaster',
+    image: '/images/board/ceo.jpg',
   },
   {
     handle: '@eatingsnackswithstrippers_2.0',
     role: 'Chopped Producer',
     tenure: '15 years in Production',
-    bio: 'Production powerhouse. Turning industrial concepts into physical gear with relentless precision.',
+    bio: 'Production powerhouse. Turning musical concepts into tracks with fire beats.',
     status: 'STILL UP',
     link: 'https://instagram.com/eatingsnackswithstrippers_2.0',
+    image: '/images/board/producer.jpg',
   },
   {
     handle: '@abstract_andy_',
@@ -31,6 +34,7 @@ const BOARD_MEMBERS = [
     bio: 'The veteran operator. Decades of market friction distilled into the CHOPPED. ethos.',
     status: 'STILL UP',
     link: 'https://instagram.com/abstract_andy_',
+    image: '/images/board/unc.jpg',
   },
 ];
 
@@ -68,8 +72,19 @@ export default function AdvisoryBoardPage() {
                 `}
               >
                 {/* Avatar */}
-                <div className="w-14 h-14 border border-border bg-black flex items-center justify-center text-muted-foreground font-mono text-lg group-hover:border-white transition-colors">
-                  {member.status === 'CLASSIFIED' ? '?' : '◉'}
+                <div className="w-14 h-14 border border-border bg-black flex items-center justify-center overflow-hidden group-hover:border-white transition-colors relative">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.handle}
+                      fill
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  ) : (
+                    <span className="text-muted-foreground font-mono text-lg">
+                      {member.status === 'CLASSIFIED' ? '?' : '◉'}
+                    </span>
+                  )}
                 </div>
 
                 {/* Info */}
@@ -100,8 +115,8 @@ export default function AdvisoryBoardPage() {
                 <div>
                   <span
                     className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
-                        ? 'border-green-500/50 text-green-500'
-                        : 'border-[#FF0000]/50 text-[#FF0000]'
+                      ? 'border-green-500/50 text-green-500'
+                      : 'border-[#FF0000]/50 text-[#FF0000]'
                       }`}
                   >
                     {member.status}
