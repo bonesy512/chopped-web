@@ -1,7 +1,7 @@
-'use client';
-
-import Link from 'next/link';
+'use client'; 
+import Link from 'next/link'; 
 import { useState } from 'react';
+import { useUncVoice } from '@/hooks/use-unc-voice';
 
 const NAV_LINKS = [
   { label: 'MUSEUM', href: '/shop/all' },
@@ -9,8 +9,6 @@ const NAV_LINKS = [
   { label: 'ADVISORY', href: '/advisory-board' },
   { label: 'TRANSMIT', href: '/transmit' },
 ];
-
-import { useUncVoice } from '@/hooks/use-unc-voice';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,11 +24,7 @@ export function Header() {
       {/* Center: Nav (desktop) */}
       <nav className="hidden md:flex items-center gap-8">
         {NAV_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 relative group"
-          >
+          <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 relative group">
             {link.label}
             <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-150" />
           </Link>
@@ -39,32 +33,29 @@ export function Header() {
 
       {/* Right: CTA + scan */}
       <div className="flex items-center gap-3">
-        <button
-          onClick={() => speak("The first move is what sets everything in motion.")}
-          disabled={isPlaying}
-          className={`hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`}
-          title="LISTEN TO THE UNC"
-        >
-          {isPlaying ? '• SIGNAL •' : 'SIGNAL'}
+        {/* THE PATCH: Hardwired Auditory Protocol (Visible on mobile & desktop) */}
+        <button 
+          onClick={() => speak("The first move is what sets everything in motion.")} 
+          disabled={isPlaying} 
+          // Replaced 'hidden md:inline-block' with flex and h-[44px] for touch targets
+          className={`flex items-center justify-center h-[44px] px-2 md:h-auto md:px-0 text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`} 
+          title="LISTEN TO THE UNC" 
+        > 
+          {isPlaying ? '• SIGNAL •' : 'SIGNAL'} 
         </button>
-        <Link
-          href="/scan"
-          className="hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0"
-          title="SCAN SYSTEM"
-        >
+
+        <Link href="/scan" className="hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0" title="SCAN SYSTEM">
           ⌕
         </Link>
-        <Link
-          href="/secure-gear"
-          className="border border-[#FF0000] text-[#FF0000] px-3 py-1 text-xs tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0 hidden md:block"
-        >
+
+        <Link href="/secure-gear" className="border border-[#FF0000] text-[#FF0000] px-3 py-1 text-xs tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0 hidden md:block">
           SECURE GEAR
         </Link>
 
         {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5"
+        <button 
+          onClick={() => setMenuOpen(!menuOpen)} 
+          className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5" 
           aria-label="Toggle menu"
         >
           <div className="w-8 flex flex-col gap-1.5">
@@ -79,20 +70,11 @@ export function Header() {
       {menuOpen && (
         <div className="absolute top-14 left-0 w-full bg-[#080808] border-b border-border flex flex-col md:hidden z-50">
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="px-6 py-4 border-b border-border text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0"
-            >
+            <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="px-6 py-4 border-b border-border text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0">
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/secure-gear"
-            onClick={() => setMenuOpen(false)}
-            className="px-6 py-4 text-[#FF0000] tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0"
-          >
+          <Link href="/secure-gear" onClick={() => setMenuOpen(false)} className="px-6 py-4 text-[#FF0000] tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0">
             SECURE GEAR
           </Link>
         </div>
