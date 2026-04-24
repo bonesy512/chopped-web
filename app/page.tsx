@@ -6,7 +6,7 @@ import { products } from '@/lib/products';
 import { OrganizationSchema, WebSiteSchema, ItemListSchema } from '@/components/seo/schema';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
 
 export const metadata: Metadata = {
   title: 'CHOPPED. — High-Performance Ageless Streetwear',
@@ -260,8 +260,8 @@ export default function Home() {
                 <div className="mt-auto">
                   <span
                     className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
-                        ? 'border-green-500/50 text-green-500'
-                        : 'border-[#FF0000]/50 text-[#FF0000]'
+                      ? 'border-green-500/50 text-green-500'
+                      : 'border-[#FF0000]/50 text-[#FF0000]'
                       }`}
                   >
                     {member.status}

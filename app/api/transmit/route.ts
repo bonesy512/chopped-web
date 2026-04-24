@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'CHOPPED. Transmit <onboarding@resend.dev>', // Update this to a verified domain when going live, e.g., inquiries@chopped.store
+      from: 'CHOPPED. Transmit <onboarding@resend.dev>', // Update this to a verified domain when going live, e.g., inquiries@choppedunc.store
       to: ['kozmo51488@gmail.com'], // Or the user's preferred receiving email
       replyTo: channel,
       subject: `[CHOPPED. INQUIRY] ${subject} - ${callsign}`,

@@ -4,7 +4,7 @@ import { products } from '@/lib/products';
 
 export async function POST(request: NextRequest) {
   try {
-    const { productId, quantity = 1 } = await request.json();
+    const { productId, quantity = 1, size } = await request.json();
 
     const product = products.find(p => p.id === productId);
     if (!product) {
@@ -23,10 +23,11 @@ export async function POST(request: NextRequest) {
               ? { product: product.stripeProductId }
               : {
                   product_data: {
-                    name: product.name,
+                    name: size ? `${product.name} (Size: ${size})` : product.name,
                     description: product.shortDesc,
                     metadata: {
                       sku: product.sku,
+                      ...(size && { size }),
                     },
                   },
                 }),
@@ -41,6 +42,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         productId: product.id,
         sku: product.sku,
+        ...(size && { size }),
       },
     });
 

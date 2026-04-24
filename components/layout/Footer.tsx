@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 const LEGAL_LINKS = [
   { label: 'TERMS OF FRICTION', href: '/legal/terms-of-friction' },
@@ -9,6 +10,39 @@ const LEGAL_LINKS = [
 ];
 
 export function Footer() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus('loading');
+
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error('Newsletter Error:', data.error);
+        throw new Error(data.error || 'Failed to subscribe');
+      }
+
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (err) {
+      console.error('Signup error:', err);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
+
   return (
     <footer className="border-t border-border bg-black">
       {/* Newsletter bar */}
@@ -21,18 +55,28 @@ export function Footer() {
             Get the 02:00 AM access code. No spam. Just the drop.
           </p>
         </div>
-        <form className="flex w-full md:w-auto gap-0" onSubmit={(e) => e.preventDefault()}>
+        <form className="flex w-full md:w-auto gap-0 relative" onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="> ENTER EMAIL"
-            className="bg-transparent border border-border border-r-0 px-4 py-3 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white w-full md:w-64 transition-colors"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={status === 'loading' || status === 'success'}
+            className="bg-transparent border border-border border-r-0 px-4 py-3 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white w-full md:w-64 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
-            className="border border-white bg-black text-white px-4 py-3 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0 shrink-0"
+            disabled={status === 'loading' || status === 'success' || !email}
+            className="border border-white bg-black text-white px-4 py-3 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed w-28 text-center"
           >
-            CLOCK IN
+            {status === 'loading' ? 'WAIT...' : status === 'success' ? 'LOCKED IN' : 'CLOCK IN'}
           </button>
+          
+          {status === 'error' && (
+            <span className="absolute -bottom-6 left-0 text-[10px] text-[#ff0000] font-mono tracking-widest">
+              SYSTEM_FRICTION_DETECTED
+            </span>
+          )}
         </form>
       </div>
 

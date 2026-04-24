@@ -134,7 +134,7 @@ export default async function Image() {
               letterSpacing: '0.05em',
             }}
           >
-            High-Performance Ageless Streetwear — chopped.store
+            High-Performance Ageless Streetwear — choppedunc.store
           </div>
         </div>
       </div>

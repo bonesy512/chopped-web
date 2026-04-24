@@ -9,7 +9,7 @@ import { ProductSchema, BreadcrumbSchema } from '@/components/seo/schema';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
 
 type Props = {
   params: Promise<{ category: string; slug: string }>;

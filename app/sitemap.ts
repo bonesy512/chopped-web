@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { products } from '@/lib/products'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

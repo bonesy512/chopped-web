@@ -27,7 +27,7 @@ export default function PrivacyRedactedPage() {
             <article className="space-y-4">
               <h2 className="text-xl font-bold font-sans uppercase">01 // Data Collection</h2>
               <p className="font-mono text-sm leading-relaxed text-black/70">
-                We collect what we need to process your drop. Nothing more. We operate in the shadows, 
+                We collect what we need to process your drop. Nothing more. We operate in the shadows,
                 and respect your right to do the same. Become invisible.
               </p>
             </article>

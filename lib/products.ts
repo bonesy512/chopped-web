@@ -13,6 +13,7 @@ export type Product = {
   features: string[];
   specs: { label: string; value: string }[];
   status: 'REDACTED' | 'ACTIVE';
+  sizes: string[];
   image?: string;
   stripeProductId?: string;
 };
@@ -25,7 +26,7 @@ export const products: Product[] = [
     slug: 'ortho-aggressor-mid',
     category: 'Footwear',
     categorySlug: 'footwear',
-    price: 149.99,
+    price: 245.00,
     description: 'All-black Italian suede mid-top with hidden ORTH3-AGGR medical-grade support. Heavy-gauge suede chassis. Hidden orthotic sole. Built for the 02:00 AM shift.',
     shortDesc: 'All-black Italian suede mid-top. Hidden ORTH3-AGGR support.',
     features: [
@@ -39,6 +40,7 @@ export const products: Product[] = [
       { label: 'LOGO', value: 'Stencil C on Lateral Heel' },
     ],
     status: 'ACTIVE',
+    sizes: ['7', '8', '9', '10', '11', '12', '13', '14'], // Adult US Sizes
     image: '/images/products/ortho-aggressor-mid/hero.jpg',
     stripeProductId: 'prod_UOO58N0UmdWVZk',
   },
@@ -49,7 +51,7 @@ export const products: Product[] = [
     slug: 'chopped-heavyweight-hoodie',
     category: 'Outerwear',
     categorySlug: 'outerwear',
-    price: 99.99,
+    price: 165.00,
     description: '500GSM French Terry armor with internal lumbar support. Wear the armor. Respect the friction.',
     shortDesc: '500GSM French Terry armor. Internal Lumbar-Lock™ liner.',
     features: [
@@ -63,6 +65,7 @@ export const products: Product[] = [
       { label: 'FIT', value: 'Structured Boxy' },
     ],
     status: 'ACTIVE',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
     image: '/images/products/chopped-heavyweight-hoodie/hero.jpg',
   },
   {
@@ -72,7 +75,7 @@ export const products: Product[] = [
     slug: 'unc-utility-vest',
     category: 'Outerwear',
     categorySlug: 'outerwear',
-    price: 99.99,
+    price: 185.00,
     description: '12oz Duck Canvas tactical vest stripped of cosplay aesthetics. Logical utility. No excess. Just capacity.',
     shortDesc: '12oz Duck Canvas. Stripped of cosplay aesthetics.',
     features: [
@@ -86,6 +89,7 @@ export const products: Product[] = [
       { label: 'PATCH', value: 'Black-on-Black Tonal Velcro' },
     ],
     status: 'ACTIVE',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
     image: '/images/products/unc-utility-vest/hero.png',
   },
   {
@@ -109,6 +113,7 @@ export const products: Product[] = [
       { label: 'BACK', value: 'Wavy Distorted Typography' },
     ],
     status: 'ACTIVE',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
     image: '/images/products/anti-graphic-tee/hero.png',
   },
   {
@@ -132,6 +137,7 @@ export const products: Product[] = [
       { label: 'DISTRESS', value: 'Hand-abraded brim edges' },
     ],
     status: 'ACTIVE',
+    sizes: ['OSFA'],
     image: '/images/products/distressed-logo-hat/hero.png',
   },
 ];

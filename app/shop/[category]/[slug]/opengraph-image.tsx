@@ -86,7 +86,7 @@ export default async function Image({ params }: Props) {
 
         {/* Footer */}
         <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em', position: 'relative', zIndex: 1 }}>
-          chopped.store — DROP: JUNE 1, 2026 // 02:00 AM PST
+          choppedunc.store — DROP: JUNE 1, 2026 // 02:00 AM PST
         </div>
       </div>
     ),

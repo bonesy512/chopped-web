@@ -3,7 +3,7 @@
  * Rendered as <script type="application/ld+json"> in RSC pages.
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 // ─── Organization schema ────────────────────────────────────────────────────
 export function OrganizationSchema() {

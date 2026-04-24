@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped.store'
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
   return {
     rules: [
