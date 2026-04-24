@@ -35,7 +35,7 @@ export function Header() {
       <div className="flex items-center gap-3">
         {/* THE PATCH: Hardwired Auditory Protocol (Visible on mobile & desktop) */}
         <button 
-          onClick={() => speak("The first move is what sets everything in motion.")} 
+          onClick={() => speak("[heavy thoughts] Life is a series of frictions. [deliberate short pause] We don't avoid the friction; we function for it. [slow reflecting] The street never left us. [deliberate short pause] Our backs just started keeping score. The world sleeps at midnight. [authoritative tone] We drop at 02:00 AM. [exhales sharply] This is Volume 01. No reruns, limited supply, [slow branding pause] [brand tag]Chopped Uncs ")} 
           disabled={isPlaying} 
           // Replaced 'hidden md:inline-block' with flex and h-[44px] for touch targets
           className={`flex items-center justify-center h-[44px] px-2 md:h-auto md:px-0 text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`} 
