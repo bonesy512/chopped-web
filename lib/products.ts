@@ -1,4 +1,4 @@
-// Central product data - all 5 VOL.01 products from choppedproducts.md
+// Central product data - all 9 VOL.01 products from choppedproducts.md
 
 export type Product = {
   id: string;
@@ -139,6 +139,102 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['OSFA'],
     image: '/images/products/distressed-logo-hat/hero.png',
+  },
+  {
+    id: 'chpd-btm-006',
+    sku: 'CHPD-BTM-006',
+    name: 'The "Shop-Floor" Double-Knee Pant',
+    slug: 'shop-floor-double-knee-pant',
+    category: 'Bottoms',
+    categorySlug: 'bottoms',
+    price: 145.00,
+    description: '14oz black rigid denim. Hidden impact-absorption inserts. Built for the concrete.',
+    shortDesc: '14oz rigid black denim. Hidden impact-absorption inserts.',
+    features: [
+      'Internal shock-absorbing knee pads',
+      'Gusseted crotch for stance width',
+      'Heavy-duty tool pockets',
+    ],
+    specs: [
+      { label: 'FABRIC', value: '14oz Rigid Black Denim' },
+      { label: 'HARDWARE', value: 'Matte Black Rivets' },
+      { label: 'STITCHING', value: 'Tonal Triple-Stitch' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['30', '32', '34', '36', '38', '40'],
+    image: '/images/products/shop-floor-double-knee-pant/hero.png',
+  },
+  {
+    id: 'chpd-hrd-007',
+    sku: 'CHPD-HRD-007',
+    name: 'The "Lockdown" Tactical Carabiner',
+    slug: 'lockdown-tactical-carabiner',
+    category: 'Hardware',
+    categorySlug: 'hardware',
+    price: 35.00,
+    description: 'Aircraft-grade matte aluminum. Zero rattle. Secure your access.',
+    shortDesc: 'Aircraft-grade matte aluminum. Zero rattle.',
+    features: [
+      "Integrates with the Vest's Concealed Car Fob Loop",
+      '500lb load capacity',
+      'Industrial screw-lock',
+    ],
+    specs: [
+      { label: 'MATERIAL', value: 'Matte Black Aluminum' },
+      { label: 'BRANDING', value: 'Laser-etched CHOPPED. Stencil' },
+      { label: 'MECHANISM', value: 'Heavy-tension spring gate' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['OSFA'],
+    image: '/images/products/lockdown-tactical-carabiner/hero.png',
+  },
+  {
+    id: 'chpd-rec-008',
+    sku: 'CHPD-REC-008',
+    name: 'The "Deep-Friction" Recovery Salve',
+    slug: 'deep-friction-recovery-salve',
+    category: 'Support',
+    categorySlug: 'support',
+    price: 28.00,
+    description: 'Menthol-heavy muscle armor. Back pain is the tax. Clock back in.',
+    shortDesc: 'Menthol-heavy muscle armor. Maximum strength cooling.',
+    features: [
+      'Maximum strength cooling/heating elements',
+      'Unscented finish post-application',
+      'Vacuum-sealed industrial packaging',
+    ],
+    specs: [
+      { label: 'PACKAGING', value: 'Matte Black Aluminum Tin' },
+      { label: 'LABEL', value: 'Redacted Typography' },
+      { label: 'TEXTURE', value: 'Dense wax consistency' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['2OZ'],
+    image: '/images/products/deep-friction-recovery-salve/hero.png',
+  },
+  {
+    id: 'chpd-acc-009',
+    sku: 'CHPD-ACC-009',
+    name: 'The "Night-Shift" Watch Cap',
+    slug: 'night-shift-watch-cap',
+    category: 'Accessories',
+    categorySlug: 'accessories',
+    price: 40.00,
+    description: 'Heavy-ribbed wool structure. Heat retention for the god hour.',
+    shortDesc: 'Heavy-ribbed wool structure. Heat retention.',
+    features: [
+      'Wind-resistant double fold',
+      'Low visibility silhouette',
+      'Fray-resistant seaming',
+    ],
+    specs: [
+      { label: 'FABRIC', value: 'Heavy-gauge Black Wool Blend' },
+      { label: 'PATCH', value: 'Black-on-Black Tonal Woven Label' },
+      { label: 'FIT', value: 'Snug, above-ear profile' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['OSFA'],
+    image: '/images/products/night-shift-watch-cap/hero.png',
   },
 ];
 

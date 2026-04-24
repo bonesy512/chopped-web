@@ -29,7 +29,10 @@ const CATEGORIES = [
   { label: 'ALL', slug: 'all' },
   { label: 'FOOTWEAR', slug: 'footwear' },
   { label: 'OUTERWEAR', slug: 'outerwear' },
+  { label: 'BOTTOMS', slug: 'bottoms' },
   { label: 'ESSENTIALS', slug: 'essentials' },
+  { label: 'HARDWARE', slug: 'hardware' },
+  { label: 'SUPPORT', slug: 'support' },
 ];
 
 export default function ShopAllPage() {

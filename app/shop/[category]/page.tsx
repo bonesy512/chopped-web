@@ -17,10 +17,25 @@ const CATEGORY_META: Record<string, { label: string; title: string; description:
     title: 'Outerwear — VOL.01 — CHOPPED.',
     description: '500GSM French Terry armor. 12oz Duck Canvas. Lumbar-Lock™ compression. No cosplay.',
   },
+  bottoms: {
+    label: 'BOTTOMS',
+    title: 'Bottoms — VOL.01 — CHOPPED.',
+    description: '14oz rigid black denim. Hidden impact-absorption inserts. Built for the concrete.',
+  },
   essentials: {
     label: 'ESSENTIALS',
     title: 'Essentials — VOL.01 — CHOPPED.',
     description: 'Anti-uniform kit for the veteran. 300GSM tees. Hand-abraded hats. No decoration.',
+  },
+  hardware: {
+    label: 'HARDWARE',
+    title: 'Hardware — VOL.01 — CHOPPED.',
+    description: 'Aircraft-grade matte aluminum. Zero rattle. Secure your access.',
+  },
+  support: {
+    label: 'SUPPORT',
+    title: 'Support — VOL.01 — CHOPPED.',
+    description: 'Menthol-heavy muscle armor. Back pain is the tax. Clock back in.',
   },
 };
 
@@ -28,7 +43,10 @@ const CATEGORIES = [
   { label: 'ALL', slug: 'all' },
   { label: 'FOOTWEAR', slug: 'footwear' },
   { label: 'OUTERWEAR', slug: 'outerwear' },
+  { label: 'BOTTOMS', slug: 'bottoms' },
   { label: 'ESSENTIALS', slug: 'essentials' },
+  { label: 'HARDWARE', slug: 'hardware' },
+  { label: 'SUPPORT', slug: 'support' },
 ];
 
 type Props = { params: Promise<{ category: string }> };
