@@ -84,7 +84,7 @@ export const products: Product[] = [
       { label: 'PATCH', value: 'Black-on-Black Tonal Velcro' },
     ],
     status: 'ACTIVE',
-    image: '/images/products/unc-utility-vest/hero.jpg',
+    image: '/images/products/unc-utility-vest/hero.png',
   },
   {
     id: 'chpd-tsh-004',
@@ -107,7 +107,7 @@ export const products: Product[] = [
       { label: 'BACK', value: 'Wavy Distorted Typography' },
     ],
     status: 'ACTIVE',
-    image: '/images/products/anti-graphic-tee/hero.jpg',
+    image: '/images/products/anti-graphic-tee/hero.png',
   },
   {
     id: 'chpd-acc-005',
@@ -130,7 +130,7 @@ export const products: Product[] = [
       { label: 'DISTRESS', value: 'Hand-abraded brim edges' },
     ],
     status: 'ACTIVE',
-    image: '/images/products/distressed-logo-hat/hero.jpg',
+    image: '/images/products/distressed-logo-hat/hero.png',
   },
 ];
 
