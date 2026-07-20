@@ -74,7 +74,7 @@ export default async function ProductDetailPage({ params }: Props) {
       <BreadcrumbSchema
         items={[
           { name: 'CHOPPED.', url: BASE_URL },
-          { name: 'Museum', url: `${BASE_URL}/shop/all` },
+          { name: 'Chassis', url: `${BASE_URL}/shop/all` },
           { name: product.category, url: `${BASE_URL}/shop/all` },
           { name: product.name, url: `${BASE_URL}/shop/${product.categorySlug}/${product.slug}` },
         ]}
@@ -85,7 +85,7 @@ export default async function ProductDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
           {/* Breadcrumb */}
           <div className="text-xs font-mono text-muted-foreground mb-8 flex gap-2 items-center">
-            <a href="/shop/all" className="hover:text-white transition-colors">MUSEUM</a>
+            <a href="/shop/all" className="hover:text-white transition-colors">CHASSIS</a>
             <span>/</span>
             <span className="uppercase">{product.category}</span>
             <span>/</span>

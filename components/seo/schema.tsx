@@ -53,7 +53,7 @@ export function WebSiteSchema() {
     '@id': `${BASE_URL}/#website`,
     url: BASE_URL,
     name: 'CHOPPED.',
-    description: 'High-Performance Ageless Streetwear. Nocturnal drops at 02:00 AM PST.',
+    description: 'High-Performance Ageless Streetwear. Nocturnal drops at 02:00 AM.',
     publisher: {
       '@id': `${BASE_URL}/#organization`,
     },

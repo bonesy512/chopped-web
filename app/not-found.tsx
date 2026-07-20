@@ -67,7 +67,7 @@ export default function NotFound() {
                 href="/shop/all"
                 className="flex-1 text-center py-3 px-4 text-xs font-mono text-white bg-black hover:bg-white hover:text-black tracking-widest transition-colors duration-0"
               >
-                SCAN THE MUSEUM →
+                SCAN THE CHASSIS →
               </a>
             </div>
 

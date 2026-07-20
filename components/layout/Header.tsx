@@ -2,19 +2,20 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useCart } from '@/components/cart/CartContext';
+import { useUncVoice } from '@/hooks/use-unc-voice';
 
 const NAV_LINKS = [
-  { label: 'MUSEUM', href: '/shop/all' },
+  { label: 'CHASSIS', href: '/shop/all' },
   { label: 'MANIFESTO', href: '/manifesto' },
   { label: 'ADVISORY', href: '/advisory-board' },
   { label: 'TRANSMIT', href: '/transmit' },
 ];
 
-import { useUncVoice } from '@/hooks/use-unc-voice';
-
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { speak, isPlaying } = useUncVoice();
+  const { cartCount, toggleCart } = useCart();
 
   return (
     <header className="fixed top-0 left-0 w-full border-b border-border bg-[#080808]/95 backdrop-blur-sm z-40 h-14 flex items-center px-4 md:px-6 justify-between font-mono text-xs">
@@ -37,7 +38,7 @@ export function Header() {
         ))}
       </nav>
 
-      {/* Right: CTA + scan */}
+      {/* Right: CTA + scan + cart */}
       <div className="flex items-center gap-3">
         <button
           onClick={() => speak("The first move is what sets everything in motion.")}
@@ -47,6 +48,7 @@ export function Header() {
         >
           {isPlaying ? '• SIGNAL •' : 'SIGNAL'}
         </button>
+        
         <Link
           href="/scan"
           className="hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0"
@@ -54,6 +56,15 @@ export function Header() {
         >
           ⌕
         </Link>
+
+        {/* Cart Trigger */}
+        <button
+          onClick={toggleCart}
+          className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 font-bold border border-border px-3 py-1 hover:border-white"
+        >
+          CART ({cartCount})
+        </button>
+
         <Link
           href="/secure-gear"
           className="border border-[#FF0000] text-[#FF0000] px-3 py-1 text-xs tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0 hidden md:block"
@@ -88,6 +99,18 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          
+          {/* Mobile Cart Trigger */}
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              toggleCart();
+            }}
+            className="px-6 py-4 border-b border-border text-left text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0"
+          >
+            CART ({cartCount})
+          </button>
+
           <Link
             href="/secure-gear"
             onClick={() => setMenuOpen(false)}

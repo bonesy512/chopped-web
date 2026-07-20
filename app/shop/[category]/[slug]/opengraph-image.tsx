@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { products, getProductBySlug } from '@/lib/products'
+import { formatDropDateTime } from '@/lib/drop'
 
 export const alt = 'CHOPPED. Product'
 export const size = { width: 1200, height: 630 }
@@ -86,7 +87,7 @@ export default async function Image({ params }: Props) {
 
         {/* Footer */}
         <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em', position: 'relative', zIndex: 1 }}>
-          choppedunc.store — DROP: JUNE 1, 2026 // 02:00 AM PST
+          choppedunc.store — DROP: {formatDropDateTime()}
         </div>
       </div>
     ),

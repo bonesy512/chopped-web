@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: 'CHOPPED.',
     title: 'CHOPPED. — High-Performance Ageless Streetwear',
     description:
-      'Engineered for the midnight shift. 500GSM French Terry armor, hidden orthotic support, industrial hardware. Limited drops at 02:00 AM PST.',
+      'Engineered for the midnight shift. 500GSM French Terry armor, hidden orthotic support, industrial hardware. Limited drops at 02:00 AM.',
     images: [
       {
         url: '/og-image.png',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'CHOPPED. — Function For The Friction.',
     description:
-      'High-Performance Ageless Streetwear. Limited nocturnal drops at 02:00 AM PST.',
+      'High-Performance Ageless Streetwear. Limited nocturnal drops at 02:00 AM.',
     images: ['/og-image.png'],
     creator: '@choppedstore',
     site: '@choppedstore',
@@ -96,6 +96,8 @@ export const metadata: Metadata = {
 }
 
 import { OrganizationSchema, WebSiteSchema } from "@/components/seo/schema"
+import { CartProvider } from "@/components/cart/CartContext"
+import { CartDrawer } from "@/components/cart/CartDrawer"
 
 export default function RootLayout({
   children,
@@ -110,12 +112,15 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <OrganizationSchema />
-          <WebSiteSchema />
-          <div className="grain-overlay" />
-          {children}
-          <Analytics />
-          <SpeedInsights />
+          <CartProvider>
+            <OrganizationSchema />
+            <WebSiteSchema />
+            <div className="grain-overlay" />
+            {children}
+            <CartDrawer />
+            <Analytics />
+            <SpeedInsights />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -115,7 +115,7 @@ export default function AdvisoryBoardPage() {
                 <div>
                   <span
                     className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
-                      ? 'border-green-500/50 text-green-500'
+                      ? 'border-white/50 text-white'
                       : 'border-[#FF0000]/50 text-[#FF0000]'
                       }`}
                   >

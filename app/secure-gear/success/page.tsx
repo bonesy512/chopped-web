@@ -14,7 +14,7 @@ export default function SuccessPage() {
 
       <main className="flex-1 pt-14 flex items-center justify-center px-4">
         <div className="max-w-lg w-full text-center border border-border p-12 bg-black">
-          <span className="text-green-500 text-xs font-mono tracking-[0.4em] border border-green-500/50 px-3 py-1 inline-block">
+          <span className="text-white text-xs font-mono tracking-[0.4em] border border-white/50 px-3 py-1 inline-block">
             ▮ ORDER SECURED
           </span>
 

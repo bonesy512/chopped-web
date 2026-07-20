@@ -107,7 +107,7 @@ export default async function ShopCategoryPage({ params }: Props) {
       <BreadcrumbSchema
         items={[
           { name: 'CHOPPED.', url: BASE_URL },
-          { name: 'Museum', url: `${BASE_URL}/shop/all` },
+          { name: 'Chassis', url: `${BASE_URL}/shop/all` },
           { name: meta.label, url: `${BASE_URL}/shop/${category}` },
         ]}
       />
@@ -123,7 +123,7 @@ export default async function ShopCategoryPage({ params }: Props) {
             {meta.label}
           </h1>
           <p className="text-sm font-mono text-muted-foreground mt-3">
-            {filtered.length} of {products.length} units. Drop: 02:00 AM PST.
+            {filtered.length} of {products.length} units. Drop: 02:00 AM.
           </p>
         </div>
 
@@ -150,13 +150,13 @@ export default async function ShopCategoryPage({ params }: Props) {
                 [REDACTED]
               </p>
               <p className="text-sm font-mono text-muted-foreground">
-                NO UNITS IN THIS CATEGORY. RETURN AT 02:00 AM PST.
+                NO UNITS IN THIS CATEGORY. RETURN AT 02:00 AM.
               </p>
               <Link
                 href="/shop/all"
                 className="inline-block mt-8 text-xs font-mono text-white border border-border px-6 py-3 hover:bg-white hover:text-black transition-colors duration-0 tracking-widest"
               >
-                ← SCAN FULL MUSEUM
+                ← SCAN FULL CHASSIS
               </Link>
             </div>
           ) : (

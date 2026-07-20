@@ -1,50 +1,40 @@
 'use client';
 
 import { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import { type Product } from '@/lib/products';
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+import { useCart } from '@/components/cart/CartContext';
 
 export function AcquireButton({ product }: { product: Product }) {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : null
   );
+  const [selectedColor, setSelectedColor] = useState<string | null>(
+    product.colors && product.colors.length > 0 ? product.colors[0] : null
+  );
 
-  const handleAcquire = async () => {
+  const { addItem, setIsOpen } = useCart();
+
+  const handleAddToCart = () => {
     if (product.sizes && product.sizes.length > 0 && !selectedSize) {
       setError('SELECT_SIZE_TO_PROCEED.');
       return;
     }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res = await fetch('/api/checkout_sessions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: product.id, size: selectedSize }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.url) {
-        setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.');
-        return;
-      }
-
-      // Redirect to Stripe Checkout
-      window.location.href = data.url;
-    } catch {
-      setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.');
-    } finally {
-      setLoading(false);
+    if (product.colors && product.colors.length > 0 && !selectedColor) {
+      setError('SELECT_COLOR_TO_PROCEED.');
+      return;
     }
+
+    setError(null);
+    addItem({
+      product,
+      size: selectedSize || 'One Size',
+      color: selectedColor || undefined,
+      quantity: 1,
+    });
+    
+    // Auto-open cart drawer
+    setIsOpen(true);
   };
 
   if (product.status === 'REDACTED') {
@@ -76,7 +66,7 @@ export function AcquireButton({ product }: { product: Product }) {
             [REDACTED] — SYSTEM OFFLINE
           </button>
           <p className="text-xs text-muted-foreground mt-2 font-mono">
-            SYSTEM UNLOCKS: 02:00 AM PST
+            SYSTEM UNLOCKS: 02:00 AM
           </p>
         </div>
       </div>
@@ -85,6 +75,32 @@ export function AcquireButton({ product }: { product: Product }) {
 
   return (
     <div className="w-full flex flex-col gap-6">
+      {product.colors && product.colors.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-mono text-muted-foreground tracking-widest border-b border-border pb-2">
+            SELECT_COLOR
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {product.colors.map((color) => (
+              <button
+                key={color}
+                onClick={() => {
+                  setSelectedColor(color);
+                  setError(null);
+                }}
+                className={`font-mono text-xs border py-3 px-5 transition-colors uppercase min-w-[5rem] h-[2.75rem] flex items-center justify-center ${
+                  selectedColor === color
+                    ? 'border-white bg-white text-black font-bold'
+                    : 'border-border bg-black text-muted-foreground hover:border-white hover:text-white'
+                }`}
+              >
+                {color}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {product.sizes && product.sizes.length > 0 && (
         <div className="flex flex-col gap-3">
           <p className="text-xs font-mono text-muted-foreground tracking-widest border-b border-border pb-2">
@@ -113,11 +129,10 @@ export function AcquireButton({ product }: { product: Product }) {
 
       <div className="w-full">
         <button
-          onClick={handleAcquire}
-          disabled={loading}
-          className="w-full border border-white bg-black text-white font-mono text-sm tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-none cursor-pointer disabled:opacity-50"
+          onClick={handleAddToCart}
+          className="w-full border border-white bg-black text-white font-mono text-sm tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-none cursor-pointer"
         >
-          {loading ? 'ACQUIRING...' : 'ACQUIRE'}
+          ADD TO CART
         </button>
         {error && (
           <p className="text-xs text-[#FF0000] mt-2 font-mono">{error}</p>

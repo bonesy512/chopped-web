@@ -9,18 +9,18 @@ import { ItemListSchema, BreadcrumbSchema } from '@/components/seo/schema';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
 
 export const metadata: Metadata = {
-  title: 'Museum — VOL.01: The Support System — CHOPPED.',
-  description: 'Scan the full VOL.01 archive. Industrial-grade hardware and ageless streetwear. Drop: 02:00 AM PST.',
+  title: 'The Chassis — VOL.01: The Support System — CHOPPED.',
+  description: 'Scan the full VOL.01 chassis. Industrial-grade hardware and ageless streetwear. Drop: 02:00 AM.',
   openGraph: {
-    title: 'THE MUSEUM — VOL.01 — CHOPPED.',
-    description: 'The complete VOL.01 hardware archive. Engineered for the midnight shift.',
+    title: 'THE CHASSIS — VOL.01 — CHOPPED.',
+    description: 'The complete VOL.01 hardware system. Engineered for the midnight shift.',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. MUSEUM' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. THE CHASSIS' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'THE MUSEUM — CHOPPED.',
-    description: 'The full hardware archive for the friction.',
+    title: 'THE CHASSIS — CHOPPED.',
+    description: 'The full hardware system for the friction.',
     images: ['/og-image.png'],
   },
 };
@@ -48,7 +48,7 @@ export default function ShopAllPage() {
       <BreadcrumbSchema
         items={[
           { name: 'CHOPPED.', url: BASE_URL },
-          { name: 'Museum', url: `${BASE_URL}/shop/all` },
+          { name: 'Chassis', url: `${BASE_URL}/shop/all` },
         ]}
       />
       <Header />
@@ -60,10 +60,10 @@ export default function ShopAllPage() {
             CATALOG // VOL.01
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white font-sans uppercase tracking-tight">
-            THE MUSEUM
+            THE CHASSIS
           </h1>
           <p className="text-sm font-mono text-muted-foreground mt-3">
-            {products.length} items. All rights reserved. Drop: 02:00 AM PST.
+            {products.length} items. All rights reserved. Drop: 02:00 AM.
           </p>
         </div>
 

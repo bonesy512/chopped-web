@@ -105,7 +105,7 @@ export function Footer() {
         </nav>
 
         <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
-          <span className="w-2 h-2 bg-green-500 inline-block animate-pulse" />
+          <span className="w-2 h-2 bg-white inline-block animate-pulse" />
           SYS_STATUS: ONLINE
         </div>
       </div>

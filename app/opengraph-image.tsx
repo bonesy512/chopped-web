@@ -63,7 +63,7 @@ export default async function Image() {
             gap: 8,
           }}
         >
-          ▮ NEXT DROP: 02:00 AM PST
+          ▮ NEXT DROP: 02:00 AM
         </div>
 
         {/* Main headline */}

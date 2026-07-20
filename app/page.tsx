@@ -4,24 +4,28 @@ import { ProductCard } from '@/components/ui/product-card';
 import { DropTimer } from '@/components/ui/drop-timer';
 import { products } from '@/lib/products';
 import { ItemListSchema } from '@/components/seo/schema';
+import { formatDropDate, formatDropDateTime, getNextDrop, DROP_TIME_LABEL } from '@/lib/drop';
 import type { Metadata } from 'next';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
 
-export const metadata: Metadata = {
-  title: 'CHOPPED. — High-Performance Ageless Streetwear',
-  description:
-    'Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Next drop June 1st, 2026 02:00 AM PST. Austin, TX.',
-  alternates: { canonical: BASE_URL },
-  openGraph: {
-    title: 'CHOPPED. — Function For The Friction.',
-    description: 'High-Performance Ageless Streetwear. Next drop June 1st, 2026 02:00 AM PST.',
-    url: BASE_URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. — Function For The Friction.' }],
-  },
-};
+export function generateMetadata(): Metadata {
+  const drop = formatDropDate(getNextDrop());
+  return {
+    title: 'CHOPPED. — High-Performance Ageless Streetwear',
+    description: `Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Next drop ${drop} ${DROP_TIME_LABEL}. Austin, TX.`,
+    alternates: { canonical: BASE_URL },
+    openGraph: {
+      title: 'CHOPPED. — Function For The Friction.',
+      description: `High-Performance Ageless Streetwear. Next drop ${drop} ${DROP_TIME_LABEL}.`,
+      url: BASE_URL,
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. — Function For The Friction.' }],
+    },
+  };
+}
 
 export default function Home() {
+  const dropDateTime = formatDropDateTime();
   const productListItems = products.map((p, i) => ({
     name: p.name,
     url: `${BASE_URL}/shop/${p.categorySlug}/${p.slug}`,
@@ -47,7 +51,7 @@ export default function Home() {
 
         {/* HUD corner labels */}
         <div className="absolute top-16 left-4 text-[10px] text-muted-foreground font-mono">
-          NODE: // CHK // 02:00_PST
+          NODE: // CHK // 02:00_HRS
         </div>
         <div className="absolute top-16 right-4 text-[10px] text-muted-foreground font-mono text-right">
           VOL.01 / THE_SUPPORT_SYSTEM
@@ -86,7 +90,7 @@ export default function Home() {
               href="/shop/all"
               className="flex-1 border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-colors duration-0 text-center"
             >
-              SCAN THE MUSEUM
+              SCAN THE CHASSIS
             </a>
             <a
               href="/manifesto"
@@ -103,8 +107,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── MUSEUM GRID ── */}
-      <section id="museum" className="border-b border-border py-20 bg-[#080808] relative">
+      {/* ── CHASSIS GRID ── */}
+      <section id="chassis" className="border-b border-border py-20 bg-[#080808] relative">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 border-b border-border pb-8">
@@ -113,7 +117,7 @@ export default function Home() {
                 CATALOG // 001
               </p>
               <h2 className="text-3xl sm:text-4xl font-bold text-white font-sans uppercase tracking-tight">
-                VOL.01: THE ARCHIVE
+                VOL.01: THE CHASSIS
               </h2>
               <p className="text-sm font-mono text-muted-foreground mt-2">
                 The Support System. {products.length} items.
@@ -124,7 +128,7 @@ export default function Home() {
                 ▮ ACCESS RESTRICTED
               </div>
               <div className="text-xs font-mono text-muted-foreground mt-1">
-                DROP: JUNE 1, 2026 // 02:00 AM PST
+                DROP: {dropDateTime}
               </div>
             </div>
           </div>
@@ -258,7 +262,7 @@ export default function Home() {
                 <div className="mt-auto">
                   <span
                     className={`text-[10px] font-mono tracking-widest px-2 py-1 border ${member.status === 'STILL UP'
-                      ? 'border-green-500/50 text-green-500'
+                      ? 'border-white/50 text-white'
                       : 'border-[#FF0000]/50 text-[#FF0000]'
                       }`}
                   >

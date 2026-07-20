@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { formatDropDateTime } from '@/lib/drop';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default function DropLogPage() {
               <article className="space-y-2">
                 <div className="flex items-center gap-4">
                   <span className="bg-black text-white px-2 py-1 text-xs font-mono font-bold tracking-widest">UPCOMING</span>
-                  <span className="font-mono text-sm text-black/50">JUNE 1, 2026 // 02:00 AM</span>
+                  <span className="font-mono text-sm text-black/50">{formatDropDateTime()}</span>
                 </div>
                 <h2 className="text-2xl font-bold font-sans uppercase pt-2">THE NOCTURNAL STANDARD DROP</h2>
                 <p className="font-mono text-sm leading-relaxed text-black/70">

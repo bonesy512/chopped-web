@@ -1,31 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-// Target: June 1st, 2026 02:00 AM PST
-function getNextDropTime(): Date {
-  // June is month 5 (0-indexed). 02:00 PST = 10:00 UTC
-  return new Date(Date.UTC(2026, 5, 1, 10, 0, 0));
-}
+import { getDropState, formatDropDate, DROP_TIME_LABEL } from '@/lib/drop';
 
 export function DropTimer() {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [isLive, setIsLive] = useState(false);
+  const [label, setLabel] = useState('');
 
   useEffect(() => {
     const tick = () => {
       const now = new Date();
-      const target = getNextDropTime();
-      const diff = target.getTime() - now.getTime();
+      const { next, isLive: live } = getDropState(now);
+      setLabel(formatDropDate(next));
 
-      if (diff <= 0) {
+      if (live) {
         setIsLive(true);
         setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
         return;
       }
 
       setIsLive(false);
-      const totalSeconds = Math.floor(diff / 1000);
+      const diff = next.getTime() - now.getTime();
+      const totalSeconds = Math.max(0, Math.floor(diff / 1000));
       const d = Math.floor(totalSeconds / 86400);
       const h = Math.floor((totalSeconds % 86400) / 3600);
       const m = Math.floor((totalSeconds % 3600) / 60);
@@ -56,7 +53,7 @@ export function DropTimer() {
   return (
     <div className="flex flex-col items-center gap-4">
       <span className="text-xs font-mono text-muted-foreground tracking-widest">
-        NEXT DROP: JUNE 1, 2026 — 02:00 PST
+        NEXT DROP: {label} — {DROP_TIME_LABEL}
       </span>
       <div className="flex items-center gap-2 text-3xl sm:text-5xl font-mono tabular-nums">
         <div className="flex flex-col items-center">

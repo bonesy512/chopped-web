@@ -16,6 +16,7 @@ export type Product = {
   sizes: string[];
   image?: string;
   stripeProductId?: string;
+  colors?: string[];
 };
 
 export const products: Product[] = [
@@ -99,7 +100,7 @@ export const products: Product[] = [
     slug: 'anti-graphic-tee',
     category: 'Essentials',
     categorySlug: 'essentials',
-    price: 65.00,
+    price: 45.00,
     description: '300GSM "Anti Chopped Chopped Social Club" parody tee. Wear it without explanation.',
     shortDesc: '300GSM Dry-Hand Cotton. Anti-uniform for the veteran.',
     features: [
@@ -113,7 +114,8 @@ export const products: Product[] = [
       { label: 'BACK', value: 'Wavy Distorted Typography' },
     ],
     status: 'ACTIVE',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'],
+    colors: ['Black', 'White'],
     image: '/images/products/anti-graphic-tee/hero.png',
   },
   {
