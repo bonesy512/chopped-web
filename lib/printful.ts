@@ -18,6 +18,18 @@ export type PrintfulOrderItem = {
 
 // Map of SKU + Color + Size to Printful Sync Variant ID
 export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, number>>> = {
+  // F#&K CANCER fundraiser tee — Stanley/Stella SATU020 (sync product 449249937)
+  'CHPD-FND-001': {
+    'Black': {
+      'S': 5405608962,
+      'M': 5405608963,
+      'L': 5405608964,
+      'XL': 5405608965,
+      '2XL': 5405608966,
+      'XXL': 5405608966, // alias
+    },
+  },
+
   // The "Anti" Graphic Tee
   'CHPD-TSH-004': {
     'Black': {

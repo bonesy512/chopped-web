@@ -17,6 +17,7 @@ export const SUPPORTED_SHIPPING_COUNTRIES = ['US', 'CA', 'AU'];
 type ShippingCategory = 'shirts' | 'hoodies' | 'hats' | 'mugs' | 'bottles' | 'bags' | 'stickers';
 
 const SKU_CATEGORY: Record<string, ShippingCategory> = {
+  'CHPD-FND-001': 'shirts', // F#&K CANCER fundraiser tee (Stanley/Stella SATU020)
   'CHPD-TSH-004': 'shirts', // Anti Graphic Tee
   'CHPD-OUT-002': 'hoodies', // Heavyweight Hoodie
   'CHPD-ACC-005': 'hats', // Distressed Dad Hat

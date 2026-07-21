@@ -30,6 +30,43 @@ export function getProductImage(product: Product, color?: string): string | unde
 
 export const products: Product[] = [
   {
+    id: 'chpd-fnd-001',
+    sku: 'CHPD-FND-001',
+    name: 'F#&K CANCER',
+    slug: 'fck-cancer',
+    category: 'Essentials',
+    categorySlug: 'essentials',
+    // FUNDRAISER — 100% of profits donated to Andy's cancer fight.
+    // Live Printful POD: Stanley/Stella SATU020 "Blaster 2.0" oversized organic
+    // cotton tee (sync product 449249937); Black S–2XL sync variants in
+    // lib/printful.ts. Retail $50; Printful landed ~$21.10–$23.10.
+    price: 50.00,
+    description: "A fundraiser drop. 100% of profits from every F#&K CANCER tee go directly to Andy to support his fight against cancer. Printed on a premium Stanley/Stella \"Blaster 2.0\" heavyweight organic cotton oversized tee with a ribbed high-neck collar and a chopper-and-roses front graphic. Wear it loud. Stand with Andy.",
+    shortDesc: "Fundraiser tee — 100% of profits to Andy's cancer fight.",
+    features: [
+      "100% of Profits Donated to Andy's Cancer Fight",
+      'Stanley/Stella SATU020 "Blaster 2.0" Heavyweight Organic Cotton',
+      'Unisex Oversized Boxy Fit + Ribbed High-Neck Collar',
+      'High-Density Chopper-and-Roses DTG Front Graphic',
+    ],
+    specs: [
+      { label: 'CAUSE', value: "100% Profits → Andy's Cancer Fight" },
+      { label: 'FABRIC CHASSIS', value: 'Stanley/Stella Blaster 2.0 Organic Cotton' },
+      { label: 'FIT PROFILE', value: 'Unisex Oversized / Ribbed High-Neck' },
+      { label: 'COLORWAYS', value: 'Dead-Night Black' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    colors: ['Black'],
+    image: '/images/products/fck-cancer/black/front.png',
+    colorImages: {
+      Black: [
+        '/images/products/fck-cancer/black/front.png',
+        '/images/products/fck-cancer/black/folded.png',
+      ],
+    },
+  },
+  {
     id: 'chpd-out-002',
     sku: 'CHPD-OUT-002',
     name: 'The "Chopped" Heavyweight Hoodie',
