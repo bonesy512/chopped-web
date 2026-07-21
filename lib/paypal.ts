@@ -78,8 +78,16 @@ export type PayPalOrderResponse = {
   details?: Array<{ issue?: string; description?: string }>;
   payer?: { email_address?: string };
   purchase_units?: Array<{
+    amount?: {
+      value?: string;
+      breakdown?: {
+        item_total?: { currency_code?: string; value?: string };
+        shipping?: { currency_code?: string; value?: string };
+      };
+    };
     shipping?: PayPalShipping;
     items?: Array<{
+      name?: string;
       sku?: string;
       quantity?: string;
       unit_amount?: { currency_code?: string; value?: string };

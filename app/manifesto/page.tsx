@@ -130,9 +130,40 @@ export default function ManifestoPage() {
               </p>
             </article>
 
+            {/* Quality & Technical Sourcing — E-E-A-T Trust */}
+            <article className="space-y-6">
+              <h2 className="text-xs font-mono tracking-[0.4em] text-black/40 border-b border-black/20 pb-3">
+                06 // TECHNICAL TRANSPARENCY & GUARANTEE
+              </h2>
+              <p className="text-2xl sm:text-3xl font-bold font-sans leading-tight">
+                Zero fluff. 100% verified chassis.
+              </p>
+              <p className="text-base font-mono leading-relaxed text-black/70">
+                Every single garment silhouette in the CHOPPED. arsenal is hand-selected and physically stress-tested in Austin, TX before release. We use Cotton Heritage 6.5oz ring-spun combed cotton (MC1086) for our tees and 13oz premium heavyweight fleece (M2580) for our hoodies.
+              </p>
+              <p className="text-base font-mono leading-relaxed text-black/70">
+                Fulfillment is automated via dedicated industrial production pipelines and instant PayPal order processing. If a product cannot be produced to 100% spec, it remains [REDACTED] until verified.
+              </p>
+
+              {/* Conversion CTA Box */}
+              <div className="pt-8 border-t border-black/20 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                  <p className="text-xs font-mono text-black/60 tracking-widest uppercase">STILL UP? SECURE YOUR GEAR</p>
+                  <p className="text-lg font-bold font-sans">Vol. 01 Launch Drop is Live.</p>
+                </div>
+                <a
+                  href="/shop/all"
+                  className="w-full sm:w-auto border-2 border-black bg-black text-white text-xs font-mono tracking-widest py-4 px-8 hover:bg-transparent hover:text-black transition-colors duration-0 text-center font-bold"
+                >
+                  ACQUIRE CHASSIS →
+                </a>
+              </div>
+            </article>
+
           </div>
         </div>
       </main>
+
 
       <Footer />
     </div>

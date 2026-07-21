@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.44.0",
+    "@next/third-parties": "^16.2.10",
     "@paypal/react-paypal-js": "^10.1.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

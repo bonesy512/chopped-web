@@ -22,11 +22,17 @@ export default function TransmitPage() {
           <h1 className="text-4xl sm:text-6xl font-bold text-white font-sans uppercase tracking-tight">
             TRANSMIT.
           </h1>
-          <p className="text-sm font-mono text-muted-foreground mt-4 max-w-md">
-            Industrial inquiries only. Press, wholesale, and advisory board applications accepted.
-            We respond at [REDACTED].
+          <p className="text-sm font-mono text-muted-foreground mt-4 max-w-lg leading-relaxed">
+            Direct customer support, press inquiries, wholesale protocols, and Advisory Board applications.
+            Our team operates out of Austin, TX and reviews all transmissions within a strict 24-hour window.
           </p>
+          <div className="flex flex-wrap gap-6 mt-6 text-xs font-mono text-muted-foreground/80 border-t border-border/50 pt-4">
+            <div>HQ: <span className="text-white font-bold">Austin, TX</span></div>
+            <div>SLA: <span className="text-white font-bold">&lt; 24 HR RESPONSE</span></div>
+            <div>ENCRYPTION: <span className="text-white font-bold">256-BIT SSL</span></div>
+          </div>
         </div>
+
 
         {/* Form — client component */}
         <div className="px-6 md:px-12 py-16 max-w-2xl">

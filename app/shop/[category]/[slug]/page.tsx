@@ -7,6 +7,7 @@ import { ProductOptionsProvider } from '@/components/product/product-options';
 import { ProductCard } from '@/components/ui/product-card';
 import { products, getProductBySlug } from '@/lib/products';
 import { ProductSchema, BreadcrumbSchema } from '@/components/seo/schema';
+import { ProductAnalytics } from '@/components/product/product-analytics';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
@@ -62,6 +63,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
+      <ProductAnalytics product={product} />
       <ProductSchema
         name={product.name}
         description={product.description}

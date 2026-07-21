@@ -1,11 +1,12 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { PersonSchema } from '@/components/seo/schema';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Advisory Board — CHOPPED.',
-  description: 'The Unc Advisory Board. Veterans. Operators. Night-shift legends.',
+  description: 'The Unc Advisory Board. 49+ years combined industry experience in design, production, and marketing. Austin, TX.',
 };
 
 const BOARD_MEMBERS = [
@@ -13,7 +14,7 @@ const BOARD_MEMBERS = [
     handle: '@thomas_schustereit',
     role: 'Chopped CEO',
     tenure: '14 years in Design',
-    bio: 'Lead visionary. Orchestrating the intersection of industrial utility and high-design friction.',
+    bio: 'Lead visionary. 14 years mastering UI/UX, brand architecture, and industrial design. Orchestrating the intersection of heavy-duty utility and high-design street friction in Austin, TX.',
     status: 'STILL UP',
     link: 'https://www.instagram.com/thomas_schustereit/',
     image: '/images/board/ceo.jpg',
@@ -22,7 +23,7 @@ const BOARD_MEMBERS = [
     handle: '@eatingsnackswithstrippers_2.0',
     role: 'Chopped COO',
     tenure: '15 years in Production',
-    bio: 'Production powerhouse. Turning musical concepts into tracks with fire beats.',
+    bio: 'Production powerhouse. 15 years in audio engineering, garment logistics, and physical product fabrication. Turning nocturnal energy into verified chassis execution.',
     status: 'STILL UP',
     link: 'https://instagram.com/eatingsnackswithstrippers_2.0',
     image: '/images/board/producer.jpg',
@@ -31,7 +32,7 @@ const BOARD_MEMBERS = [
     handle: '@abstract_andy_',
     role: 'Chopped Old Head Unc',
     tenure: '20 years in Marketing and Product Design',
-    bio: 'The veteran operator. Decades of market friction distilled into the CHOPPED. ethos.',
+    bio: 'The veteran operator. 20 years in high-impact brand strategy, growth engineering, and streetwear culture. Decades of market friction distilled into the CHOPPED. ethos.',
     status: 'STILL UP',
     link: 'https://instagram.com/abstract_andy_',
     image: '/images/board/unc.jpg',
@@ -41,7 +42,18 @@ const BOARD_MEMBERS = [
 export default function AdvisoryBoardPage() {
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
+      {BOARD_MEMBERS.map((m) => (
+        <PersonSchema
+          key={m.handle}
+          name={m.handle}
+          jobTitle={m.role}
+          description={m.bio}
+          url={m.link}
+          image={m.image}
+        />
+      ))}
       <Header />
+
 
       <main className="flex-1 pt-14">
         {/* Header */}

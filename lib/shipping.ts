@@ -9,7 +9,7 @@
 
 import type { Product } from './products';
 
-export const SUPPORTED_SHIPPING_COUNTRIES = ['US', 'CA', 'GB', 'AU'];
+export const SUPPORTED_SHIPPING_COUNTRIES = ['US', 'CA', 'AU'];
 
 // Printful groups its catalog into shipping categories. We map each CHOPPED SKU
 // to its category. Unknown/other SKUs fall back to 'shirts' (the cheapest, so we
@@ -34,7 +34,9 @@ export function shippingCategory(product: Product): ShippingCategory {
   return SKU_CATEGORY[product.sku] ?? 'shirts';
 }
 
-// Printful shipping regions we serve (US/CA/GB/AU allowlist).
+// Printful shipping regions (US/CA/AU allowlist). GB/UK is no longer served —
+// its rate rows below are retained (unreachable) so it can be re-added by
+// putting 'GB' back in SUPPORTED_SHIPPING_COUNTRIES.
 type Region = 'US' | 'UK' | 'CA' | 'ANZ';
 
 export function shippingRegion(countryCode: string): Region {

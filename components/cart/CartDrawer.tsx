@@ -1,10 +1,16 @@
 'use client';
 
 import { useCart } from './CartContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/shipping';
 import { getProductImage } from '@/lib/products';
+import {
+  trackViewCart,
+  trackBeginCheckout,
+  trackAddShippingInfo,
+  trackPurchase,
+} from '@/lib/analytics/ga';
 
 // 'test' is PayPal's sandbox-demo client id — keeps local dev working before env setup.
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'test';
@@ -23,6 +29,12 @@ export function CartDrawer() {
 
   const [error, setError] = useState<string | null>(null);
 
+  // Fire view_cart once each time the drawer opens (not on every cart mutation).
+  useEffect(() => {
+    if (isOpen) trackViewCart(cartItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   // Cart payload sent to the server, which re-derives all prices + shipping.
@@ -37,6 +49,7 @@ export function CartDrawer() {
   // Server derives all prices + provisional shipping from lib/products.ts.
   const createOrder = async (): Promise<string> => {
     setError(null);
+    trackBeginCheckout(cartItems);
     const res = await fetch('/api/paypal/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -51,7 +64,7 @@ export function CartDrawer() {
   };
 
   // Buyer picked/changed their address in the popup: reject unsupported regions,
-  // otherwise patch real Printful shipping for that destination so PayPal shows
+  // otherwise patch real destination-based shipping for that location so PayPal shows
   // the correct total before approval. Server is the pricing authority.
   const onShippingAddressChange = async (
     data: { orderID?: string; shippingAddress?: { countryCode?: string } },
@@ -70,6 +83,7 @@ export function CartDrawer() {
       // Patch failed — refuse the address rather than charge a wrong total.
       return actions.reject();
     }
+    trackAddShippingInfo(cartItems, country);
   };
 
   const onApprove = async (
@@ -95,7 +109,10 @@ export function CartDrawer() {
       return;
     }
 
-    // Success only: clear the kit, route to confirmation.
+    // Success only: fire purchase (client-side; the server Measurement Protocol
+    // backstop dedupes on the same transaction_id), clear the kit, route to
+    // confirmation. Cart is still populated here — clearCart() runs after.
+    trackPurchase({ transactionId: data.orderID, items: cartItems });
     clearCart();
     window.location.href = '/secure-gear/success';
   };
@@ -247,7 +264,7 @@ export function CartDrawer() {
             </div>
 
             <p className="text-[9px] text-muted-foreground mb-4 leading-relaxed">
-              + SHIPPING, SET BY DESTINATION AT CHECKOUT. US / CA / GB / AU. ALL SALES FINAL.
+              + SHIPPING, SET BY DESTINATION AT CHECKOUT. US / CA / AU. ALL SALES FINAL.
             </p>
 
             {/* PayPal buttons (includes card guest checkout). Script loads lazily

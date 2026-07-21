@@ -51,6 +51,16 @@ export default function PrivacyRedactedPage() {
                 Transactions are encrypted. Addresses are cleared from memory when the mission is accomplished.
               </p>
             </article>
+
+            <article className="space-y-4">
+              <h2 className="text-xl font-bold font-sans uppercase">03 // Observation Systems</h2>
+              <p className="font-mono text-sm leading-relaxed text-black/70">
+                We run Google Analytics to read the system — pages scanned, gear secured, where
+                transmissions drop off. It sets cookies and reports aggregated, de-identified signals
+                to Google. No names sold. No dossiers. You can run dark: any tracker blocker or
+                browser Do-Not-Track stops it, and the store still operates at full function.
+              </p>
+            </article>
           </div>
         </div>
       </main>

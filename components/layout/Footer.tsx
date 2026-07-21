@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { trackGenerateLead } from '@/lib/analytics/ga';
 
 const LEGAL_LINKS = [
   { label: 'TERMS OF FRICTION', href: '/legal/terms-of-friction' },
@@ -34,6 +35,7 @@ export function Footer() {
       }
 
       setStatus('success');
+      trackGenerateLead({ method: 'newsletter' });
       setEmail('');
       setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
@@ -90,6 +92,9 @@ export function Footer() {
               [REDACTED]
             </span>
           </span>
+          <span className="text-[10px] text-muted-foreground/60 font-mono mt-0.5">
+            AUTOMATED FULFILLMENT PIPELINE • SECURED BY PAYPAL ORDERS V2 • SLA &lt; 24 HR
+          </span>
         </div>
 
         <nav className="flex flex-wrap gap-6">
@@ -109,6 +114,7 @@ export function Footer() {
           SYS_STATUS: ONLINE
         </div>
       </div>
+
     </footer>
   );
 }

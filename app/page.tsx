@@ -2,12 +2,27 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductCard } from '@/components/ui/product-card';
 import { products } from '@/lib/products';
-import { ItemListSchema } from '@/components/seo/schema';
+import { ItemListSchema, OrganizationSchema, WebSiteSchema, FAQSchema } from '@/components/seo/schema';
 import { formatDropDate, formatDropDateTime, getNextDrop, DROP_TIME_LABEL } from '@/lib/drop';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped-web.vercel.app';
+
+const HOMEPAGE_FAQS = [
+  {
+    question: 'What makes CHOPPED. different from standard streetwear hype brands?',
+    answer: 'CHOPPED. re-engineers classic streetwear silhouettes with heavyweight 13oz fleece and 6.5oz ring-spun combed cotton chassis built specifically for 38+ streetwear veterans. No neon logos, no 4.2oz tissue paper tees, and a 100-wash stance guarantee.',
+  },
+  {
+    question: 'Is CHOPPED. print-on-demand production sustainable?',
+    answer: 'Yes. On-demand manufacturing eliminates overproduction waste and unsold inventory landfills. Every garment is printed using water-based OEKO-TEX® STANDARD 100 certified inks and dispatched from regional facilities to minimize carbon emissions.',
+  },
+  {
+    question: 'When do CHOPPED. drop unlocks occur?',
+    answer: 'Product drops occur exclusively at 02:00 AM PST/CST — a nocturnal drop ritual for night-shift legends, studio heads, mechanics, and skaters.',
+  },
+];
 
 const BOARD_MEMBERS = [
   {
@@ -61,8 +76,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#080808] flex flex-col">
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <FAQSchema items={HOMEPAGE_FAQS} />
       <ItemListSchema name="CHOPPED. VOL.01 Collection" items={productListItems} />
       <Header />
+
 
       {/* ── HERO ── */}
       <section className="min-h-screen pt-14 border-b border-border flex flex-col relative overflow-hidden">
@@ -89,17 +108,17 @@ export default function Home() {
           {/* Main headline */}
           <div className="flex flex-col gap-4">
             <p className="text-xs font-mono text-muted-foreground tracking-[0.4em] uppercase">
-              Austin, TX — Est. 02:00 AM
+              Austin, TX — Est. 02:00 AM // Vol. 01 Drop
             </p>
-            <h1 className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-white font-sans leading-none uppercase">
+            <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold tracking-tighter text-white font-sans leading-none uppercase">
               FUNCTION<br />
               FOR THE<br />
               <span className="text-[#FF0000]">FRICTION.</span>
             </h1>
-            <p className="text-sm sm:text-base font-mono text-muted-foreground max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base font-mono text-muted-foreground max-w-xl mx-auto leading-relaxed">
               High-Performance Ageless Streetwear engineered for the midnight shift.
               <br />
-              We don&apos;t hide the grey. We wear it with all-black suede.
+              Heavyweight 13oz fleece armor & 6.5oz combed cotton built for 38+ veterans who refuse to sacrifice street authority for physical comfort.
             </p>
           </div>
 
@@ -107,22 +126,22 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-0 w-full max-w-sm">
             <a
               href="/shop/all"
-              className="flex-1 border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-colors duration-0 text-center"
+              className="flex-1 border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-colors duration-0 text-center font-bold"
             >
-              SCAN THE CHASSIS
+              ACQUIRE GEAR
             </a>
             <a
-              href="/manifesto"
+              href="#comparison"
               className="flex-1 border border-border bg-transparent text-muted-foreground text-xs font-mono tracking-widest py-4 px-6 hover:border-white hover:text-white transition-colors duration-0 text-center"
             >
-              READ THE MANIFESTO
+              SCAN THE CHASSIS
             </a>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div className="flex justify-center pb-8 text-muted-foreground text-xs font-mono animate-bounce">
-          ↓ SCROLL TO SCAN
+          ↓ SCROLL TO SCAN CHASSIS
         </div>
       </section>
 
@@ -133,21 +152,21 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 border-b border-border pb-8">
             <div>
               <p className="text-xs font-mono text-muted-foreground tracking-widest mb-2">
-                CATALOG // 001
+                CATALOG // VOL. 01
               </p>
               <h2 className="text-3xl sm:text-4xl font-bold text-white font-sans uppercase tracking-tight">
-                VOL.01: THE CHASSIS
+                THE INDUSTRIAL CHASSIS
               </h2>
               <p className="text-sm font-mono text-muted-foreground mt-2">
-                The Support System. {products.length} items.
+                Engineered Silhouettes. {products.length} Items. 100-Wash Stance Guarantee.
               </p>
             </div>
             <div className="text-right">
               <div className="text-xs font-mono text-[#FF0000] animate-pulse">
-                ▮ ACCESS RESTRICTED
+                ▮ ACCESS RESTRICTED // 02:00 AM RITUAL
               </div>
               <div className="text-xs font-mono text-muted-foreground mt-1">
-                DROP: {dropDateTime}
+                NEXT UNLOCK: {dropDateTime}
               </div>
             </div>
           </div>
@@ -159,39 +178,33 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Technical edge table */}
-          <div className="mt-20 border border-border">
-            <div className="border-b border-border px-4 py-3 text-xs font-mono text-muted-foreground tracking-widest">
-              PRODUCT_PHILOSOPHY // THE CODE
+          {/* Technical Edge / Comparison Table */}
+          <div id="comparison" className="mt-20 border border-border">
+            <div className="border-b border-border px-4 py-3 text-xs font-mono text-muted-foreground tracking-widest flex items-center justify-between">
+              <span>WHY CHOPPED. OUTPERFORMS HYPE BRANDS</span>
+              <span className="text-[#FF0000]">SPEC_COMPARISON_v4</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm font-mono">
                 <thead>
                   <tr className="border-b border-border text-left">
-                    <th className="px-4 py-3 text-xs text-muted-foreground tracking-widest font-normal">THE CODE</th>
-                    <th className="px-4 py-3 text-xs text-muted-foreground tracking-widest font-normal">THE REALITY</th>
-                    <th className="px-4 py-3 text-xs text-muted-foreground tracking-widest font-normal">THE CHOP</th>
+                    <th className="px-4 py-3 text-xs text-muted-foreground tracking-widest font-normal">SPEC METRIC</th>
+                    <th className="px-4 py-3 text-xs text-muted-foreground tracking-widest font-normal">STANDARD HYPE BRANDS</th>
+                    <th className="px-4 py-3 text-xs text-white tracking-widest font-bold">CHOPPED. INDUSTRIAL GEAR</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ['STANCE', 'Back pain is the tax on a life lived at 100%.', 'Heavyweight boxy cut & ergonomic support.'],
-                    ['CHASSIS', 'Cheap cotton doesn\'t survive the Austin sun.', '13oz Premium Fleece & 6.5oz Combed Cotton.'],
-                    ['LOCKDOWN', 'Loose gear is a liability in the shop.', 'Reinforced stitching & high-density embroidery.'],
-                    ['SCARCITY', 'If everyone has it, it\'s a uniform.', '[REDACTED] drops. Nocturnal release. No pre-orders.'],
-                  ].map(([code, reality, chop], i) => (
+                    ['FABRIC WEIGHT', '4.2oz thin carded cotton (tears easily in shop)', '6.5oz Combed Cotton / 13oz Premium Fleece Armor'],
+                    ['FIT PROFILE', 'Teenager boxy crop / tight collar (shrinks 2 sizes)', 'Ergonomic Boxy Stance (Pre-shrunk, 100-Wash Guarantee)'],
+                    ['GRAPHIC QUALITY', 'Cheap flaking screen-print ink', 'High-Density Silver-Grey DTG + Tonal Black Embroidery'],
+                    ['SCARCITY RITUAL', 'Mass-produced hype restocks', 'Nocturnal 02:00 AM Drops. Zero inventory waste.'],
+                  ].map(([metric, hype, chopped], i) => (
                     <tr key={i} className="border-b border-border/50 hover:bg-white/5 transition-colors">
-                      <td className="px-4 py-4 text-white font-bold">{code}</td>
-                      <td className="px-4 py-4 text-muted-foreground">{reality}</td>
-                      <td className="px-4 py-4 text-muted-foreground">
-                        {code === 'SCARCITY' ? (
-                          <>
-                            <span className="bg-black text-black hover:text-white transition-colors cursor-pointer px-1">
-                              [REDACTED]
-                            </span>{' '}
-                            drops. Nocturnal release. No pre-orders.
-                          </>
-                        ) : chop}
+                      <td className="px-4 py-4 text-white font-bold">{metric}</td>
+                      <td className="px-4 py-4 text-muted-foreground/70">{hype}</td>
+                      <td className="px-4 py-4 text-white font-bold">
+                        {chopped}
                       </td>
                     </tr>
                   ))}

@@ -63,7 +63,7 @@ export default function ShopAllPage() {
             THE CHASSIS
           </h1>
           <p className="text-sm font-mono text-muted-foreground mt-3">
-            {products.length} items. All rights reserved. Drop: 02:00 AM.
+            {products.length} items engineered for the midnight shift. 100-Wash Stance Guarantee. Nocturnal drop: 02:00 AM.
           </p>
         </div>
 

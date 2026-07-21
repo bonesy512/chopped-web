@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { type Product } from '@/lib/products';
 import { useCart } from '@/components/cart/CartContext';
 import { useProductOptions } from '@/components/product/product-options';
+import { trackAddToCart } from '@/lib/analytics/ga';
 
 export function AcquireButton({ product }: { product: Product }) {
   const [error, setError] = useState<string | null>(null);
@@ -32,12 +33,14 @@ export function AcquireButton({ product }: { product: Product }) {
     }
 
     setError(null);
-    addItem({
+    const item = {
       product,
       size: selectedSize || 'One Size',
       color: selectedColor || undefined,
       quantity: 1,
-    });
+    };
+    addItem(item);
+    trackAddToCart(item);
     
     // Auto-open cart drawer
     setIsOpen(true);

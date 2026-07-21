@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { products } from '@/lib/products'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped-web.vercel.app'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -43,6 +43,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/drop-log`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/shop/outerwear`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/shop/essentials`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/shop/accessories`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

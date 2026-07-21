@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getOrder, captureOrder } from '@/lib/paypal';
 import { SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/shipping';
 import { dispatchPayPalFulfillment } from '@/lib/fulfillment';
+import { sendPurchaseEvent, gaClientIdFromCookie, type MpItem } from '@/lib/analytics/mp';
 
 // Captures an approved PayPal order, then dispatches Printful fulfillment.
 // Guards (per docs/STRIPE-TO-PAYPAL-MIGRATION.md §4):
@@ -10,7 +11,7 @@ import { dispatchPayPalFulfillment } from '@/lib/fulfillment';
 //  - ORDER_ALREADY_CAPTURED → client success, no duplicate fulfillment
 //  - INSTRUMENT_DECLINED → 422 passthrough so the client can actions.restart()
 export async function POST(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ orderID: string }> }
 ) {
   const { orderID } = await params;
@@ -65,6 +66,34 @@ export async function POST(
       await dispatchPayPalFulfillment(order, orderID, shipping, email);
     } catch (err) {
       console.error('[CHOPPED. SYSTEM] FULFILLMENT ATTEMPT FAILED (webhook backstop will retry):', err);
+    }
+
+    // 5. GA4 purchase backstop — server-side, fire-and-forget. Dedupes with the
+    //    client `purchase` on transaction_id. Sourced from the order WE priced
+    //    (items + breakdown), not the client cart. Never throws into the response.
+    try {
+      const pu = order.purchase_units?.[0];
+      const items: MpItem[] = (pu?.items ?? []).map((it) => {
+        // sku carrier format: "{SKU}|{color}|{size}" (see lib/paypal.ts).
+        const [sku, color, size] = (it.sku ?? '').split('|');
+        return {
+          item_id: sku || it.sku || 'UNKNOWN',
+          item_name: it.name,
+          item_variant: [color, size].filter(Boolean).join(' / ') || undefined,
+          price: Number(it.unit_amount?.value ?? 0),
+          quantity: Number(it.quantity ?? 1),
+        };
+      });
+      const breakdown = pu?.amount?.breakdown;
+      await sendPurchaseEvent({
+        transactionId: orderID,
+        value: Number(breakdown?.item_total?.value ?? 0),
+        shipping: breakdown?.shipping?.value ? Number(breakdown.shipping.value) : undefined,
+        items,
+        clientId: gaClientIdFromCookie(request.headers.get('cookie')),
+      });
+    } catch (err) {
+      console.warn('[CHOPPED. GA4] purchase backstop skipped:', err);
     }
 
     return NextResponse.json({ status: 'COMPLETED', id: data.id });
