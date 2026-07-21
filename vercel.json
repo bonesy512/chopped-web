@@ -34,6 +34,9 @@
     "app/api/paypal/orders/route.ts": {
       "maxDuration": 10
     },
+    "app/api/paypal/orders/*/shipping/route.ts": {
+      "maxDuration": 10
+    },
     "app/api/paypal/orders/*/capture/route.ts": {
       "maxDuration": 30
     },

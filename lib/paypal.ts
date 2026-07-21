@@ -87,12 +87,16 @@ export type PayPalOrderResponse = {
   }>;
 };
 
-export async function createOrder(items: PayPalLineItem[]) {
+export const centsToValue = (cents: number) => (cents / 100).toFixed(2);
+
+// `shippingCents` is a provisional estimate (buyer's real region is unknown
+// until the popup); it's re-patched by the shipping route on address change.
+export async function createOrder(items: PayPalLineItem[], shippingCents = 0) {
   const token = await getAccessToken();
 
   // Sum in integer cents to avoid float drift; PayPal 422s on breakdown mismatch.
   const itemTotalCents = items.reduce((sum, i) => sum + i.unitPriceCents * i.quantity, 0);
-  const toValue = (cents: number) => (cents / 100).toFixed(2);
+  const toValue = centsToValue;
 
   const payload = {
     intent: 'CAPTURE',
@@ -100,9 +104,10 @@ export async function createOrder(items: PayPalLineItem[]) {
       {
         amount: {
           currency_code: 'USD',
-          value: toValue(itemTotalCents),
+          value: toValue(itemTotalCents + shippingCents),
           breakdown: {
             item_total: { currency_code: 'USD', value: toValue(itemTotalCents) },
+            shipping: { currency_code: 'USD', value: toValue(shippingCents) },
           },
         },
         items: items.map((i) => ({
@@ -155,6 +160,42 @@ export async function getOrder(orderID: string): Promise<PayPalOrderResponse> {
     throw new Error('PAYPAL_GET_ORDER_FAILED');
   }
   return data;
+}
+
+// Replaces the order's amount + breakdown (used to set real shipping once the
+// buyer's destination is known, via onShippingAddressChange). Returns true on
+// success. PayPal reflects the new total in the popup after this succeeds.
+export async function patchOrderAmount(
+  orderID: string,
+  itemTotalCents: number,
+  shippingCents: number,
+): Promise<boolean> {
+  const token = await getAccessToken();
+  const v = centsToValue;
+  const patch = [
+    {
+      op: 'replace',
+      path: "/purchase_units/@reference_id=='default'/amount",
+      value: {
+        currency_code: 'USD',
+        value: v(itemTotalCents + shippingCents),
+        breakdown: {
+          item_total: { currency_code: 'USD', value: v(itemTotalCents) },
+          shipping: { currency_code: 'USD', value: v(shippingCents) },
+        },
+      },
+    },
+  ];
+  const response = await fetch(`${getApiBase()}/v2/checkout/orders/${orderID}`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(patch),
+    cache: 'no-store',
+  });
+  if (response.status === 204) return true; // PayPal returns 204 No Content on success
+  const data = await response.json().catch(() => ({}));
+  console.error('[CHOPPED. PAYPAL] Patch order amount failed:', response.status, JSON.stringify(data));
+  return false;
 }
 
 // Verifies a webhook event's signature via PayPal's verification endpoint

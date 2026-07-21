@@ -25,20 +25,22 @@ export function CartDrawer() {
 
   if (!isOpen) return null;
 
-  // Server derives all prices from lib/products.ts — we only send ids/options/qty.
+  // Cart payload sent to the server, which re-derives all prices + shipping.
+  const cartPayload = () =>
+    cartItems.map((item) => ({
+      productId: item.product.id,
+      size: item.size,
+      color: item.color,
+      quantity: item.quantity,
+    }));
+
+  // Server derives all prices + provisional shipping from lib/products.ts.
   const createOrder = async (): Promise<string> => {
     setError(null);
     const res = await fetch('/api/paypal/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        items: cartItems.map((item) => ({
-          productId: item.product.id,
-          size: item.size,
-          color: item.color,
-          quantity: item.quantity,
-        })),
-      }),
+      body: JSON.stringify({ items: cartPayload() }),
     });
     const data = await res.json();
     if (!res.ok || !data.id) {
@@ -46,6 +48,28 @@ export function CartDrawer() {
       throw new Error(data.error || 'ORDER_CREATE_FAILED');
     }
     return data.id;
+  };
+
+  // Buyer picked/changed their address in the popup: reject unsupported regions,
+  // otherwise patch real Printful shipping for that destination so PayPal shows
+  // the correct total before approval. Server is the pricing authority.
+  const onShippingAddressChange = async (
+    data: { orderID?: string; shippingAddress?: { countryCode?: string } },
+    actions: { reject: () => Promise<void> }
+  ) => {
+    const country = data.shippingAddress?.countryCode;
+    if (!country || !SUPPORTED_SHIPPING_COUNTRIES.includes(country)) {
+      return actions.reject();
+    }
+    const res = await fetch(`/api/paypal/orders/${data.orderID}/shipping`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cartPayload(), countryCode: country }),
+    });
+    if (!res.ok) {
+      // Patch failed — refuse the address rather than charge a wrong total.
+      return actions.reject();
+    }
   };
 
   const onApprove = async (
@@ -223,7 +247,7 @@ export function CartDrawer() {
             </div>
 
             <p className="text-[9px] text-muted-foreground mb-4 leading-relaxed">
-              SHIPPING TO US / CA / GB / AU. ALL SALES FINAL.
+              + SHIPPING, SET BY DESTINATION AT CHECKOUT. US / CA / GB / AU. ALL SALES FINAL.
             </p>
 
             {/* PayPal buttons (includes card guest checkout). Script loads lazily
@@ -235,16 +259,7 @@ export function CartDrawer() {
                 style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal', height: 48 }}
                 createOrder={createOrder}
                 onApprove={onApprove}
-                // Reject unsupported countries INSIDE the popup, before approval —
-                // better UX than failing at capture. Server still re-checks (authority).
-                onShippingAddressChange={async (data, actions) => {
-                  const country = data.shippingAddress?.countryCode;
-                  if (country && !SUPPORTED_SHIPPING_COUNTRIES.includes(country)) {
-                    // v10 typed API: reject() takes no args (raw-SDK docs show
-                    // data.errors.COUNTRY_ERROR — not exposed by the wrapper).
-                    return actions.reject();
-                  }
-                }}
+                onShippingAddressChange={onShippingAddressChange}
                 onError={() => setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.')}
                 onCancel={() => setError(null)}
               />
