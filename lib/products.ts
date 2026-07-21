@@ -217,7 +217,8 @@ export const products: Product[] = [
     colorImages: {
       Black: [
         '/images/products/night-shift-watch-cap/black/front.png',
-        '/images/products/night-shift-watch-cap/black/detail.png',
+        '/images/products/night-shift-watch-cap/black/model1.png',
+        '/images/products/night-shift-watch-cap/black/model2.png',
       ],
     },
   },
