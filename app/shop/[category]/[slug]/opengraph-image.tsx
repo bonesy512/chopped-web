@@ -54,11 +54,15 @@ export default async function Image({ params }: Props) {
         {/* Header row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 64, position: 'relative', zIndex: 1 }}>
           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 20, fontFamily: 'monospace', letterSpacing: '0.3em' }}>
-            CHOPPED. // {sku}
+            {`CHOPPED. // ${sku}`}
           </span>
-          <span style={{ color: '#FF0000', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em' }}>
-            ▮ ACCESS RESTRICTED
-          </span>
+          {/* Satori: no ▮ glyph (avoids dynamic font fetch) — red block via div */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 10, height: 14, background: '#FF0000' }} />
+            <span style={{ color: '#FF0000', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em' }}>
+              ACCESS RESTRICTED
+            </span>
+          </div>
         </div>
 
         {/* Product name */}
@@ -86,8 +90,10 @@ export default async function Image({ params }: Props) {
         </div>
 
         {/* Footer */}
+        {/* Single template-literal child — Satori errors on mixed text+expression
+            children in a non-flex div (this exact line broke the Vercel build). */}
         <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em', position: 'relative', zIndex: 1 }}>
-          choppedunc.store — DROP: {formatDropDateTime()}
+          {`choppedunc.store — DROP: ${formatDropDateTime()}`}
         </div>
       </div>
     ),

@@ -48,7 +48,8 @@ export default async function Image() {
           Austin, TX — Est. 02:00 AM
         </div>
 
-        {/* Drop indicator */}
+        {/* Drop indicator — red block as a div (▮ glyph triggers a dynamic
+            font fetch in Satori that 400s at build/request time) */}
         <div
           style={{
             position: 'absolute',
@@ -63,11 +64,12 @@ export default async function Image() {
             gap: 8,
           }}
         >
-          ▮ NEXT DROP: 02:00 AM
+          <div style={{ width: 8, height: 12, background: '#FF0000' }} />
+          <span>NEXT DROP: 02:00 AM</span>
         </div>
 
-        {/* Main headline */}
-        <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Main headline — Satori requires explicit flex on multi-child divs */}
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column' }}>
           <div
             style={{
               color: 'rgba(255,255,255,0.08)',
@@ -96,6 +98,7 @@ export default async function Image() {
             CHOPPED. // VOL.01
           </div>
 
+          {/* No <br/> in Satori — stack lines as flex children */}
           <div
             style={{
               color: '#FFFFFF',
@@ -105,11 +108,12 @@ export default async function Image() {
               letterSpacing: '-0.03em',
               fontFamily: 'sans-serif',
               textTransform: 'uppercase',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            FUNCTION
-            <br />
-            FOR THE
+            <div>FUNCTION</div>
+            <div>FOR THE</div>
           </div>
           <div
             style={{
