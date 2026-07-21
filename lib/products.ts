@@ -111,36 +111,78 @@ export const products: Product[] = [
     },
   },
   {
+    id: 'chpd-out-005',
+    sku: 'CHPD-OUT-005',
+    name: 'The "Anti" Social Club Hoodie',
+    slug: 'anti-social-club-hoodie',
+    category: 'Outerwear',
+    categorySlug: 'outerwear',
+    // Live Printful POD: Cotton Heritage M2580 (catalog ID 380); sync variants
+    // live in lib/printful.ts for Black S–3XL. 13oz Cotton Heritage M2580
+    // premium fleece — heaviest blank Printful produces. DTG left-chest stencil
+    // + wavy "Anti Chopped Chopped Social Club" back graphic, white ink on black.
+    price: 60.00,
+    description: 'The tee started the club. The hoodie makes it official. Features the same wavy "Anti Chopped Chopped Social Club" back graphic and left-chest stencil — white ink on black — built onto 13oz premium fleece, the heaviest hoodie blank Printful produces. Built for the cold end of the shift.',
+    shortDesc: '13oz Cotton Heritage M2580 premium fleece. Same club, heavier armor.',
+    features: [
+      '13oz Premium Heavyweight Fleece (Cotton Heritage M2580)',
+      'Dual DTG Placements (Left-Chest Stencil + Wavy Back Print)',
+      '3-Panel Hood with Matching Flat Drawstrings',
+      '100-Wash Stance Guarantee (Pre-Shrunk Unisex Fit)',
+    ],
+    specs: [
+      { label: 'FABRIC CHASSIS', value: '13oz 65/35 Cotton-Poly Fleece (100% Cotton Face)' },
+      { label: 'FRONT PRINT', value: 'Left-Chest Industrial Stencil (White Ink)' },
+      { label: 'BACK PRINT', value: 'Wavy "Anti Chopped Chopped Social Club"' },
+      { label: 'COLORWAYS', value: 'Dead-Night Black' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL'],
+    colors: ['Black'],
+    image: '/images/products/anti-heavyweight-hoodie/black/front.png',
+    colorImages: {
+      Black: [
+        '/images/products/anti-heavyweight-hoodie/black/front.png',
+        '/images/products/anti-heavyweight-hoodie/black/back.png',
+        '/images/products/anti-heavyweight-hoodie/black/detail.png',
+      ],
+    },
+  },
+  {
     id: 'chpd-acc-005',
     sku: 'CHPD-ACC-005',
     name: 'The "Chopped" Distressed Logo Hat',
     slug: 'distressed-logo-hat',
     category: 'Essentials',
     categorySlug: 'essentials',
-    // Live Printful POD: Otto Cap 104-1018 (catalog ID 396); sync variants
-    // pending — status stays REDACTED until IDs replace the 0s in lib/printful.ts.
-    // Pre-distressed construction. Embroidery front. $15.74 cost (Black/OS).
+    // Live Printful POD: Otto Cap 104-1018 (catalog ID 396); sync variant
+    // live in lib/printful.ts (ID 5404771405). Pre-distressed construction,
+    // white high-density embroidery. $15.74 Printful cost, $45.00 retail.
     price: 45.00,
-    description: 'Pre-distressed heavy twill 6-panel headwear engineered with low-profile deconstructed crown and tonal black-on-black embroidery. Delivers instant street authority without looking brand new or corporate.',
-    shortDesc: 'Pre-distressed heavy twill cap. Tonal black-on-black embroidery.',
+    description: 'Hand-abraded low-profile dad hat chassis engineered for 38+ veterans who refuse pristine hypewear. Features pre-distressed brim wear and high-density "CHOPPED." front embroidery built to maintain stance through years of concrete shift wear.',
+    shortDesc: 'Pre-distressed washed cotton chassis. High-density white front embroidery.',
     features: [
-      'Pre-Distressed Industrial Heavy Twill',
-      'Low-Profile Deconstructed Ergonomic Crown',
-      'Tonal Black-on-Black High-Density Embroidery',
-      'Custom Antique Brass Slide Closure',
+      'Pre-Distressed Washed Cotton Chassis (Otto Cap 104-1018)',
+      'High-Density White Front Embroidery',
+      '6-Panel Low-Profile Unstructured Crown',
+      'Adjustable Fabric Strap with Tri-Glide Buckle',
     ],
     specs: [
-      { label: 'COLORWAY', value: 'Washed Dead-Night Black' },
-      { label: 'EMBROIDERY', value: 'Tonal Black "CHOPPED." Stencil' },
-      { label: 'ADJUSTMENT', value: 'Brass Strap Closure' },
+      { label: 'FABRIC CHASSIS', value: '100% Pre-Distressed Washed Cotton' },
+      { label: 'FRONT EMBROIDERY', value: 'High-Density White Stitching' },
+      { label: 'PROFILE / FIT', value: '6-Panel Low-Profile Unstructured' },
+      { label: 'CLOSURE', value: 'Matching Fabric Strap with Metal Buckle' },
     ],
-    status: 'REDACTED',
+    status: 'ACTIVE',
     sizes: ['OSFA'],
     colors: ['Black'],
     image: '/images/products/distressed-logo-hat/black/front.png',
     colorImages: {
       Black: [
         '/images/products/distressed-logo-hat/black/front.png',
+        '/images/products/distressed-logo-hat/black/back.png',
+        '/images/products/distressed-logo-hat/black/side.png',
+        '/images/products/distressed-logo-hat/black/detail.png',
       ],
     },
   },

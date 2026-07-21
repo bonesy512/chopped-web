@@ -86,14 +86,14 @@ export function Footer() {
       <div className="px-6 md:px-12 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex flex-col gap-1">
           <span className="font-bold tracking-[0.3em] text-white text-sm">CHOPPED.</span>
-          <span className="text-xs text-muted-foreground font-mono">
+          <span className="text-xs text-muted-foreground font-mono" suppressHydrationWarning>
             © {new Date().getFullYear()} CHOPPED. INDUSTRIAL WEAR. AUSTIN, TX.{' '}
             <span className="bg-black text-black hover:text-white transition-colors cursor-pointer px-1">
               [REDACTED]
             </span>
           </span>
-          <span className="text-[10px] text-muted-foreground/60 font-mono mt-0.5">
-            AUTOMATED FULFILLMENT PIPELINE • SECURED BY PAYPAL ORDERS V2 • SLA &lt; 24 HR
+          <span className="text-[10px] text-muted-foreground/60 font-mono mt-0.5" suppressHydrationWarning>
+            AUTOMATED FULFILLMENT PIPELINE • SECURED BY PAYPAL ORDERS V2 • SLA {'<'} 24 HR
           </span>
         </div>
 

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/kozmo/Desktop/Choppped/**)",
+      "Read(//c/Users/kozmo/Desktop/Choppped/docs/**)"
+    ]
+  }
+}

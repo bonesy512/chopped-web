@@ -42,6 +42,19 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
     }
   },
   
+  // The "Anti" Social Club Hoodie (Live Printful Sync Product ID: 448961780)
+  'CHPD-OUT-005': {
+    'Black': {
+      'S': 5404658799,
+      'M': 5404658800,
+      'L': 5404658801,
+      'XL': 5404658802,
+      'XXL': 5404658803,
+      '2XL': 5404658803, // alias
+      '3XL': 5404658804,
+    }
+  },
+  
   // Future launch expansions — replace 0s with real sync-variant IDs from
   // Printful after creating store products via dashboard.
   // Use: GET /store/products/{id} → sync_variants[].id
@@ -56,14 +69,10 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
       '3XL': 0,
     }
   },
-  'CHPD-ACC-005': { // Hat — Otto Cap 104-1018 (catalog 396)
+  'CHPD-ACC-005': { // Hat — Otto Cap 104-1018 (catalog 396; sync product 449015612)
     'Black': {
-      'One Size': 0,
-      'OSFA': 0, // alias — products.ts uses OSFA
-    },
-    'Charcoal Grey': {
-      'One Size': 0,
-      'OSFA': 0,
+      'One Size': 5404771405,
+      'OSFA': 5404771405, // alias — products.ts uses OSFA
     },
   },
   'CHPD-ACC-009': { // Beanie — Yupoong 1501KC (catalog 266)

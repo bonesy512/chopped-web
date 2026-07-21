@@ -58,6 +58,7 @@ export function Header() {
         <button
           onClick={toggleCart}
           className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 font-bold border border-border px-3 py-1 hover:border-white"
+          suppressHydrationWarning
         >
           CART ({cartCount})
         </button>
