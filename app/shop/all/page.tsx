@@ -6,7 +6,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ItemListSchema, BreadcrumbSchema } from '@/components/seo/schema';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store'
 
 export const metadata: Metadata = {
   title: 'The Chassis — VOL.01: The Support System — CHOPPED.',

@@ -4,7 +4,7 @@ import { products } from '@/lib/products';
 import { AcquireButton } from '@/components/ui/acquire-button';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 export const metadata: Metadata = {
   title: 'SECURE GEAR — CHOPPED.',

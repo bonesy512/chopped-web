@@ -98,7 +98,7 @@ async function sendGa4CollectHTTP(clientId, sessionId, eventName, params) {
   url.searchParams.append('sid', sessionId);
   url.searchParams.append('sct', '1');
   url.searchParams.append('seg', '1');
-  url.searchParams.append('dl', params.page_location || 'https://chopped-web.vercel.app/');
+  url.searchParams.append('dl', params.page_location || 'https://choppeduncs.store/');
   url.searchParams.append('dt', params.page_title || 'CHOPPED — Official Apparel');
   url.searchParams.append('en', eventName);
 
@@ -133,7 +133,7 @@ async function sendGa4CollectHTTP(clientId, sessionId, eventName, params) {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
         'Accept': '*/*',
-        'Origin': 'https://chopped-web.vercel.app'
+        'Origin': 'https://choppeduncs.store'
       }
     });
     return res.status === 204 || res.status === 200;
@@ -154,14 +154,14 @@ async function simulateSingleSession(sessionNum, delayMs = 800) {
   const steps = [
     {
       name: 'page_view',
-      params: { page_title: 'CHOPPED — Official Apparel', page_location: 'https://chopped-web.vercel.app/' },
+      params: { page_title: 'CHOPPED — Official Apparel', page_location: 'https://choppeduncs.store/' },
       log: 'Visited Homepage'
     },
     {
       name: 'view_item',
       params: {
         page_title: `${prod.name} — CHOPPED`,
-        page_location: `https://chopped-web.vercel.app/shop/${prod.category.toLowerCase()}/${prod.sku.toLowerCase()}`,
+        page_location: `https://choppeduncs.store/shop/${prod.category.toLowerCase()}/${prod.sku.toLowerCase()}`,
         currency: 'USD',
         value: prod.price,
         items: [{

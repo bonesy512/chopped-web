@@ -11,10 +11,10 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swa
 const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 const courierPrime = Courier_Prime({ weight: ["400", "700"], subsets: ['latin'], variable: '--font-courier', display: 'swap' })
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped-web.vercel.app/'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store/'
 // GA4 measurement ID. Unset in local/preview → the tag is not mounted and every
 // analytics call in lib/analytics/ga.ts is a safe no-op.
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-THQQMK7W7Z'
 
 export const viewport: Viewport = {
   themeColor: '#080808',

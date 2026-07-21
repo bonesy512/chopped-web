@@ -11,7 +11,7 @@ import { ProductAnalytics } from '@/components/product/product-analytics';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 type Props = {
   params: Promise<{ category: string; slug: string }>;

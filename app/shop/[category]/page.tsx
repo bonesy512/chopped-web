@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 import { ItemListSchema, BreadcrumbSchema } from '@/components/seo/schema';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 export default async function ShopCategoryPage({ params }: Props) {
   const { category } = await params;

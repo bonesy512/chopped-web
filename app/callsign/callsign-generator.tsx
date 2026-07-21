@@ -203,7 +203,7 @@ export default function CallsignGeneratorPage() {
                 <button
                   onClick={() => {
                     // Quick copy text to clipboard for sharing
-                    navigator.clipboard.writeText(`I'm ${result.callsign} in the ${result.unit} Unit.\nGet your midnight callsign: https://choppedunc.store/callsign\n\n#CHOPPED #TheFriction`);
+                    navigator.clipboard.writeText(`I'm ${result.callsign} in the ${result.unit} Unit.\nGet your midnight callsign: https://choppeduncs.store/callsign\n\n#CHOPPED #TheFriction`);
                     alert('Copied to clipboard! Ready to paste on X/Twitter.');
                   }}
                   className="flex-1 bg-white text-black font-mono text-xs tracking-widest py-4 uppercase text-center hover:bg-white/90 transition-colors"

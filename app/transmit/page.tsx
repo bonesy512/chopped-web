@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { TransmitForm } from '@/components/ui/transmit-form';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 export const metadata: Metadata = {
   title: 'Transmit — CHOPPED.',

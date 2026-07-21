@@ -4,7 +4,7 @@
  * Aligned with Generative Engine Optimization (GEO) & W3C/Google standards.
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://chopped-web.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 // ─── Organization schema (Knowledge Graph Entity) ───────────────────────────
 export function OrganizationSchema() {

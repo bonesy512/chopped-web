@@ -4,7 +4,7 @@ import { PersonSchema } from '@/components/seo/schema';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 export const metadata: Metadata = {
   title: 'Advisory Board — CHOPPED.',

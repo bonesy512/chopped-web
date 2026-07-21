@@ -93,7 +93,7 @@ export default async function Image({ params }: Props) {
         {/* Single template-literal child — Satori errors on mixed text+expression
             children in a non-flex div (this exact line broke the Vercel build). */}
         <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: 14, fontFamily: 'monospace', letterSpacing: '0.2em', position: 'relative', zIndex: 1 }}>
-          {`choppedunc.store — DROP: ${formatDropDateTime()}`}
+          {`choppeduncs.store — DROP: ${formatDropDateTime()}`}
         </div>
       </div>
     ),

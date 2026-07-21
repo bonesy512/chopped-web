@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     // 3. SEND WELCOME EMAIL (The actual newsletter)
     // IMPORTANT: If your domain is not verified in Resend, you must use onboarding@resend.dev
     // and you can only send to your own email. 
-    // To send to others, you MUST verify your domain (e.g. choppedunc.store).
+    // To send to others, you MUST verify your domain (e.g. choppeduncs.store).
     const fromAddress = process.env.RESEND_FROM_EMAIL || 'CHOPPED. <onboarding@resend.dev>';
     
     const { data: userData, error: userError } = await resend.emails.send({

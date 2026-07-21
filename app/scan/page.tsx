@@ -4,7 +4,7 @@ import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ui/product-card';
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
 export const metadata: Metadata = {
   title: 'Scan System — CHOPPED.',
