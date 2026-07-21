@@ -73,7 +73,7 @@ export function Footer() {
           >
             {status === 'loading' ? 'WAIT...' : status === 'success' ? 'LOCKED IN' : 'CLOCK IN'}
           </button>
-          
+
           {status === 'error' && (
             <span className="absolute -bottom-6 left-0 text-[10px] text-[#ff0000] font-mono tracking-widest">
               SYSTEM_FRICTION_DETECTED
@@ -84,7 +84,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="px-6 md:px-12 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1" suppressHydrationWarning>
           <span className="font-bold tracking-[0.3em] text-white text-sm">CHOPPED.</span>
           <span className="text-xs text-muted-foreground font-mono" suppressHydrationWarning>
             © {new Date().getFullYear()} CHOPPED. INDUSTRIAL WEAR. AUSTIN, TX.{' '}
