@@ -30,6 +30,14 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
     },
   },
 
+  // F&#K CANCER fundraiser tank — Cotton Heritage MC1790 (sync product 449265307)
+  // Only Black / L synced so far.
+  'CHPD-FND-002': {
+    'Black': {
+      'L': 5405647432,
+    },
+  },
+
   // The "Anti" Graphic Tee
   'CHPD-TSH-004': {
     'Black': {

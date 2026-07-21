@@ -18,6 +18,7 @@ type ShippingCategory = 'shirts' | 'hoodies' | 'hats' | 'mugs' | 'bottles' | 'ba
 
 const SKU_CATEGORY: Record<string, ShippingCategory> = {
   'CHPD-FND-001': 'shirts', // F#&K CANCER fundraiser tee (Stanley/Stella SATU020)
+  'CHPD-FND-002': 'shirts', // F&#K CANCER fundraiser tank (Cotton Heritage MC1790)
   'CHPD-TSH-004': 'shirts', // Anti Graphic Tee
   'CHPD-OUT-002': 'hoodies', // Heavyweight Hoodie
   'CHPD-ACC-005': 'hats', // Distressed Dad Hat

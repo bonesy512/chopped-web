@@ -67,6 +67,42 @@ export const products: Product[] = [
     },
   },
   {
+    id: 'chpd-fnd-002',
+    sku: 'CHPD-FND-002',
+    name: 'F&#K CANCER Tank Top',
+    slug: 'fck-cancer-tank',
+    category: 'Essentials',
+    categorySlug: 'essentials',
+    // FUNDRAISER — 100% of profits donated to Andy's cancer fight.
+    // Live Printful POD: Cotton Heritage MC1790 Men's Premium Tank Top
+    // (sync product 449265307). Only Black / L is synced so far. Retail $40;
+    // Printful landed ~$16.29.
+    price: 40.00,
+    description: "A fundraiser drop. 100% of profits from every F&#K CANCER tank go directly to Andy to support his fight against cancer. Printed on a Cotton Heritage MC1790 men's premium tank top with a left-chest chopper-and-roses graphic. Stand with Andy.",
+    shortDesc: "Fundraiser tank — 100% of profits to Andy's cancer fight.",
+    features: [
+      "100% of Profits Donated to Andy's Cancer Fight",
+      "Cotton Heritage MC1790 Men's Premium Tank Top",
+      'Left-Chest Chopper-and-Roses DTG Graphic',
+    ],
+    specs: [
+      { label: 'CAUSE', value: "100% Profits → Andy's Cancer Fight" },
+      { label: 'FABRIC CHASSIS', value: 'Cotton Heritage MC1790 Premium Cotton' },
+      { label: 'FIT PROFILE', value: "Men's Premium Tank" },
+      { label: 'COLORWAYS', value: 'Dead-Night Black' },
+    ],
+    status: 'ACTIVE',
+    sizes: ['L'],
+    colors: ['Black'],
+    image: '/images/products/fck-cancer-tank/black/front.png',
+    colorImages: {
+      Black: [
+        '/images/products/fck-cancer-tank/black/front.png',
+        '/images/products/fck-cancer-tank/black/hangar.png',
+      ],
+    },
+  },
+  {
     id: 'chpd-out-002',
     sku: 'CHPD-OUT-002',
     name: 'The "Chopped" Heavyweight Hoodie',
