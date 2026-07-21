@@ -42,27 +42,44 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
     }
   },
   
-  // Future launch expansions (Placeholders)
-  'CHPD-OUT-002': { // Hoodie
+  // Future launch expansions — replace 0s with real sync-variant IDs from
+  // Printful after creating store products via dashboard.
+  // Use: GET /store/products/{id} → sync_variants[].id
+  'CHPD-OUT-002': { // Hoodie — Cotton Heritage M2580 (catalog 380)
     'Black': {
-      'S': 0, // Swap with published Printful M2580 Sync Variant IDs
+      'S': 0,
       'M': 0,
       'L': 0,
       'XL': 0,
       'XXL': 0,
-      '3XL': 0
+      '2XL': 0, // alias
+      '3XL': 0,
     }
   },
-  'CHPD-ACC-005': { // Hat
+  'CHPD-ACC-005': { // Hat — Otto Cap 104-1018 (catalog 396)
     'Black': {
-      'One Size': 0 // Swap with published Otto Cap 104-1018 Sync Variant ID
+      'One Size': 0,
+      'OSFA': 0, // alias — products.ts uses OSFA
+    },
+    'Charcoal Grey': {
+      'One Size': 0,
+      'OSFA': 0,
+    },
+  },
+  'CHPD-ACC-009': { // Beanie — Yupoong 1501KC (catalog 266)
+    'Black': {
+      'One Size': 0,
+      'OSFA': 0, // alias — products.ts uses OSFA
     }
   },
-  'CHPD-ACC-009': { // Watch Cap
-    'Black': {
-      'One Size': 0 // Swap with published Yupoong 1501KC Sync Variant ID
-    }
-  }
+  // Vol.02 Expansion Line (Catalog ID placeholders)
+  'CHPD-STK-001': { 'Black': { '3X3': 0 } },   // Sticker (ID 358)
+  'CHPD-MUG-001': { 'Black': { '11OZ': 0 } },  // Mug (ID 300)
+  'CHPD-PAT-001': { 'Black': { '3INCH': 0 } }, // Patch (ID 516)
+  'CHPD-TSH-005': { 'Black': { 'S': 0, 'M': 0, 'L': 0, 'XL': 0, 'XXL': 0, '2XL': 0, '3XL': 0 } }, // LS Tee (ID 57)
+  'CHPD-OUT-004': { 'Black': { 'S': 0, 'M': 0, 'L': 0, 'XL': 0, 'XXL': 0, '2XL': 0, '3XL': 0 } }, // Crewneck (ID 145)
+  'CHPD-BAG-001': { 'Black': { 'OSFA': 0 } },  // Tote Bag (ID 84)
+  'CHPD-BTL-001': { 'Black': { '17OZ': 0 } },  // Water Bottle (ID 382)
 };
 
 /**

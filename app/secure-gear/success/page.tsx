@@ -25,11 +25,7 @@ export default function SuccessPage() {
           <p className="text-sm font-mono text-muted-foreground leading-relaxed mb-8">
             Hardware is in the system.
             <br />
-            Deployment commences within{' '}
-            <span className="bg-black text-black hover:text-white transition-colors cursor-pointer px-1">
-              [REDACTED]
-            </span>
-            {' '}hours. Confirmation transmitted to your channel.
+            Fulfillment & production underway (5–10 business days standard delivery). Confirmation transmitted to your channel.
           </p>
 
           <div className="border border-border/50 p-4 text-left mb-8">

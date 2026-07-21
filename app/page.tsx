@@ -1,19 +1,46 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductCard } from '@/components/ui/product-card';
-import { DropTimer } from '@/components/ui/drop-timer';
 import { products } from '@/lib/products';
 import { ItemListSchema } from '@/components/seo/schema';
 import { formatDropDate, formatDropDateTime, getNextDrop, DROP_TIME_LABEL } from '@/lib/drop';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+
+const BOARD_MEMBERS = [
+  {
+    handle: '@thomas_schustereit',
+    role: 'Chopped CEO',
+    tenure: '14 years in Design',
+    status: 'STILL UP',
+    link: 'https://www.instagram.com/thomas_schustereit/',
+    image: '/images/board/ceo.jpg',
+  },
+  {
+    handle: '@eatingsnackswithstrippers_2.0',
+    role: 'Chopped Producer',
+    tenure: '15 years in Production',
+    status: 'STILL UP',
+    link: 'https://instagram.com/eatingsnackswithstrippers_2.0',
+    image: '/images/board/producer.jpg',
+  },
+  {
+    handle: '@abstract_andy_',
+    role: 'Chopped Old Head Unc',
+    tenure: '20 years in Marketing',
+    status: 'STILL UP',
+    link: 'https://instagram.com/abstract_andy_',
+    image: '/images/board/unc.jpg',
+  },
+];
 
 export function generateMetadata(): Metadata {
   const drop = formatDropDate(getNextDrop());
   return {
     title: 'CHOPPED. — High-Performance Ageless Streetwear',
-    description: `Engineered for the midnight shift. 500GSM French Terry armor, ORTH3-AGGR orthopedic support, industrial hardware. Next drop ${drop} ${DROP_TIME_LABEL}. Austin, TX.`,
+    description: `Engineered for the midnight shift. 13oz Premium Heavyweight Fleece armor, 6.5oz combed cotton, industrial hardware. Next drop ${drop} ${DROP_TIME_LABEL}. Austin, TX.`,
     alternates: { canonical: BASE_URL },
     openGraph: {
       title: 'CHOPPED. — Function For The Friction.',
@@ -74,14 +101,6 @@ export default function Home() {
               <br />
               We don&apos;t hide the grey. We wear it with all-black suede.
             </p>
-          </div>
-
-          {/* Drop timer */}
-          <div className="border border-border bg-black/60 px-8 py-6 backdrop-blur-sm w-full max-w-lg">
-            <p className="text-[10px] font-mono text-muted-foreground tracking-[0.3em] mb-4 border-b border-border pb-3">
-              ▮ NEXT_DROP_SEQUENCE_ACTIVE
-            </p>
-            <DropTimer />
           </div>
 
           {/* CTAs */}
@@ -156,10 +175,10 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {[
-                    ['STANCE', 'Back pain is the tax on a life lived at 100%.', 'Hidden Lumbar-Lock™ and Orthotic support.'],
-                    ['CHASSIS', 'Cheap cotton doesn\'t survive the Austin sun.', '500GSM French Terry and 12oz Duck Canvas.'],
-                    ['LOCKDOWN', 'Loose gear is a liability in the shop.', 'Industrial-grade zippers and brass hardware.'],
-                    ['SCARCITY', 'If everyone has it, it\'s a uniform.', '[REDACTED] drops. 1 of 500. No pre-orders.'],
+                    ['STANCE', 'Back pain is the tax on a life lived at 100%.', 'Heavyweight boxy cut & ergonomic support.'],
+                    ['CHASSIS', 'Cheap cotton doesn\'t survive the Austin sun.', '13oz Premium Fleece & 6.5oz Combed Cotton.'],
+                    ['LOCKDOWN', 'Loose gear is a liability in the shop.', 'Reinforced stitching & high-density embroidery.'],
+                    ['SCARCITY', 'If everyone has it, it\'s a uniform.', '[REDACTED] drops. Nocturnal release. No pre-orders.'],
                   ].map(([code, reality, chop], i) => (
                     <tr key={i} className="border-b border-border/50 hover:bg-white/5 transition-colors">
                       <td className="px-4 py-4 text-white font-bold">{code}</td>
@@ -170,7 +189,7 @@ export default function Home() {
                             <span className="bg-black text-black hover:text-white transition-colors cursor-pointer px-1">
                               [REDACTED]
                             </span>{' '}
-                            drops. 1 of 500. No pre-orders.
+                            drops. Nocturnal release. No pre-orders.
                           </>
                         ) : chop}
                       </td>
@@ -232,31 +251,44 @@ export default function Home() {
             </h2>
             <p className="text-sm font-mono text-muted-foreground mt-3 max-w-xl">
               We don&apos;t have influencers. We have an Advisory Board.
-              Mechanics, engineers, skaters, and creators who have spent 20+ years in the friction.
+              Veterans, operators, and creators who have spent 15+ years in the friction.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { handle: 'THE_MECHANIC', role: 'Shop Owner / 28yrs', status: 'STILL UP' },
-              { handle: 'THE_ENGINEER', role: 'Fabricator / 22yrs', status: 'STILL UP' },
-              { handle: 'THE_SKATER', role: 'Veteran Rider / 30yrs', status: 'STILL UP' },
-              { handle: '[REDACTED]', role: '[REDACTED]', status: 'CLASSIFIED' },
-            ].map((member) => (
-              <div
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {BOARD_MEMBERS.map((member) => (
+              <a
                 key={member.handle}
+                href={member.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border border-border p-6 flex flex-col gap-4 bg-black hover:border-white transition-colors duration-0 group"
               >
-                {/* Avatar placeholder */}
-                <div className="w-12 h-12 border border-border bg-[#080808] group-hover:border-white transition-colors duration-0 flex items-center justify-center text-muted-foreground text-xs font-mono">
-                  ◉
+                {/* Image / Avatar */}
+                <div className="w-14 h-14 border border-border bg-[#080808] group-hover:border-white transition-colors duration-0 relative overflow-hidden">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.handle}
+                      fill
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs font-mono">
+                      ◉
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <p className="font-bold text-white font-mono text-sm">
+                  <p className="font-bold text-white font-mono text-sm group-hover:text-muted-foreground transition-colors inline-flex items-center gap-2">
                     {member.handle}
+                    <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
                   </p>
                   <p className="text-xs text-muted-foreground font-mono mt-1">
                     {member.role}
+                  </p>
+                  <p className="text-[10px] text-muted-foreground/50 font-mono mt-0.5">
+                    {member.tenure}
                   </p>
                 </div>
                 <div className="mt-auto">
@@ -269,7 +301,7 @@ export default function Home() {
                     {member.status}
                   </span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 

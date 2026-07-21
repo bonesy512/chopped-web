@@ -83,9 +83,9 @@ export default function ManifestoPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                 {[
-                  { stat: '500GSM', label: 'FRENCH TERRY BASE' },
-                  { stat: 'ORTH3', label: 'AGGR SUPPORT SYSTEM' },
-                  { stat: '15mm', label: 'VIRGIL-GRADE HARDWARE' },
+                  { stat: '13oz', label: 'HEAVYWEIGHT FLEECE' },
+                  { stat: '6.5oz', label: 'COMBED RING-SPUN COTTON' },
+                  { stat: '02:00', label: 'NOCTURNAL DISPATCH' },
                 ].map((item) => (
                   <div key={item.stat} className="border border-black/20 p-4">
                     <p className="text-3xl font-bold font-mono">{item.stat}</p>

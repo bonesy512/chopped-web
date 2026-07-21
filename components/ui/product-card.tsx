@@ -10,12 +10,10 @@ const CATEGORY_GLYPHS: Record<string, string> = {
 
 export function ProductCard({ product }: { product: Product }) {
   const glyph = CATEGORY_GLYPHS[product.categorySlug] ?? '◌';
+  const isRedacted = product.status === 'REDACTED';
 
-  return (
-    <Link
-      href={`/shop/${product.categorySlug}/${product.slug}`}
-      className="group border border-border flex flex-col bg-black hover:border-white transition-colors duration-0 relative overflow-hidden"
-    >
+  const cardContent = (
+    <>
       {/* Product image area — terminal placeholder with identity glyph or actual image */}
       <div className="aspect-[4/5] bg-[#080808] flex flex-col items-center justify-center border-b border-border relative overflow-hidden select-none">
         {/* Noise texture overlay */}
@@ -32,7 +30,11 @@ export function ProductCard({ product }: { product: Product }) {
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 z-0"
+            className={`object-cover transition-opacity duration-300 z-0 ${
+              isRedacted
+                ? 'opacity-40 grayscale'
+                : 'opacity-80 group-hover:opacity-100'
+            }`}
             sizes="(max-width: 768px) 50vw, 33vw"
           />
         ) : (
@@ -52,18 +54,24 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Product info bar */}
-      <div className="p-4 bg-black group-hover:bg-white transition-colors duration-0 flex justify-between items-start gap-2">
+      <div className={`p-4 bg-black transition-colors duration-0 flex justify-between items-start gap-2 ${
+        isRedacted ? '' : 'group-hover:bg-white'
+      }`}>
         <div className="min-w-0">
-          <h3 className="font-bold text-white group-hover:text-black font-sans text-sm uppercase tracking-tight truncate">
+          <h3 className={`font-bold font-sans text-sm uppercase tracking-tight truncate ${
+            isRedacted ? 'text-white/50' : 'text-white group-hover:text-black'
+          }`}>
             {product.name}
           </h3>
-          <p className="text-xs text-muted-foreground group-hover:text-black/60 mt-0.5 font-mono uppercase">
+          <p className={`text-xs mt-0.5 font-mono uppercase ${
+            isRedacted ? 'text-muted-foreground/50' : 'text-muted-foreground group-hover:text-black/60'
+          }`}>
             {product.category}
           </p>
         </div>
         <div className="shrink-0 text-right">
-          {product.status === 'REDACTED' ? (
-            <span className="text-[#FF0000] group-hover:text-black font-mono text-sm font-bold">
+          {isRedacted ? (
+            <span className="text-[#FF0000] font-mono text-sm font-bold">
               [REDACTED]
             </span>
           ) : (
@@ -73,6 +81,23 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </div>
+    </>
+  );
+
+  if (isRedacted) {
+    return (
+      <div className="group border border-[#FF0000]/20 flex flex-col bg-black relative overflow-hidden cursor-not-allowed">
+        {cardContent}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={`/shop/${product.categorySlug}/${product.slug}`}
+      className="group border border-border flex flex-col bg-black hover:border-white transition-colors duration-0 relative overflow-hidden"
+    >
+      {cardContent}
     </Link>
   );
 }

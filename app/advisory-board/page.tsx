@@ -10,17 +10,17 @@ export const metadata: Metadata = {
 
 const BOARD_MEMBERS = [
   {
-    handle: '@dances_with_disaster',
+    handle: '@thomas_schustereit',
     role: 'Chopped CEO',
     tenure: '14 years in Design',
     bio: 'Lead visionary. Orchestrating the intersection of industrial utility and high-design friction.',
     status: 'STILL UP',
-    link: 'https://instagram.com/dances_with_disaster',
+    link: 'https://www.instagram.com/thomas_schustereit/',
     image: '/images/board/ceo.jpg',
   },
   {
     handle: '@eatingsnackswithstrippers_2.0',
-    role: 'Chopped Producer',
+    role: 'Chopped COO',
     tenure: '15 years in Production',
     bio: 'Production powerhouse. Turning musical concepts into tracks with fire beats.',
     status: 'STILL UP',
