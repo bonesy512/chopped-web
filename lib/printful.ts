@@ -85,7 +85,7 @@ export async function createPrintfulOrder(
   items: PrintfulOrderItem[]
 ) {
   const apiKey = process.env.PRINTFUL_API_KEY;
-  const storeId = '18495276';
+  const storeId = process.env.PRINTFUL_STORE_ID || '18495276';
 
   if (!apiKey) {
     console.error('[CHOPPED. PRINTFUL] Missing PRINTFUL_API_KEY env variable.');

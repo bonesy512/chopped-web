@@ -1,6 +1,5 @@
-'use client';
-
-import Link from 'next/link';
+'use client'; 
+import Link from 'next/link'; 
 import { useState } from 'react';
 import { useCart } from '@/components/cart/CartContext';
 import { useUncVoice } from '@/hooks/use-unc-voice';
@@ -27,11 +26,7 @@ export function Header() {
       {/* Center: Nav (desktop) */}
       <nav className="hidden md:flex items-center gap-8">
         {NAV_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 relative group"
-          >
+          <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 relative group">
             {link.label}
             <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-150" />
           </Link>
@@ -40,15 +35,17 @@ export function Header() {
 
       {/* Right: CTA + scan + cart */}
       <div className="flex items-center gap-3">
-        <button
-          onClick={() => speak("The first move is what sets everything in motion.")}
-          disabled={isPlaying}
-          className={`hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`}
-          title="LISTEN TO THE UNC"
-        >
+        {/* THE PATCH: Hardwired Auditory Protocol (Visible on mobile & desktop) */}
+        <button 
+          onClick={() => speak("[heavy thoughts] Life is a series of frictions. [deliberate short pause] We don't avoid the friction; we function for it. [slow reflecting] The street never left us. [deliberate short pause] Our backs just started keeping score. The world sleeps at midnight. [authoritative tone] We drop at 02:00 AM. [exhales sharply] This is Volume 01. No reruns, limited supply, [slow branding pause] [brand tag]Chopped Uncs ")} 
+          disabled={isPlaying} 
+          // Replaced 'hidden md:inline-block' with flex and h-[44px] for touch targets
+          className={`flex items-center justify-center h-[44px] px-2 md:h-auto md:px-0 text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`} 
+          title="LISTEN TO THE UNC" 
+        > 
           {isPlaying ? '• SIGNAL •' : 'SIGNAL'}
         </button>
-        
+
         <Link
           href="/scan"
           className="hidden md:inline-block text-muted-foreground hover:text-white tracking-widest transition-colors duration-0"
@@ -73,9 +70,9 @@ export function Header() {
         </Link>
 
         {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5"
+        <button 
+          onClick={() => setMenuOpen(!menuOpen)} 
+          className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5" 
           aria-label="Toggle menu"
         >
           <div className="w-8 flex flex-col gap-1.5">
@@ -90,16 +87,11 @@ export function Header() {
       {menuOpen && (
         <div className="absolute top-14 left-0 w-full bg-[#080808] border-b border-border flex flex-col md:hidden z-50">
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="px-6 py-4 border-b border-border text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0"
-            >
+            <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="px-6 py-4 border-b border-border text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0">
               {link.label}
             </Link>
           ))}
-          
+
           {/* Mobile Cart Trigger */}
           <button
             onClick={() => {

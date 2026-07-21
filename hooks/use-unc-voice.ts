@@ -17,7 +17,7 @@ export function useUncVoice() {
         },
         body: JSON.stringify({ 
           text, 
-          voiceId: voiceId || 'JBFqnCBsd6RMkjVDRZzb' 
+          voiceId: voiceId || 'NJFaM5ouXwsuGSYeFRK3' 
         }),
       });
 

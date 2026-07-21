@@ -2,7 +2,11 @@
 
 import { useCart } from './CartContext';
 import { useState } from 'react';
-import Link from 'next/link';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/shipping';
+
+// 'test' is PayPal's sandbox-demo client id — keeps local dev working before env setup.
+const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'test';
 
 export function CartDrawer() {
   const {
@@ -12,48 +16,63 @@ export function CartDrawer() {
     setIsOpen,
     updateQuantity,
     removeItem,
+    clearCart,
     cartSubtotal,
   } = useCart();
 
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const handleCheckout = async () => {
-    setCheckoutLoading(true);
+  // Server derives all prices from lib/products.ts — we only send ids/options/qty.
+  const createOrder = async (): Promise<string> => {
     setError(null);
-
-    try {
-      const payload = {
+    const res = await fetch('/api/paypal/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         items: cartItems.map((item) => ({
           productId: item.product.id,
           size: item.size,
           color: item.color,
           quantity: item.quantity,
         })),
-      };
-
-      const res = await fetch('/api/checkout_sessions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.url) {
-        setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.');
-        return;
-      }
-
-      // Redirect to Stripe Checkout
-      window.location.href = data.url;
-    } catch {
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.id) {
       setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.');
-    } finally {
-      setCheckoutLoading(false);
+      throw new Error(data.error || 'ORDER_CREATE_FAILED');
     }
+    return data.id;
+  };
+
+  const onApprove = async (
+    data: { orderID: string },
+    actions: { restart: () => void }
+  ) => {
+    const res = await fetch(`/api/paypal/orders/${data.orderID}/capture`, {
+      method: 'POST',
+    });
+    const details = await res.json();
+
+    // Buyer's funding source failed — PayPal standard recovery: restart the flow.
+    if (details.error === 'INSTRUMENT_DECLINED') {
+      actions.restart();
+      return;
+    }
+    if (details.error === 'REGION_NOT_SUPPORTED') {
+      setError('REGION_NOT_SUPPORTED. TRANSMIT FOR MANUAL PROTOCOL.');
+      return;
+    }
+    if (!res.ok || details.status !== 'COMPLETED') {
+      setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.');
+      return;
+    }
+
+    // Success only: clear the kit, route to confirmation.
+    clearCart();
+    window.location.href = '/secure-gear/success';
   };
 
   return (
@@ -203,16 +222,32 @@ export function CartDrawer() {
             </div>
 
             <p className="text-[9px] text-muted-foreground mb-4 leading-relaxed">
-              SHIPPING AND TAXES CALCULATED AT CHECKOUT. ALL SALES FINAL.
+              SHIPPING TO US / CA / GB / AU. ALL SALES FINAL.
             </p>
 
-            <button
-              onClick={handleCheckout}
-              disabled={checkoutLoading}
-              className="w-full border border-white bg-black hover:bg-white hover:text-black text-white text-xs tracking-widest py-4 px-6 transition-none font-bold uppercase disabled:opacity-50"
+            {/* PayPal buttons (includes card guest checkout). Script loads lazily
+                on first drawer open; provider dedupes across re-opens. */}
+            <PayPalScriptProvider
+              options={{ clientId: PAYPAL_CLIENT_ID, currency: 'USD', intent: 'capture' }}
             >
-              {checkoutLoading ? 'COMMUNICATING...' : 'PROCEED TO CHECKOUT'}
-            </button>
+              <PayPalButtons
+                style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'paypal', height: 48 }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+                // Reject unsupported countries INSIDE the popup, before approval —
+                // better UX than failing at capture. Server still re-checks (authority).
+                onShippingAddressChange={async (data, actions) => {
+                  const country = data.shippingAddress?.countryCode;
+                  if (country && !SUPPORTED_SHIPPING_COUNTRIES.includes(country)) {
+                    // v10 typed API: reject() takes no args (raw-SDK docs show
+                    // data.errors.COUNTRY_ERROR — not exposed by the wrapper).
+                    return actions.reject();
+                  }
+                }}
+                onError={() => setError('SYSTEM_FRICTION_DETECTED. RE-TRANSMIT.')}
+                onCancel={() => setError(null)}
+              />
+            </PayPalScriptProvider>
 
             {error && (
               <p className="text-[10px] text-[#FF0000] mt-2 text-center">

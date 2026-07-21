@@ -15,7 +15,6 @@ export type Product = {
   status: 'REDACTED' | 'ACTIVE';
   sizes: string[];
   image?: string;
-  stripeProductId?: string;
   colors?: string[];
 };
 
@@ -43,7 +42,6 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['7', '8', '9', '10', '11', '12', '13', '14'], // Adult US Sizes
     image: '/images/products/ortho-aggressor-mid/hero.jpg',
-    stripeProductId: 'prod_UOO58N0UmdWVZk',
   },
   {
     id: 'chpd-out-002',
