@@ -242,35 +242,45 @@ export const products: Product[] = [
       { label: 'COATING', value: 'Weatherproof UV Matte Shield' },
       { label: 'CATALOG_ID', value: 'Printful 358' },
     ],
-    status: 'ACTIVE',
+    status: 'REDACTED',
     sizes: ['3X3'],
     colors: ['Black'],
-    image: '/images/choppedgraffiti.jpg',
+    image: '/images/products/chopped-sticker-pack/black/front.jpg',
+    colorImages: {
+      Black: [
+        '/images/products/chopped-sticker-pack/black/front.jpg',
+      ],
+    },
   },
   {
     id: 'chpd-mug-001',
     sku: 'CHPD-MUG-001',
-    name: 'The "God Hour" Black Ceramic Mug (11oz)',
+    name: "It's 2AM Coffee Mug",
     slug: 'the-god-hour-mug',
     category: 'Accessories',
     categorySlug: 'accessories',
-    price: 18.00,
-    description: '11oz solid black ceramic mug featuring contrast white CHOPPED. stencil typography and hazard red status block. Purpose-built for the 02:00 AM coffee ritual.',
-    shortDesc: '11oz solid black ceramic mug. 02:00 AM coffee ritual.',
+    price: 30.00,
+    description: 'Solid black glossy ceramic mug with high-contrast white CHOPPED. stencil hardware. Built for the 02:00 AM coffee ritual — dishwasher and microwave proof. Available in 11oz and 15oz.',
+    shortDesc: 'Black glossy ceramic mug. 02:00 AM coffee ritual. 11oz & 15oz.',
     features: [
-      '11oz Solid Black Ceramic Hardware',
-      'High-Contrast White Industrial Stencil',
+      'Solid Black Glossy Ceramic Hardware',
+      'High-Contrast White CHOPPED. Stencil',
       '100% Dishwasher & Microwave Proof',
     ],
     specs: [
-      { label: 'VOLUME', value: '11 oz (325 ml)' },
+      { label: 'VOLUME', value: '11 oz / 15 oz' },
       { label: 'MATERIAL', value: 'Solid Black Glossy Ceramic' },
       { label: 'CATALOG_ID', value: 'Printful 300' },
     ],
     status: 'ACTIVE',
-    sizes: ['11OZ'],
+    sizes: ['11OZ', '15OZ'],
     colors: ['Black'],
-    image: '/images/choppedgraffiti.jpg',
+    image: '/images/products/the-god-hour-mug/black/front.jpg',
+    colorImages: {
+      Black: [
+        '/images/products/the-god-hour-mug/black/front.jpg',
+      ],
+    },
   },
   {
     id: 'chpd-pat-001',
@@ -292,10 +302,15 @@ export const products: Product[] = [
       { label: 'THREAD', value: 'Tonal Black & Industrial Red' },
       { label: 'CATALOG_ID', value: 'Printful 516' },
     ],
-    status: 'ACTIVE',
+    status: 'REDACTED',
     sizes: ['3INCH'],
     colors: ['Black'],
-    image: '/images/choppedgraffiti.jpg',
+    image: '/images/products/black-tape-patch/black/front.jpg',
+    colorImages: {
+      Black: [
+        '/images/products/black-tape-patch/black/front.jpg',
+      ],
+    },
   },
   {
     id: 'chpd-tsh-005',
@@ -392,10 +407,15 @@ export const products: Product[] = [
       { label: 'MATERIAL', value: 'Double-Wall Stainless Steel' },
       { label: 'CATALOG_ID', value: 'Printful 382' },
     ],
-    status: 'ACTIVE',
+    status: 'REDACTED',
     sizes: ['17OZ'],
     colors: ['Black'],
-    image: '/images/choppedgraffiti.jpg',
+    image: '/images/products/hydration-kit-bottle/black/front.jpg',
+    colorImages: {
+      Black: [
+        '/images/products/hydration-kit-bottle/black/front.jpg',
+      ],
+    },
   },
 ];
 

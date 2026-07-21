@@ -85,9 +85,13 @@ export async function POST(
         };
       });
       const breakdown = pu?.amount?.breakdown;
+      const calculatedValue = breakdown?.item_total?.value
+        ? Number(breakdown.item_total.value)
+        : Number(pu?.amount?.value ?? items.reduce((acc, i) => acc + i.price * i.quantity, 0));
+
       await sendPurchaseEvent({
         transactionId: orderID,
-        value: Number(breakdown?.item_total?.value ?? 0),
+        value: calculatedValue,
         shipping: breakdown?.shipping?.value ? Number(breakdown.shipping.value) : undefined,
         items,
         clientId: gaClientIdFromCookie(request.headers.get('cookie')),

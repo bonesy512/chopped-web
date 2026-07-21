@@ -83,7 +83,7 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
   },
   // Vol.02 Expansion Line (Catalog ID placeholders)
   'CHPD-STK-001': { 'Black': { '3X3': 0 } },   // Sticker (ID 358)
-  'CHPD-MUG-001': { 'Black': { '11OZ': 0 } },  // Mug (ID 300)
+  'CHPD-MUG-001': { 'Black': { '11OZ': 5405110245, '15OZ': 5405110246 } }, // Mug — sync product 449140710 (It's 2AM Coffee Mug)
   'CHPD-PAT-001': { 'Black': { '3INCH': 0 } }, // Patch (ID 516)
   'CHPD-TSH-005': { 'Black': { 'S': 0, 'M': 0, 'L': 0, 'XL': 0, 'XXL': 0, '2XL': 0, '3XL': 0 } }, // LS Tee (ID 57)
   'CHPD-OUT-004': { 'Black': { 'S': 0, 'M': 0, 'L': 0, 'XL': 0, 'XXL': 0, '2XL': 0, '3XL': 0 } }, // Crewneck (ID 145)

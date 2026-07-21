@@ -22,7 +22,7 @@ const SKU_CATEGORY: Record<string, ShippingCategory> = {
   'CHPD-ACC-005': 'hats', // Distressed Dad Hat
   'CHPD-ACC-009': 'hats', // Night-Shift Beanie
   'CHPD-STK-001': 'stickers', // Sticker Pack
-  'CHPD-MUG-001': 'mugs', // God Hour Mug
+  'CHPD-MUG-001': 'mugs', // It's 2AM Coffee Mug
   'CHPD-PAT-001': 'stickers', // Embroidered Patch
   'CHPD-TSH-005': 'shirts', // Long Sleeve Tee
   'CHPD-OUT-004': 'hoodies', // Crewneck Sweatshirt

@@ -112,7 +112,7 @@ export function CartDrawer() {
     // Success only: fire purchase (client-side; the server Measurement Protocol
     // backstop dedupes on the same transaction_id), clear the kit, route to
     // confirmation. Cart is still populated here — clearCart() runs after.
-    trackPurchase({ transactionId: data.orderID, items: cartItems });
+    trackPurchase({ transactionId: data.orderID, items: cartItems, value: cartSubtotal });
     clearCart();
     window.location.href = '/secure-gear/success';
   };
