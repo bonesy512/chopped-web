@@ -157,6 +157,46 @@ export async function getOrder(orderID: string): Promise<PayPalOrderResponse> {
   return data;
 }
 
+// Verifies a webhook event's signature via PayPal's verification endpoint
+// (postback method per docs/integrate-webhooks.md).
+//
+// CRITICAL: `rawBody` is the UNMODIFIED request body string, spliced into the
+// postback payload verbatim. PayPal's docs warn that parse→re-stringify can
+// alter formatting (e.g. `1.0`→`1`, unicode escapes) and fail verification —
+// so we never re-serialize the event.
+export async function verifyWebhookSignature(
+  headers: Headers,
+  rawBody: string,
+  webhookId: string
+): Promise<boolean> {
+  const token = await getAccessToken();
+  const j = (v: string | null) => JSON.stringify(v);
+  const payload =
+    `{"auth_algo":${j(headers.get('paypal-auth-algo'))},` +
+    `"cert_url":${j(headers.get('paypal-cert-url'))},` +
+    `"transmission_id":${j(headers.get('paypal-transmission-id'))},` +
+    `"transmission_sig":${j(headers.get('paypal-transmission-sig'))},` +
+    `"transmission_time":${j(headers.get('paypal-transmission-time'))},` +
+    `"webhook_id":${j(webhookId)},` +
+    `"webhook_event":${rawBody}}`;
+
+  const response = await fetch(`${getApiBase()}/v1/notifications/verify-webhook-signature`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: payload,
+    cache: 'no-store',
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    console.error('[CHOPPED. PAYPAL] Webhook verification call failed:', JSON.stringify(data));
+    return false;
+  }
+  return data.verification_status === 'SUCCESS';
+}
+
 // Returns { status, data } instead of throwing so the route can branch on
 // PayPal issues (INSTRUMENT_DECLINED, ORDER_ALREADY_CAPTURED) per the plan.
 export async function captureOrder(

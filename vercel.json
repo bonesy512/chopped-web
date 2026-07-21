@@ -36,6 +36,9 @@
     },
     "app/api/paypal/orders/*/capture/route.ts": {
       "maxDuration": 30
+    },
+    "app/api/paypal/webhook/route.ts": {
+      "maxDuration": 30
     }
   }
 }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getOrder, captureOrder, SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/paypal';
-import { createPrintfulOrder, getSyncVariantId } from '@/lib/printful';
+import { getOrder, captureOrder } from '@/lib/paypal';
+import { SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/shipping';
+import { dispatchPayPalFulfillment } from '@/lib/fulfillment';
 
 // Captures an approved PayPal order, then dispatches Printful fulfillment.
 // Guards (per docs/STRIPE-TO-PAYPAL-MIGRATION.md §4):
@@ -55,60 +56,15 @@ export async function POST(
     console.log(`[CHOPPED. SYSTEM] ORDER SECURED: ${orderID}`);
 
     // 4. Fulfillment — the PAID order is the source of truth, not the client cart.
-    //    Payment already succeeded, so fulfillment failures are logged, not surfaced.
+    //    Shared with the webhook backstop (lib/fulfillment.ts); idempotent via
+    //    Printful external_id + update_existing. Payment already succeeded, so
+    //    failures are logged, not surfaced — the webhook redelivery retries them.
     try {
       const shipping = data.purchase_units?.[0]?.shipping || preShipping;
       const email = data.payer?.email_address || order.payer?.email_address || undefined;
-
-      if (!shipping?.address || !shipping?.name?.full_name) {
-        console.error('[CHOPPED. SYSTEM] No shipping details on captured order — manual fulfillment needed.');
-      } else {
-        // Post-capture belt-and-braces: if a bad address slipped through, flag for manual refund.
-        const country = shipping.address.country_code || '';
-        if (!SUPPORTED_SHIPPING_COUNTRIES.includes(country)) {
-          console.error(`[CHOPPED. SYSTEM] CAPTURED order ${orderID} has unsupported country ${country} — MANUAL REFUND REQUIRED.`);
-        } else {
-          const recipient = {
-            name: shipping.name.full_name,
-            address1: shipping.address.address_line_1 || '',
-            city: shipping.address.admin_area_2 || '',
-            state_code: shipping.address.admin_area_1 || undefined,
-            country_code: country,
-            zip: shipping.address.postal_code || '',
-            email,
-          };
-
-          const printfulItems: Array<{ sync_variant_id: number; quantity: number; retail_price?: string }> = [];
-          for (const it of order.purchase_units?.[0]?.items || []) {
-            // Carrier format: "{SKU}|{color}|{size}"
-            const [sku, color, size] = String(it.sku || '').split('|');
-            const qty = parseInt(it.quantity || '1', 10) || 1;
-            const syncVariantId = getSyncVariantId(sku, color, size);
-            if (syncVariantId) {
-              printfulItems.push({
-                sync_variant_id: syncVariantId,
-                quantity: qty,
-                // What the buyer actually paid — shows on the Printful order.
-                ...(it.unit_amount?.value && { retail_price: it.unit_amount.value }),
-              });
-            } else {
-              console.error(`[CHOPPED. SYSTEM] Failed to resolve Printful Sync Variant ID for SKU ${sku}, color ${color}, size ${size}`);
-            }
-          }
-
-          if (printfulItems.length > 0) {
-            console.log(`[CHOPPED. SYSTEM] Dispatching fulfillment for ${printfulItems.length} items to Printful...`);
-            // external_id = PayPal order ID → payment↔fulfillment traceability,
-            // and (with update_existing) idempotent against dispatch retries.
-            const printfulOrder = await createPrintfulOrder(recipient, printfulItems, orderID);
-            console.log(`[CHOPPED. SYSTEM] FULFILLMENT SUCCESSFUL. PRINTFUL ORDER ID: ${printfulOrder.id}`);
-          } else {
-            console.warn('[CHOPPED. SYSTEM] No fulfillable items resolved on order.');
-          }
-        }
-      }
+      await dispatchPayPalFulfillment(order, orderID, shipping, email);
     } catch (err) {
-      console.error('[CHOPPED. SYSTEM] FULFILLMENT ATTEMPT FAILED:', err);
+      console.error('[CHOPPED. SYSTEM] FULFILLMENT ATTEMPT FAILED (webhook backstop will retry):', err);
     }
 
     return NextResponse.json({ status: 'COMPLETED', id: data.id });
