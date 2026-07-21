@@ -4,9 +4,25 @@ import { PersonSchema } from '@/components/seo/schema';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+
 export const metadata: Metadata = {
   title: 'Advisory Board — CHOPPED.',
   description: 'The Unc Advisory Board. 49+ years combined industry experience in design, production, and marketing. Austin, TX.',
+  alternates: { canonical: `${BASE_URL}/advisory-board` },
+  openGraph: {
+    title: 'Advisory Board — CHOPPED.',
+    description: 'The Unc Advisory Board. 49+ years combined industry experience in design, production, and marketing. Austin, TX.',
+    url: `${BASE_URL}/advisory-board`,
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. Advisory Board' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Advisory Board — CHOPPED.',
+    description: 'The Unc Advisory Board. 49+ years combined industry experience in design, production, and marketing. Austin, TX.',
+    images: ['/og-image.png'],
+  },
 };
 
 const BOARD_MEMBERS = [

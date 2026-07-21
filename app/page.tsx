@@ -63,6 +63,12 @@ export function generateMetadata(): Metadata {
       url: BASE_URL,
       images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. — Function For The Friction.' }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'CHOPPED. — Function For The Friction.',
+      description: `High-Performance Ageless Streetwear. Next drop ${drop} ${DROP_TIME_LABEL}.`,
+      images: ['/og-image.png'],
+    },
   };
 }
 

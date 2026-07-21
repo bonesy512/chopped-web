@@ -192,16 +192,16 @@ export const products: Product[] = [
     sku: 'CHPD-ACC-009',
     name: 'The "Night-Shift" Watch Cap',
     slug: 'night-shift-watch-cap',
-    category: 'Accessories',
-    categorySlug: 'accessories',
-    // Live Printful POD: Yupoong 1501KC (catalog ID 266); sync variants
-    // pending — status stays REDACTED until IDs replace the 0s in lib/printful.ts.
-    // Classic cuffed beanie, 100% acrylic. Embroidery front. $12.79 cost (Black/OS).
-    price: 40.00,
+    category: 'Essentials',
+    categorySlug: 'essentials',
+    // Live Printful POD: Yupoong 1501KC (catalog ID 266); sync variant
+    // live in lib/printful.ts (ID 5404798547). Classic 12" cuffed beanie,
+    // white high-density embroidery. $12.79 Printful cost, $35.00 retail.
+    price: 35.00,
     description: 'Heavyweight ribbed knit cuffed beanie with high-contrast white "CHOPPED." stencil embroidery. Built for warmth during 02:00 AM garage shifts and cold night runs.',
     shortDesc: 'Ribbed knit watch cap. High-contrast white embroidery.',
     features: [
-      'Heavy Ribbed Knit Insulation',
+      'Heavy Ribbed Knit Insulation (Yupoong 1501KC)',
       'Wind-Resistant Double-Cuffed Fold',
       'Contrast White High-Density Stitching',
     ],
@@ -210,13 +210,14 @@ export const products: Product[] = [
       { label: 'EMBROIDERY', value: 'White "CHOPPED." Stencil' },
       { label: 'FIT PROFILE', value: 'Snug Above-Ear Watch Cap' },
     ],
-    status: 'REDACTED',
+    status: 'ACTIVE',
     sizes: ['OSFA'],
     colors: ['Black'],
     image: '/images/products/night-shift-watch-cap/black/front.png',
     colorImages: {
       Black: [
         '/images/products/night-shift-watch-cap/black/front.png',
+        '/images/products/night-shift-watch-cap/black/detail.png',
       ],
     },
   },

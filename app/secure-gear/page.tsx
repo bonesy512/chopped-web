@@ -4,9 +4,25 @@ import { products } from '@/lib/products';
 import { AcquireButton } from '@/components/ui/acquire-button';
 import type { Metadata } from 'next';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+
 export const metadata: Metadata = {
   title: 'SECURE GEAR — CHOPPED.',
   description: 'The complete VOL.01 hardware and streetwear system. Always active.',
+  alternates: { canonical: `${BASE_URL}/secure-gear` },
+  openGraph: {
+    title: 'SECURE GEAR — CHOPPED.',
+    description: 'The complete VOL.01 hardware and streetwear system. Always active.',
+    url: `${BASE_URL}/secure-gear`,
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. SECURE GEAR' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SECURE GEAR — CHOPPED.',
+    description: 'The complete VOL.01 hardware and streetwear system. Always active.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function SecureGearPage() {

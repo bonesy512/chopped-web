@@ -75,10 +75,10 @@ export const PRINTFUL_VARIANT_MAP: Record<string, Record<string, Record<string, 
       'OSFA': 5404771405, // alias — products.ts uses OSFA
     },
   },
-  'CHPD-ACC-009': { // Beanie — Yupoong 1501KC (catalog 266)
+  'CHPD-ACC-009': { // Beanie — Yupoong 1501KC (catalog 266; sync product 449029011)
     'Black': {
-      'One Size': 0,
-      'OSFA': 0, // alias — products.ts uses OSFA
+      'One Size': 5404798547,
+      'OSFA': 5404798547, // alias — products.ts uses OSFA
     }
   },
   // Vol.02 Expansion Line (Catalog ID placeholders)

@@ -4,9 +4,25 @@ import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ui/product-card';
 import type { Metadata } from 'next';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+
 export const metadata: Metadata = {
   title: 'Scan System — CHOPPED.',
   description: 'Scan the CHOPPED. system. Search the full VOL.01 archive.',
+  alternates: { canonical: `${BASE_URL}/scan` },
+  openGraph: {
+    title: 'Scan System — CHOPPED.',
+    description: 'Scan the CHOPPED. system. Search the full VOL.01 archive.',
+    url: `${BASE_URL}/scan`,
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. System Scan' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Scan System — CHOPPED.',
+    description: 'Scan the CHOPPED. system. Search the full VOL.01 archive.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function ScanPage() {

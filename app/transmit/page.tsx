@@ -3,9 +3,25 @@ import { Footer } from '@/components/layout/Footer';
 import { TransmitForm } from '@/components/ui/transmit-form';
 import type { Metadata } from 'next';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppedunc.store';
+
 export const metadata: Metadata = {
   title: 'Transmit — CHOPPED.',
   description: 'Industrial inquiries. Direct channel only.',
+  alternates: { canonical: `${BASE_URL}/transmit` },
+  openGraph: {
+    title: 'Transmit — CHOPPED.',
+    description: 'Industrial inquiries. Direct channel only.',
+    url: `${BASE_URL}/transmit`,
+    type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'CHOPPED. Transmit' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Transmit — CHOPPED.',
+    description: 'Industrial inquiries. Direct channel only.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function TransmitPage() {
