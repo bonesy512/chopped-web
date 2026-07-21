@@ -3,15 +3,21 @@
 import { useState } from 'react';
 import { type Product } from '@/lib/products';
 import { useCart } from '@/components/cart/CartContext';
+import { useProductOptions } from '@/components/product/product-options';
 
 export function AcquireButton({ product }: { product: Product }) {
   const [error, setError] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : null
   );
-  const [selectedColor, setSelectedColor] = useState<string | null>(
+  // Colorway state is shared with the PDP gallery when a ProductOptionsProvider
+  // wraps us (product page); otherwise (e.g. /secure-gear) it's local.
+  const options = useProductOptions();
+  const [localColor, setLocalColor] = useState<string | null>(
     product.colors && product.colors.length > 0 ? product.colors[0] : null
   );
+  const selectedColor = options ? options.color : localColor;
+  const setSelectedColor = options ? options.setColor : setLocalColor;
 
   const { addItem, setIsOpen } = useCart();
 

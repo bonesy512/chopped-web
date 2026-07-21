@@ -16,7 +16,17 @@ export type Product = {
   sizes: string[];
   image?: string;
   colors?: string[];
+  // Per-colorway mockups (first entry = primary view). Falls back to `image`.
+  colorImages?: Record<string, string[]>;
 };
+
+// Primary image for a product, colorway-aware.
+export function getProductImage(product: Product, color?: string): string | undefined {
+  if (color && product.colorImages?.[color]?.length) {
+    return product.colorImages[color][0];
+  }
+  return product.image;
+}
 
 export const products: Product[] = [
   {
@@ -98,23 +108,42 @@ export const products: Product[] = [
     slug: 'anti-graphic-tee',
     category: 'Essentials',
     categorySlug: 'essentials',
+    // Live Printful POD: Cotton Heritage MC1086 (catalog ID 508); sync variants
+    // for Black + White S–4XL live in lib/printful.ts. Copy is POD-honest per
+    // printful-product-mapping.md §5 — the blank is 6.5oz (~220GSM) and DTG has
+    // no reflective ink, so no 300GSM / reflective claims. Retail $45 per
+    // printful-pricing-breakdown.md (landed ~$34.23, ~24% margin).
     price: 45.00,
-    description: '300GSM "Anti Chopped Chopped Social Club" parody tee. Wear it without explanation.',
-    shortDesc: '300GSM Dry-Hand Cotton. Anti-uniform for the veteran.',
+    description: 'Heavyweight combed cotton. "Anti Chopped Chopped Social Club" parody. Black or White chassis. Wear it without explanation.',
+    shortDesc: 'Heavyweight cotton parody tee. Anti-uniform for the veteran.',
     features: [
-      '1-inch Reinforced Ribbed Collar',
+      '6.5oz Heavyweight Combed Ring-Spun Cotton',
       'Pre-shrunk Veteran Fit',
-      'Reflective Silver Back Print',
+      'Wavy Silver-Grey Back Print',
     ],
     specs: [
-      { label: 'FABRIC', value: '300GSM Dry-Hand Cotton' },
+      { label: 'FABRIC', value: '6.5oz Combed Ring-Spun Cotton' },
       { label: 'FRONT', value: 'Left-Chest Pocket Stencil' },
       { label: 'BACK', value: 'Wavy Distorted Typography' },
+      { label: 'COLORWAYS', value: 'Black / White' },
     ],
     status: 'ACTIVE',
     sizes: ['S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'],
     colors: ['Black', 'White'],
-    image: '/images/products/anti-graphic-tee/hero.png',
+    // Black = white print; White = black print (Printful mockups, 2000×2000)
+    image: '/images/products/anti-graphic-tee/black/front.jpg',
+    colorImages: {
+      Black: [
+        '/images/products/anti-graphic-tee/black/front.jpg',
+        '/images/products/anti-graphic-tee/black/back.jpg',
+        '/images/products/anti-graphic-tee/black/detail.jpg',
+      ],
+      White: [
+        '/images/products/anti-graphic-tee/white/front.jpg',
+        '/images/products/anti-graphic-tee/white/back.jpg',
+        '/images/products/anti-graphic-tee/white/detail.jpg',
+      ],
+    },
   },
   {
     id: 'chpd-acc-005',

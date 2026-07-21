@@ -4,6 +4,7 @@ import { useCart } from './CartContext';
 import { useState } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { SUPPORTED_SHIPPING_COUNTRIES } from '@/lib/shipping';
+import { getProductImage } from '@/lib/products';
 
 // 'test' is PayPal's sandbox-demo client id — keeps local dev working before env setup.
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || 'test';
@@ -129,12 +130,12 @@ export function CartDrawer() {
                 key={`${item.product.id}-${item.color}-${item.size}-${index}`}
                 className="flex gap-4 border border-border p-3 bg-black relative group"
               >
-                {/* Thumbnail */}
+                {/* Thumbnail — colorway-aware */}
                 <div className="w-20 h-20 bg-[#111] border border-border flex-shrink-0 relative overflow-hidden">
-                  {item.product.image && (
+                  {getProductImage(item.product, item.color) && (
                     <img
-                      src={item.product.image}
-                      alt={item.product.name}
+                      src={getProductImage(item.product, item.color)}
+                      alt={`${item.product.name}${item.color ? ` — ${item.color}` : ''}`}
                       className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
                   )}

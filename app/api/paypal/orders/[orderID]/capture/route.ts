@@ -78,14 +78,19 @@ export async function POST(
             email,
           };
 
-          const printfulItems: Array<{ sync_variant_id: number; quantity: number }> = [];
+          const printfulItems: Array<{ sync_variant_id: number; quantity: number; retail_price?: string }> = [];
           for (const it of order.purchase_units?.[0]?.items || []) {
             // Carrier format: "{SKU}|{color}|{size}"
             const [sku, color, size] = String(it.sku || '').split('|');
             const qty = parseInt(it.quantity || '1', 10) || 1;
             const syncVariantId = getSyncVariantId(sku, color, size);
             if (syncVariantId) {
-              printfulItems.push({ sync_variant_id: syncVariantId, quantity: qty });
+              printfulItems.push({
+                sync_variant_id: syncVariantId,
+                quantity: qty,
+                // What the buyer actually paid — shows on the Printful order.
+                ...(it.unit_amount?.value && { retail_price: it.unit_amount.value }),
+              });
             } else {
               console.error(`[CHOPPED. SYSTEM] Failed to resolve Printful Sync Variant ID for SKU ${sku}, color ${color}, size ${size}`);
             }
@@ -93,7 +98,9 @@ export async function POST(
 
           if (printfulItems.length > 0) {
             console.log(`[CHOPPED. SYSTEM] Dispatching fulfillment for ${printfulItems.length} items to Printful...`);
-            const printfulOrder = await createPrintfulOrder(recipient, printfulItems);
+            // external_id = PayPal order ID → payment↔fulfillment traceability,
+            // and (with update_existing) idempotent against dispatch retries.
+            const printfulOrder = await createPrintfulOrder(recipient, printfulItems, orderID);
             console.log(`[CHOPPED. SYSTEM] FULFILLMENT SUCCESSFUL. PRINTFUL ORDER ID: ${printfulOrder.id}`);
           } else {
             console.warn('[CHOPPED. SYSTEM] No fulfillable items resolved on order.');

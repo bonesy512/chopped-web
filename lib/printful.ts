@@ -12,6 +12,8 @@ export type PrintfulRecipient = {
 export type PrintfulOrderItem = {
   sync_variant_id: number;
   quantity: number;
+  // What the customer actually paid per unit (shows on order/packing slip).
+  retail_price?: string;
 };
 
 // Map of SKU + Color + Size to Printful Sync Variant ID
@@ -79,10 +81,16 @@ export function getSyncVariantId(sku: string, color: string = 'Black', size: str
 
 /**
  * Creates a draft order in the Printful store.
+ *
+ * `externalId` (the PayPal order ID) makes the Printful order traceable to its
+ * payment, and — combined with `?update_existing=true` (per docs/openapi.json)
+ * — makes fulfillment idempotent: a re-fired dispatch UPDATES the existing
+ * draft with that external_id instead of creating a duplicate.
  */
 export async function createPrintfulOrder(
   recipient: PrintfulRecipient,
-  items: PrintfulOrderItem[]
+  items: PrintfulOrderItem[],
+  externalId?: string
 ) {
   const apiKey = process.env.PRINTFUL_API_KEY;
   const storeId = process.env.PRINTFUL_STORE_ID || '18495276';
@@ -93,13 +101,15 @@ export async function createPrintfulOrder(
   }
 
   const payload = {
+    ...(externalId && { external_id: externalId }),
     recipient,
     items,
   };
 
   console.log('[CHOPPED. PRINTFUL] Creating order payload:', JSON.stringify(payload, null, 2));
 
-  const response = await fetch('https://api.printful.com/orders', {
+  const url = `https://api.printful.com/orders${externalId ? '?update_existing=true' : ''}`;
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
@@ -113,7 +123,8 @@ export async function createPrintfulOrder(
 
   if (!response.ok) {
     console.error('[CHOPPED. PRINTFUL] API Error Response:', JSON.stringify(data, null, 2));
-    throw new Error(data.error?.message || 'PRINTFUL_API_FAILED');
+    // Per openapi.json the error body carries error.message and/or result (string).
+    throw new Error(data.error?.message || data.result || 'PRINTFUL_API_FAILED');
   }
 
   return data.result;

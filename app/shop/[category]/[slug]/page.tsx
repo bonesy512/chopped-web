@@ -1,8 +1,9 @@
-// Add next/image to imports
-import Image from 'next/image';
+import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AcquireButton } from '@/components/ui/acquire-button';
+import { ProductImage } from '@/components/product/product-image';
+import { ProductOptionsProvider } from '@/components/product/product-options';
 import { ProductCard } from '@/components/ui/product-card';
 import { products, getProductBySlug } from '@/lib/products';
 import { ProductSchema, BreadcrumbSchema } from '@/components/seo/schema';
@@ -85,14 +86,16 @@ export default async function ProductDetailPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
           {/* Breadcrumb */}
           <div className="text-xs font-mono text-muted-foreground mb-8 flex gap-2 items-center">
-            <a href="/shop/all" className="hover:text-white transition-colors">CHASSIS</a>
+            <Link href="/shop/all" className="hover:text-white transition-colors">CHASSIS</Link>
             <span>/</span>
             <span className="uppercase">{product.category}</span>
             <span>/</span>
             <span className="text-white uppercase truncate">{product.name}</span>
           </div>
 
-          {/* Main product layout */}
+          {/* Main product layout — provider shares the colorway between the
+              gallery (image swap) and AcquireButton (cart payload) */}
+          <ProductOptionsProvider initialColor={product.colors?.[0] ?? null}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-border">
             {/* Image pane */}
             <div className="aspect-square bg-[#080808] border-b md:border-b-0 md:border-r border-border flex items-center justify-center relative overflow-hidden">
@@ -110,27 +113,8 @@ export default async function ProductDetailPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Product Image */}
-              {product.image ? (
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover opacity-90 z-0"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
-              ) : (
-                /* Visual glyph fallback */
-                <div className="relative z-0 text-center select-none">
-                  <span className="text-[180px] leading-none text-white/5 font-bold font-sans block">
-                    ◈
-                  </span>
-                  <span className="text-xs font-mono text-muted-foreground/40 tracking-wider">
-                    {product.sku}
-                  </span>
-                </div>
-              )}
+              {/* Product Image — colorway-reactive gallery */}
+              <ProductImage product={product} />
 
               {/* HUD corner */}
               <div className="absolute bottom-4 right-4 text-[10px] font-mono text-muted-foreground/40">
@@ -210,6 +194,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+          </ProductOptionsProvider>
 
           {/* Related products */}
           {related.length > 0 && (

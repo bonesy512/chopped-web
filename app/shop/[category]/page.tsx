@@ -25,7 +25,7 @@ const CATEGORY_META: Record<string, { label: string; title: string; description:
   essentials: {
     label: 'ESSENTIALS',
     title: 'Essentials — VOL.01 — CHOPPED.',
-    description: 'Anti-uniform kit for the veteran. 300GSM tees. Hand-abraded hats. No decoration.',
+    description: 'Anti-uniform kit for the veteran. Heavyweight tees. Hand-abraded hats. No decoration.',
   },
   hardware: {
     label: 'HARDWARE',
