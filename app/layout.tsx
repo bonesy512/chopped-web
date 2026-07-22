@@ -3,6 +3,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { GoogleAnalytics } from "@next/third-parties/google"
@@ -15,6 +16,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store/
 // GA4 measurement ID. Unset in local/preview → the tag is not mounted and every
 // analytics call in lib/analytics/ga.ts is a safe no-op.
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-THQQMK7W7Z'
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-7731406329915162'
 
 export const viewport: Viewport = {
   themeColor: '#080808',
@@ -130,6 +132,15 @@ export default function RootLayout({
       {GA_ID && (
         <GoogleAnalytics gaId={GA_ID} debugMode={process.env.NODE_ENV !== 'production'} />
       )}
+      {ADSENSE_ID && (
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      )}
     </html>
   )
 }
+
