@@ -13,6 +13,10 @@ import type { Metadata } from 'next';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://choppeduncs.store';
 
+const NOISE_BG_STYLE = {
+  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+};
+
 type Props = {
   params: Promise<{ category: string; slug: string }>;
 };
@@ -104,16 +108,14 @@ export default async function ProductDetailPage({ params }: Props) {
               {/* Noise overlay */}
               <div
                 className="absolute inset-0 opacity-10 z-10 pointer-events-none"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-                }}
+                style={NOISE_BG_STYLE}
               />
 
-              {product.status === 'REDACTED' && (
+              {product.status === 'REDACTED' ? (
                 <div className="absolute top-4 left-4 bg-black text-[#FF0000] text-xs font-mono px-3 py-1 border border-[#FF0000] tracking-widest z-20">
                   [REDACTED]
                 </div>
-              )}
+              ) : null}
 
               {/* Product Image — colorway-reactive gallery */}
               <ProductImage product={product} />
@@ -132,11 +134,11 @@ export default async function ProductDetailPage({ params }: Props) {
                   <p className="text-xs font-mono text-muted-foreground tracking-widest">{product.sku}</p>
                   <p className="text-xs font-mono text-muted-foreground">{product.category}</p>
                 </div>
-                {product.status === 'REDACTED' && (
+                {product.status === 'REDACTED' ? (
                   <span className="text-[10px] font-mono text-[#FF0000] border border-[#FF0000] px-2 py-1 animate-pulse">
                     ▮ ACCESS LOCKED
                   </span>
-                )}
+                ) : null}
               </div>
 
               {/* Name & price */}
@@ -157,6 +159,21 @@ export default async function ProductDetailPage({ params }: Props) {
               <p className="text-sm font-mono text-muted-foreground leading-relaxed">
                 {product.description}
               </p>
+
+              {/* Trust Signals & Fulfillment Transparency */}
+              <div className="border border-border/80 bg-[#080808] p-4 flex flex-col gap-2 font-mono text-xs text-muted-foreground">
+                <div className="flex items-center gap-2 text-white font-bold">
+                  <span className="text-[#FF0000]">✔</span> DISPATCHED FROM AUSTIN, TX // NOCTURNAL UNLOCK 02:00 AM
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span>▸</span> 100-WASH STANCE GUARANTEE • PRE-SHRUNK INDUSTRIAL CHASSIS
+                </div>
+                {product.sku.startsWith('CHPD-FND') ? (
+                  <div className="flex items-center gap-2 text-xs text-[#FF0000] font-bold">
+                    <span>★</span> 100% OF PROFITS DONATED DIRECTLY TO ANDY'S CANCER FIGHT
+                  </div>
+                ) : null}
+              </div>
 
               {/* Features */}
               <div>
@@ -199,7 +216,7 @@ export default async function ProductDetailPage({ params }: Props) {
           </ProductOptionsProvider>
 
           {/* Related products */}
-          {related.length > 0 && (
+          {related.length > 0 ? (
             <div className="mt-20">
               <div className="border-b border-border pb-6 mb-8">
                 <p className="text-xs font-mono text-muted-foreground tracking-widest">
@@ -212,7 +229,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 ))}
               </div>
             </div>
-          )}
+          ) : null}
         </div>
       </main>
 

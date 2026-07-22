@@ -4,9 +4,14 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import type { Metadata, Viewport } from "next"
 import Script from "next/script"
+import dynamic from "next/dynamic"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { GoogleAnalytics } from "@next/third-parties/google"
+import { OrganizationSchema, WebSiteSchema } from "@/components/seo/schema"
+import { CartProvider } from "@/components/cart/CartContext"
+
+const CartDrawer = dynamic(() => import("@/components/cart/CartDrawer").then((mod) => mod.CartDrawer))
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 const robotoMono = Roboto_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
@@ -97,13 +102,12 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   verification: {
-    // google: 'YOUR_GOOGLE_SITE_VERIFICATION_TOKEN',
+    google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN', // Search Console verification token
+    other: {
+      'google-adsense-account': 'ca-pub-7731406329915162', // AdSense Meta Tag verification
+    },
   },
-}
-
-import { OrganizationSchema, WebSiteSchema } from "@/components/seo/schema"
-import { CartProvider } from "@/components/cart/CartContext"
-import { CartDrawer } from "@/components/cart/CartDrawer"
+};
 
 export default function RootLayout({
   children,
@@ -128,19 +132,20 @@ export default function RootLayout({
             <SpeedInsights />
           </CartProvider>
         </ThemeProvider>
+        {GA_ID ? (
+          <GoogleAnalytics gaId={GA_ID} debugMode={process.env.NODE_ENV !== 'production'} />
+        ) : null}
+        {ADSENSE_ID ? (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
-      {GA_ID && (
-        <GoogleAnalytics gaId={GA_ID} debugMode={process.env.NODE_ENV !== 'production'} />
-      )}
-      {ADSENSE_ID && (
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-      )}
     </html>
   )
 }
+
 

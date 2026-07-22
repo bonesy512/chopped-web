@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Compress responses for better CWV
+  // Compress responses for better Core Web Vitals
   compress: true,
+
+  // Vercel Edge Image Optimization: enable modern AVIF & WebP formats and long TTL
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+  },
+
+  // Tree-shake heavy UI package imports + enable React View Transitions
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'radix-ui'],
+    viewTransition: true,
+  },
+
+  // Turbopack explicit root resolution
+  turbopack: {
+    root: process.cwd(),
+  },
 
   // Security + SEO headers
   async headers() {
@@ -30,7 +47,6 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
-          // Cache: long for static assets
         ],
       },
       {
@@ -60,3 +76,4 @@ const nextConfig = {
 }
 
 export default nextConfig
+

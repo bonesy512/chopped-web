@@ -64,12 +64,12 @@ export function Footer() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === 'loading' || status === 'success'}
-            className="bg-transparent border border-border border-r-0 px-4 py-4 text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white w-full md:w-64 transition-colors disabled:opacity-50"
+            className="bg-transparent border border-border border-r-0 px-4 min-h-[44px] text-xs font-mono text-white placeholder:text-muted-foreground focus:outline-none focus:border-white focus-visible:ring-1 focus-visible:ring-[#FF0000] w-full md:w-64 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={status === 'loading' || status === 'success' || !email}
-            className="border border-white bg-black text-white px-4 py-4 text-xs font-mono tracking-widest hover:bg-white hover:text-black transition-colors duration-0 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed w-32 text-center"
+            className="border border-white bg-black text-white px-4 min-h-[44px] flex items-center justify-center text-xs font-mono tracking-widest hover:bg-white hover:text-black focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none transition-colors duration-0 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed w-32 text-center"
           >
             {status === 'loading' ? 'WAIT...' : status === 'success' ? 'LOCKED IN' : 'CLOCK IN'}
           </button>
@@ -93,16 +93,16 @@ export function Footer() {
             </span>
           </span>
           <span className="text-[10px] text-muted-foreground/60 font-mono mt-0.5" suppressHydrationWarning>
-            AUTOMATED FULFILLMENT PIPELINE • SECURED BY PAYPAL ORDERS V2 • SLA {'<'} 24 HR
+            AUTOMATED FULFILLMENT PIPELINE • 100% FUNDRAISER PROFITS TO CANCER FIGHT • SLA {'<'} 24 HR
           </span>
         </div>
 
-        <nav className="flex flex-wrap gap-6">
+        <nav className="flex flex-wrap gap-6 items-center">
           {LEGAL_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs text-muted-foreground hover:text-white font-mono tracking-wider transition-colors"
+              className="text-xs text-muted-foreground hover:text-white font-mono tracking-wider transition-colors min-h-[44px] flex items-center focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none"
             >
               {link.label}
             </Link>

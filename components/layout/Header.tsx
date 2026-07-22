@@ -11,6 +11,9 @@ const NAV_LINKS = [
   { label: 'TRANSMIT', href: '/transmit' },
 ];
 
+const UNC_SIGNAL_TEXT =
+  "[heavy thoughts] Life is a series of frictions. [deliberate short pause] We don't avoid the friction; we function for it. [slow reflecting] The street never left us. [deliberate short pause] Our backs just started keeping score. The world sleeps at midnight. [authoritative tone] We drop at 02:00 AM. [exhales sharply] This is Volume 01. No reruns, limited supply, [slow branding pause] [brand tag]Chopped Uncs ";
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { speak, isPlaying } = useUncVoice();
@@ -37,7 +40,7 @@ export function Header() {
       <div className="flex items-center gap-3">
         {/* THE PATCH: Hardwired Auditory Protocol (Visible on mobile & desktop) */}
         <button 
-          onClick={() => speak("[heavy thoughts] Life is a series of frictions. [deliberate short pause] We don't avoid the friction; we function for it. [slow reflecting] The street never left us. [deliberate short pause] Our backs just started keeping score. The world sleeps at midnight. [authoritative tone] We drop at 02:00 AM. [exhales sharply] This is Volume 01. No reruns, limited supply, [slow branding pause] [brand tag]Chopped Uncs ")} 
+          onClick={() => speak(UNC_SIGNAL_TEXT)} 
           disabled={isPlaying} 
           // Replaced 'hidden md:inline-block' with flex and h-[44px] for touch targets
           className={`flex items-center justify-center h-[44px] px-2 md:h-auto md:px-0 text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 ${isPlaying ? 'animate-pulse text-[#FF0000]' : ''}`} 
@@ -57,7 +60,7 @@ export function Header() {
         {/* Cart Trigger */}
         <button
           onClick={toggleCart}
-          className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 font-bold border border-border px-3 py-1 hover:border-white"
+          className="text-muted-foreground hover:text-white tracking-widest transition-colors duration-0 font-bold border border-border px-3.5 min-h-[44px] flex items-center justify-center hover:border-white focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none"
           suppressHydrationWarning
         >
           CART ({cartCount})
@@ -65,14 +68,14 @@ export function Header() {
 
         <Link
           href="/secure-gear"
-          className="border border-[#FF0000] text-[#FF0000] px-3 py-1 text-xs tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0 hidden md:block"
+          className="border border-[#FF0000] text-[#FF0000] px-3.5 min-h-[44px] text-xs tracking-widest hover:bg-[#FF0000] hover:text-black transition-colors duration-0 hidden md:flex items-center justify-center focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none"
         >
           SECURE GEAR
         </Link>
 
         {/* Mobile hamburger */}
         <button 
-          onClick={() => setMenuOpen(!menuOpen)} 
+          onClick={() => setMenuOpen((prev) => !prev)} 
           className="md:hidden text-white w-12 h-12 flex flex-col items-center justify-center gap-1.5" 
           aria-label="Toggle menu"
         >
@@ -85,7 +88,7 @@ export function Header() {
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
+      {menuOpen ? (
         <div className="absolute top-14 left-0 w-full bg-[#080808] border-b border-border flex flex-col md:hidden z-50">
           {NAV_LINKS.map((link) => (
             <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="px-6 py-4 border-b border-border text-white tracking-widest hover:bg-white hover:text-black transition-colors duration-0">
@@ -112,7 +115,7 @@ export function Header() {
             SECURE GEAR
           </Link>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }

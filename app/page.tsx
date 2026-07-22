@@ -122,9 +122,9 @@ export default function Home() {
               <span className="text-[#FF0000]">FRICTION.</span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base font-mono text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              High-Performance Ageless Streetwear engineered for the midnight shift.
+              Streetwear didn&apos;t age with us. Built in Austin, TX for 38+ veterans who refuse to trade street authority for physical comfort.
               <br />
-              Heavyweight 13oz fleece armor & 6.5oz combed cotton built for 38+ veterans who refuse to sacrifice street authority for physical comfort.
+              Heavyweight 13oz fleece armor & 6.5oz combed cotton chassis engineered for the midnight shift.
             </p>
           </div>
 
@@ -132,15 +132,15 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-0 w-full max-w-sm">
             <a
               href="/shop/all"
-              className="flex-1 border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-6 hover:bg-white hover:text-black transition-colors duration-0 text-center font-bold"
+              className="flex-1 border border-white bg-black text-white text-xs font-mono tracking-widest py-4 px-6 hover:bg-white hover:text-black focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none transition-colors duration-0 text-center font-bold min-h-[44px] flex items-center justify-center"
             >
-              ACQUIRE GEAR
+              ACQUIRE GEAR →
             </a>
             <a
               href="#comparison"
-              className="flex-1 border border-border bg-transparent text-muted-foreground text-xs font-mono tracking-widest py-4 px-6 hover:border-white hover:text-white transition-colors duration-0 text-center"
+              className="flex-1 border border-border bg-transparent text-muted-foreground text-xs font-mono tracking-widest py-4 px-6 hover:border-white hover:text-white focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none transition-colors duration-0 text-center min-h-[44px] flex items-center justify-center"
             >
-              SCAN THE CHASSIS
+              SCAN CHASSIS SPECS ↓
             </a>
           </div>
         </div>

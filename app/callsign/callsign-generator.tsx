@@ -36,6 +36,11 @@ function generateCallsign(name: string, trade: string) {
   return { callsign: `${prefix}-${suffix}`, unit, clearance, idHash };
 }
 
+const CARD_GRID_BG_STYLE = {
+  backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+  backgroundSize: '20px 20px',
+};
+
 export default function CallsignGeneratorPage() {
   const [name, setName] = useState('');
   const [trade, setTrade] = useState('');
@@ -78,7 +83,7 @@ export default function CallsignGeneratorPage() {
             </p>
           </div>
 
-          {!result && !isGenerating && (
+          {!result && !isGenerating ? (
             <form onSubmit={handleGenerate} className="border border-border bg-black p-6 sm:p-8 flex flex-col gap-6 relative">
               {/* Corner Accents */}
               <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/30" />
@@ -127,9 +132,9 @@ export default function CallsignGeneratorPage() {
                 REQUEST CALLSIGN
               </button>
             </form>
-          )}
+          ) : null}
 
-          {isGenerating && (
+          {isGenerating ? (
             <div className="border border-border bg-black p-12 flex flex-col items-center justify-center gap-4 h-[350px]">
               <div className="w-8 h-8 border-t-2 border-r-2 border-[#FF0000] animate-spin mb-4 rounded-full" />
               <p className="text-xs font-mono tracking-widest text-muted-foreground animate-pulse">
@@ -139,19 +144,16 @@ export default function CallsignGeneratorPage() {
                 DECRYPTING SECTOR INFO
               </p>
             </div>
-          )}
+          ) : null}
 
-          {result && !isGenerating && (
+          {result && !isGenerating ? (
             <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {/* THE SHAREABLE CARD */}
               <div id="callsign-card" className="border border-white bg-black p-6 sm:p-8 relative overflow-hidden group">
                 {/* Background Noise/Grid */}
                 <div
                   className="absolute inset-0 opacity-10 pointer-events-none"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
-                    backgroundSize: '20px 20px',
-                  }}
+                  style={CARD_GRID_BG_STYLE}
                 />
 
                 <div className="absolute top-4 right-4 flex gap-1">
@@ -196,6 +198,14 @@ export default function CallsignGeneratorPage() {
                       <p className="text-sm font-mono text-white uppercase">LEVEL {result.clearance}</p>
                     </div>
                   </div>
+
+                  {/* Recommended Gear Hook */}
+                  <div className="border-t border-white/20 mt-4 pt-3 flex justify-between items-center text-[10px] font-mono text-muted-foreground">
+                    <span>UNIT ISSUED CHASSIS:</span>
+                    <a href="/shop/all" className="text-white hover:text-[#FF0000] underline font-bold">
+                      ACQUIRE VOL.01 GEAR →
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -203,16 +213,16 @@ export default function CallsignGeneratorPage() {
                 <button
                   onClick={() => {
                     // Quick copy text to clipboard for sharing
-                    navigator.clipboard.writeText(`I'm ${result.callsign} in the ${result.unit} Unit.\nGet your midnight callsign: https://choppeduncs.store/callsign\n\n#CHOPPED #TheFriction`);
-                    alert('Copied to clipboard! Ready to paste on X/Twitter.');
+                    navigator.clipboard.writeText(`OPERATOR CALLSIGN ASSIGNED: ${result.callsign} [${result.unit} Unit]\nClearance Level ${result.clearance} • Austin, TX\n\nClaim your nocturnal ID card: https://choppeduncs.store/callsign\n\n#CHOPPED #FunctionForTheFriction #StreetwearUnc`);
+                    alert('Copied Operator Signal to clipboard! Ready to share on X/Twitter/Instagram.');
                   }}
-                  className="flex-1 bg-white text-black font-mono text-xs tracking-widest py-4 uppercase text-center hover:bg-white/90 transition-colors"
+                  className="flex-1 bg-white text-black font-mono text-xs tracking-widest min-h-[44px] py-4 uppercase text-center hover:bg-white/90 focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none transition-colors font-bold"
                 >
-                  COPY SHARE TEXT
+                  COPY SHARE SIGNAL ↗
                 </button>
                 <button
                   onClick={reset}
-                  className="flex-1 border border-border bg-transparent text-white font-mono text-xs tracking-widest py-4 uppercase text-center hover:border-white transition-colors duration-0"
+                  className="flex-1 border border-border bg-transparent text-white font-mono text-xs tracking-widest min-h-[44px] py-4 uppercase text-center hover:border-white focus-visible:ring-1 focus-visible:ring-[#FF0000] focus-visible:outline-none transition-colors duration-0"
                 >
                   RE-INITIALIZE
                 </button>
@@ -222,7 +232,7 @@ export default function CallsignGeneratorPage() {
                 * Take a screenshot to save your Operator ID Card.
               </p>
             </div>
-          )}
+          ) : null}
 
         </div>
       </main>
