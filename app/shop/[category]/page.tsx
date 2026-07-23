@@ -32,6 +32,11 @@ const CATEGORY_META: Record<string, { label: string; title: string; description:
     title: 'Hardware — VOL.01 — CHOPPED.',
     description: 'Aircraft-grade matte aluminum. Zero rattle. Secure your access.',
   },
+  women: {
+    label: "WOMEN'S",
+    title: "Women's Capsule — VOL.01 — CHOPPED.",
+    description: "High-performance ageless streetwear engineered for women and night-shift legends. Heavyweight crops & sleek bottoms.",
+  },
   support: {
     label: 'SUPPORT',
     title: 'Support — VOL.01 — CHOPPED.',
@@ -41,6 +46,7 @@ const CATEGORY_META: Record<string, { label: string; title: string; description:
 
 const CATEGORIES = [
   { label: 'ALL', slug: 'all' },
+  { label: "WOMEN'S", slug: 'women' },
   { label: 'FOOTWEAR', slug: 'footwear' },
   { label: 'OUTERWEAR', slug: 'outerwear' },
   { label: 'BOTTOMS', slug: 'bottoms' },

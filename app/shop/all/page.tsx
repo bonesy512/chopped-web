@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 
 const CATEGORIES = [
   { label: 'ALL', slug: 'all' },
+  { label: "WOMEN'S", slug: 'women' },
   { label: 'FOOTWEAR', slug: 'footwear' },
   { label: 'OUTERWEAR', slug: 'outerwear' },
   { label: 'BOTTOMS', slug: 'bottoms' },
