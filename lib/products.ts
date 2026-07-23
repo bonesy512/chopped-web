@@ -515,7 +515,7 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     colors: ['Black', 'Charcoal'],
-    image: '/images/products/auntie-boxy-crop-tee/black/front.png',
+    image: '/images/womens/auntie_boxy_crop_tee_mockup_1784781405081.png',
   },
   {
     id: 'chpd-wmn-002',
@@ -542,7 +542,7 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
     colors: ['Black'],
-    image: '/images/products/auntie-heavyweight-oversized-tee/black/front.png',
+    image: '/images/womens/auntie_heavyweight_oversized_tee_mockup_1784781412832.png',
   },
   {
     id: 'chpd-wmn-003',
@@ -569,7 +569,7 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Deep Asphalt'],
-    image: '/images/products/auntie-cropped-fleece-hoodie/black/front.png',
+    image: '/images/womens/bella_canvas_7502_cropped_hoodie_roboto_mono_1784781711491.png',
   },
   {
     id: 'chpd-wmn-004',
@@ -596,7 +596,7 @@ export const products: Product[] = [
     status: 'ACTIVE',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black'],
-    image: '/images/products/auntie-sleek-fleece-joggers/black/front.png',
+    image: '/images/womens/auntie_sleek_fleece_joggers_mockup_1784781430619.png',
   },
 ];
 
